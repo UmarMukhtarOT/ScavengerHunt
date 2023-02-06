@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
     public bool IsTimeLimited;
+    public Camera Cam;
     [SerializeField] private float timeLimit = 0;                       
     [SerializeField] private int maxHiddenObjectToFound = 6;            
     [SerializeField] private ObjectHolder objectHolderPrefab;           //ObjectHolderPrefab contains list of all the hiddenObjects available in it
@@ -108,8 +109,8 @@ public class LevelManager : MonoBehaviour
             {
                 //we are setting the object name similar to index, because we are going to use index to identify the tapped object
                 //and this index will help us to deactive the hidden object icon from the UI
-               // objectHolder[0].HiddenObjectList[randomNo].ObjItself.name = "Item " + k;    //set their name to index
-
+                // objectHolder[0].HiddenObjectList[randomNo].ObjItself.name = "Item " + k;    //set their name to index
+                //objectHolder[0].HiddenObjectList[randomNo].ObjItself.layer = ~(LayerMask.GetMask("Collectable"));
                 objectHolder[0].HiddenObjectList[randomNo].makeHidden = true;          //if false, then we set it to true
                                                                                     //activate its collider, so we can detect it on tap
                 objectHolder[0].HiddenObjectList[randomNo].ObjItself.GetComponent<Collider2D>().enabled = true;
@@ -128,7 +129,7 @@ public class LevelManager : MonoBehaviour
 
 
 
-
+    public LayerMask requiredLayer;
 
 
 
@@ -140,10 +141,15 @@ public class LevelManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))                                //check for left mouse tap
             {
-                pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);  //get the position of mouse tap and conver it to WorldPoint
-                hit = Physics2D.Raycast(pos, Vector2.zero);                 //create a Raycast hit from mouse tap position
+                pos = Cam.ScreenToWorldPoint(Input.mousePosition);  //get the position of mouse tap and conver it to WorldPoint
+                hit = Physics2D.Raycast(pos, Vector2.zero,1000,requiredLayer);                 //create a Raycast hit from mouse tap position
+               
+
                 if (hit && hit.collider != null)                            //check if hit and collider is not null
                 {
+
+                    Debug.Log("hit.collider" + hit.collider.name);
+
                     hit.collider.gameObject.SetActive(false);               //deactivate the hit object
                     //Remember we renamed all our object to their respective Index, we did it for UIManager
                     UIManager.instance.CheckSelectedHiddenObject(hit.collider.gameObject.name); //send the name of hit object to UIManager

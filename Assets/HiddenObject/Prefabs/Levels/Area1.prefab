@@ -46,6 +46,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -143,6 +145,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -240,6 +244,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -337,6 +343,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -434,6 +442,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -496,7 +506,7 @@ GameObject:
   - component: {fileID: 3125646885732808872}
   - component: {fileID: 3125646885732808871}
   m_Layer: 0
-  m_Name: ObjectHolder2
+  m_Name: Area1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,60 +556,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af6b4e01a56cd541a59222f55b75b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hiddenObjectList:
+  HiddenObjectList:
   - name: Banana
-    hiddenObj: {fileID: 3125646884933540217}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646884933540217}
     makeHidden: 0
   - name: BackBerry
-    hiddenObj: {fileID: 3125646885806718086}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646885806718086}
     makeHidden: 0
   - name: Cherry
-    hiddenObj: {fileID: 3125646885264785827}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646885264785827}
     makeHidden: 0
   - name: Coconut
-    hiddenObj: {fileID: 3125646885456554818}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646885456554818}
     makeHidden: 0
   - name: Grapes
-    hiddenObj: {fileID: 3125646886737222050}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886737222050}
     makeHidden: 0
   - name: Lemon
-    hiddenObj: {fileID: 3125646885684316791}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646885684316791}
     makeHidden: 0
   - name: Lime
-    hiddenObj: {fileID: 3125646886515227902}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886515227902}
     makeHidden: 0
   - name: Orange
-    hiddenObj: {fileID: 3125646886453101948}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886453101948}
     makeHidden: 0
   - name: Peach
-    hiddenObj: {fileID: 3125646885832380259}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646885832380259}
     makeHidden: 0
   - name: Pear
-    hiddenObj: {fileID: 3125646886098361324}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886098361324}
     makeHidden: 0
   - name: Plum
-    hiddenObj: {fileID: 3125646885484272802}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646885484272802}
     makeHidden: 0
   - name: Apple
-    hiddenObj: {fileID: 3125646886252090241}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886252090241}
     makeHidden: 0
   - name: Star Fruit
-    hiddenObj: {fileID: 3125646886412012261}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886412012261}
     makeHidden: 0
   - name: StrawBerry
-    hiddenObj: {fileID: 3125646886632700199}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886632700199}
     makeHidden: 0
   - name: Watermelon
-    hiddenObj: {fileID: 3125646886375313339}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886375313339}
     makeHidden: 0
   - name: Tank
-    hiddenObj: {fileID: 3125646886643152302}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886643152302}
     makeHidden: 0
   - name: Barrel
-    hiddenObj: {fileID: 3125646886419095186}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886419095186}
     makeHidden: 0
   - name: Die
-    hiddenObj: {fileID: 3125646886438406652}
+    ID: 0
+    count: 0
+    ObjItself: {fileID: 3125646886438406652}
     makeHidden: 0
 --- !u!1 &3125646885806718086
 GameObject:
@@ -647,6 +693,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -744,6 +792,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -841,6 +891,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -938,6 +990,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1035,6 +1089,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1132,6 +1188,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1229,6 +1287,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1326,6 +1386,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1423,6 +1485,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1520,6 +1584,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1617,6 +1683,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1714,6 +1782,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1811,6 +1881,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Test.unity
-    guid: cb28bb0e474cbc948a8dd9ccf72f8e4e
+  - enabled: 1
+    path: Assets/Scenes/ScavTest.unity
+    guid: e0a6d81aedd9a1d4cab008ad71e1d1cd
   m_configObjects: {}

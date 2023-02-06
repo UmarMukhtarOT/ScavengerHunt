@@ -19258,8 +19258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5731efadae823846889e5db23187794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointa: {x: -15, y: 25, z: 0}
-  guiColour: {r: 0, g: 1, b: 0.3874719, a: 0.078431375}
 --- !u!4 &921175814
 Transform:
   m_ObjectHideFlags: 0
@@ -19375,14 +19373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d2bc5ef0184b14eb74af144782adb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1214844402}
-  dolly: {fileID: 0}
-  dragSpeed: {fileID: 595043644}
-  edgeSpeed: {fileID: 1645059664}
-  edgeSize: {fileID: 1049349950}
-  trackMode: {fileID: 0}
-  cameraIcon: {fileID: 0}
-  panel: {fileID: 953843966}
 --- !u!114 &953843969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20066,17 +20056,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
---- !u!114 &1214844402 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6132052427728110841, guid: ebd363308c9fb544e86f694f5fb0e99c, type: 3}
-  m_PrefabInstance: {fileID: 6132052427886296199}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c3989406c198b4087c0e47eb93dd41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1219634317
 GameObject:
   m_ObjectHideFlags: 0
@@ -45711,11 +45690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7ba4202d910104194fffd4ca5c7cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rtsBTN: {fileID: 0}
-  followBTN: {fileID: 0}
-  dollyBTN: {fileID: 0}
-  snapBTN: {fileID: 0}
-  menuBTN: {fileID: 1306957549}
 --- !u!114 &1306957549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45817,6 +45791,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1015044134}
     m_Modifications:
+    - target: {fileID: 8301995129093240716, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8301995129518054510, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
       propertyPath: m_Name
       value: Area0
@@ -45864,6 +45842,50 @@ PrefabInstance:
     - target: {fileID: 8301995129518054511, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995129687388671, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995129892866880, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995129906742030, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995129937739756, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995130017583481, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995130191328447, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995130236182574, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995130442038966, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995130776150240, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995130925901520, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301995130946145913, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
@@ -46191,6 +46213,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404886220}
   m_CullTransparentMesh: 1
+--- !u!20 &1419839365 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6132052427728110840, guid: ebd363308c9fb544e86f694f5fb0e99c, type: 3}
+  m_PrefabInstance: {fileID: 6132052427886296199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1430720915
 GameObject:
   m_ObjectHideFlags: 0
@@ -48183,6 +48210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsTimeLimited: 0
+  Cam: {fileID: 1419839365}
   timeLimit: 150
   maxHiddenObjectToFound: 6
   objectHolderPrefab: {fileID: 8301995129518054504, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
@@ -48191,6 +48219,9 @@ MonoBehaviour:
   - {fileID: 1703814096}
   - {fileID: 368248253}
   - {fileID: 2053399159}
+  requiredLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!4 &1972266946
 Transform:
   m_ObjectHideFlags: 0
@@ -48745,11 +48776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7ba4202d910104194fffd4ca5c7cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rtsBTN: {fileID: 0}
-  followBTN: {fileID: 117564350}
-  dollyBTN: {fileID: 1569970990}
-  snapBTN: {fileID: 529141640}
-  menuBTN: {fileID: 0}
 --- !u!114 &2072039063
 MonoBehaviour:
   m_ObjectHideFlags: 0
