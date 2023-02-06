@@ -142,7 +142,7 @@ public class LevelManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))                                //check for left mouse tap
             {
                 pos = Cam.ScreenToWorldPoint(Input.mousePosition);  //get the position of mouse tap and conver it to WorldPoint
-                hit = Physics2D.Raycast(pos, Vector2.zero,1000,requiredLayer);                 //create a Raycast hit from mouse tap position
+                hit = Physics2D.Raycast(pos, Vector2.zero,100,requiredLayer);                 //create a Raycast hit from mouse tap position
                
 
                 if (hit && hit.collider != null)                            //check if hit and collider is not null

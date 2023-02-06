@@ -14,6 +14,14 @@ namespace TinyK.Common
 		/// <summary>The colliders this transform will be constrained to.</summary>
 		public List<Collider> Colliders { get { if (colliders == null) colliders = new List<Collider>(); return colliders; } } [SerializeField] private List<Collider> colliders;
 
+
+		private void Start()
+		{
+            transform.position = colliders[colliders.Count-1].transform.position;
+        }
+
+
+
 		protected virtual void LateUpdate()
 		{
 			if (colliders != null)

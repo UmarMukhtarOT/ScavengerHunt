@@ -42237,10 +42237,10 @@ BoxCollider:
   m_GameObject: {fileID: 1243879141}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.43393, y: 8.644821, z: 1}
-  m_Center: {x: -0.28997564, y: -0.5535908, z: 2}
+  m_Size: {x: 5, y: 5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1252096377
 GameObject:
   m_ObjectHideFlags: 0
@@ -43257,9 +43257,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 179
   orthographic: 1
-  orthographic size: 60
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -43294,11 +43294,11 @@ MonoBehaviour:
     RequiredMouseButtons: 0
     RequiredSelectable: {fileID: 0}
   _camera: {fileID: 1865376384}
-  zoom: 60
+  zoom: 5
   damping: -1
   clamp: 1
-  clampMin: 25
-  clampMax: 60
+  clampMin: 1
+  clampMax: 5
   relative: 1
   ignoreZ: 0
   ScreenDepth:
@@ -43309,7 +43309,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 4294967291
     Distance: 0
-  currentZoom: 60
+  currentZoom: 5
   remainingTranslation: {x: 0, y: 0, z: 0}
 --- !u!1 &1871920129
 GameObject:
