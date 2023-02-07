@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(ObjectHolder))]
+[CustomEditor(typeof(AreaHolder))]
 public class ObjectHolderEditor : Editor
 {
 
@@ -12,7 +12,7 @@ public class ObjectHolderEditor : Editor
         
         DrawDefaultInspector();
 
-        ObjectHolder objectHolder = target as ObjectHolder;
+        AreaHolder objectHolder = target as AreaHolder;
 
         if (GUILayout.Button("Arrange List"))
         {
