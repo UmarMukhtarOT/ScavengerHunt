@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
             Text childText = icon.transform.GetChild(1).GetComponent<Text>();   //get the text component from Icon object text child
 
             childImg.sprite = AreaObjects[i].ObjItself.GetComponent<SpriteRenderer>().sprite; //set the sprite
-            childText.text = "2/15";                         
+            childText.text = "0/"+ AreaObjects[i].Count;                         
             
             
             

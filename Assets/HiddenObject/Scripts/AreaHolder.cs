@@ -5,23 +5,32 @@ using UnityEngine;
 
 public class AreaHolder : MonoBehaviour
 {
+
+    public Transform CollectableObjects;
     [SerializeField]
     public List<AreaObjectPropertiesClass> HiddenObjectList;   //list of all the hiddenObjects available in the scene
-
-
-
-
-
-    private void Awake()
-    {
-        //ArrangeList();
-    }
+   
 
 
 
 
 
 
+
+    //bool ProductExist(string name)
+    //{
+    //    for (int j = 0; j < HiddenObjectList.Count; j++)
+    //    {
+
+    //        if (HiddenObjectList[j].name.Equals(name))
+    //        {
+    //            HiddenObjectList[j].Count++;
+
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 
 
 
@@ -32,62 +41,44 @@ public class AreaHolder : MonoBehaviour
     {
         HiddenObjectList = new List<AreaObjectPropertiesClass>();
        
-        
-        
-       
-
-
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < CollectableObjects.transform.childCount; i++)
         {
             AreaObjectPropertiesClass hiddenObjectData = new AreaObjectPropertiesClass();
-            hiddenObjectData.ObjItself = transform.GetChild(i).gameObject;
-            hiddenObjectData.name = transform.GetChild(i).name;
-            hiddenObjectData.makeHidden = false;
-
-            //if (HiddenObjectList.Count == 0)
-            //{
-            //    HiddenObjectList.Add(hiddenObjectData);
-            //    HiddenObjectList[i].Count = 1;
-            //}
-            //else
-            //{
+            hiddenObjectData.name       = CollectableObjects.transform.GetChild(i).name;
+           // hiddenObjectData.makeHidden = false;
 
 
-            //    //for (int j = 0; j < HiddenObjectList.Count; j++)
-            //    //{
-
-            //    //    if (HiddenObjectList[j].name != transform.GetChild(i).name)
-            //    //    {
-
-            //    //        HiddenObjectList.Add(hiddenObjectData);
+            string name = CollectableObjects.transform.GetChild(i).name;
+            HiddenObjectList.Add(hiddenObjectData);
 
 
+            {
+                //if (HiddenObjectList.Count == 0)
+                //{
 
-            //    //    }
-            //    //    else
-            //    //    {
-
-            //    //        HiddenObjectList[i].Count++;
-
-
-            //    //    }
-
-            //    //}
+                //    HiddenObjectList.Add(hiddenObjectData);
+                //    HiddenObjectList[i].Count = 1;
 
 
-            //}
+                //}
+                //else
+                //{
+                //    if(!ProductExist(name))
+                //    {
 
 
+                //        HiddenObjectList.Add(hiddenObjectData);
+                //        HiddenObjectList[i].Count = 1;
+                //    }
+                //    else
+                //    {
+
+                //    }
+
+                //}
 
 
-
-             HiddenObjectList.Add(hiddenObjectData);
-
-
-
-
-
-
+            }
 
 
 

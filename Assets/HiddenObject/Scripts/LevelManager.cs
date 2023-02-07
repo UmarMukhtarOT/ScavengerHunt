@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         activeHiddenObjectList = new List<AreaObjectPropertiesClass>();          
-       // AssignHiddenObjects();                                  
+        AssignHiddenObjects();                                  
     }
 
     void AssignHiddenObjects()  //Method select objects from the hiddenobjects list which should be hidden
@@ -103,7 +103,7 @@ public class LevelManager : MonoBehaviour
 
 
         int k = 0;
-        while (k < maxHiddenObjectToFound) //we check while k is less that maxHiddenObjectToFound, keep looping
+        while (k < maxHiddenObjectToFound) //we check while k is less than maxHiddenObjectToFound, keep looping
         {
             //we randomly select any number between 0 to hiddenObjectList.Count
             int randomNo = UnityEngine.Random.Range(0, objectHolder[0].HiddenObjectList.Count);

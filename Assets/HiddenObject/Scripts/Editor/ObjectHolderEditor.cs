@@ -16,10 +16,10 @@ public class ObjectHolderEditor : Editor
 
         if (GUILayout.Button("Arrange List"))
         {
-            objectHolder.ArrangeList();
+           // objectHolder.ArrangeList();
         }
 
-        serializedObject.ApplyModifiedProperties();
+       // serializedObject.ApplyModifiedProperties();
     }
 
 
