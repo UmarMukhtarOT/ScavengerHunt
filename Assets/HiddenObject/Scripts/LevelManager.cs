@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]
     public List<AreaHolder> objectHolder;
-
+    public LayerMask requiredLayer;
 
 
 
@@ -88,43 +88,47 @@ public class LevelManager : MonoBehaviour
         }
 
 
+        //for (int i = 0; i < objectHolder[0].HiddenObjectList.Count; i++)
+        //{
+        //    //deacivate collider, as we only want selected hidden objects to have collider active
+        //    objectHolder[0].HiddenObjectList[i].ObjItself.GetComponent<Collider2D>().enabled = false;
+        //}
+
+
+
+
+
+
+
+
+        {
+            //int k = 0;
+            //while (k < maxHiddenObjectToFound) //we check while k is less than maxHiddenObjectToFound, keep looping
+            //{
+            //    //we randomly select any number between 0 to hiddenObjectList.Count
+            //    int randomNo = UnityEngine.Random.Range(0, objectHolder[0].HiddenObjectList.Count);
+
+
+            //    //then we check is the makeHidden bool of that hiddenObject is false
+            //    if (!objectHolder[0].HiddenObjectList[randomNo].makeHidden)
+            //    {
+            //        objectHolder[0].HiddenObjectList[randomNo].makeHidden = true;          //if false, then we set it to true
+            //        objectHolder[0].HiddenObjectList[randomNo].ObjItself.GetComponent<Collider2D>().enabled = true;//activate its collider, so we can detect it on tap
+            //        activeHiddenObjectList.Add(objectHolder[0].HiddenObjectList[randomNo]);//add the hidden object to the activeHiddenObjectList
+            //        k++;                                                                //and increase the k
+            //    }
+            //}
+        }
+       
+        
+        
         for (int i = 0; i < objectHolder[0].HiddenObjectList.Count; i++)
         {
-            //deacivate collider, as we only want selected hidden objects to have collider active
-            objectHolder[0].HiddenObjectList[i].ObjItself.GetComponent<Collider2D>().enabled = false;
+            objectHolder[0].HiddenObjectList[i].makeHidden = true;          
+            objectHolder[0].HiddenObjectList[i].ObjItself.GetComponent<Collider2D>().enabled = true;
+            activeHiddenObjectList.Add(objectHolder[0].HiddenObjectList[i]);
+
         }
-
-
-
-
-
-
-
-
-
-        int k = 0;
-        while (k < maxHiddenObjectToFound) //we check while k is less than maxHiddenObjectToFound, keep looping
-        {
-            //we randomly select any number between 0 to hiddenObjectList.Count
-            int randomNo = UnityEngine.Random.Range(0, objectHolder[0].HiddenObjectList.Count);
-
-
-            //then we check is the makeHidden bool of that hiddenObject is false
-            if (!objectHolder[0].HiddenObjectList[randomNo].makeHidden)
-            {
-                
-                
-                
-                
-                objectHolder[0].HiddenObjectList[randomNo].makeHidden = true;          //if false, then we set it to true
-                                                                                    
-                objectHolder[0].HiddenObjectList[randomNo].ObjItself.GetComponent<Collider2D>().enabled = true;//activate its collider, so we can detect it on tap
-                activeHiddenObjectList.Add(objectHolder[0].HiddenObjectList[randomNo]);//add the hidden object to the activeHiddenObjectList
-                k++;                                                                //and increase the k
-            }
-        }
-
-
 
 
 
@@ -134,7 +138,7 @@ public class LevelManager : MonoBehaviour
 
 
 
-    public LayerMask requiredLayer;
+    
 
 
 
@@ -157,7 +161,7 @@ public class LevelManager : MonoBehaviour
 
                     hit.collider.gameObject.SetActive(false);               //deactivate the hit object
                     //Remember we renamed all our object to their respective Index, we did it for UIManager
-                    UIManager.instance.CheckSelectedHiddenObject(hit.collider.gameObject.name); //send the name of hit object to UIManager
+                    UIManager.instance.CheckSelectedHiddenObject(hit.collider.transform); //send the name of hit object to UIManager
 
                     for (int i = 0; i < activeHiddenObjectList.Count; i++)
                     {

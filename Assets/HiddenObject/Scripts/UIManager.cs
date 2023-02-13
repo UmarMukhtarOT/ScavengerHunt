@@ -12,11 +12,11 @@ public class UIManager : MonoBehaviour
     public Image infoImg;
 
     [SerializeField] private GameObject hiddenObjectIconHolder;     //reference to Icon Holder object
-    [SerializeField] private GameObject hiddenObjectIconPrefab;     //reference to Icon prefab
+    [SerializeField] private SV_ObjectIcon hiddenObjectIconPrefab;     //reference to Icon prefab
     [SerializeField] private GameObject gameCompleteObj;            //reference to GameComplete panel
     [SerializeField] private Text timerText;                        //reference to time text
 
-    private List<GameObject> SV_IconList;                  //list to store Icons of active hidden objects
+    private List<SV_ObjectIcon> SV_IconList;                  //list to store Icons of active hidden objects
 
     public GameObject GameCompleteObj { get => gameCompleteObj; } 
     public Text TimerText { get => timerText; }                    
@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        SV_IconList = new List<GameObject>();              //initialize the list
+        SV_IconList = new List<SV_ObjectIcon>();              //initialize the list
     }
 
 
@@ -46,33 +46,43 @@ public class UIManager : MonoBehaviour
 
 
     
-    //// <param name="hiddenObjectData">Data of active hidden objects</param>
+    
     public void PopulateHiddenObjectIcons(List<AreaObjectPropertiesClass> AreaObjects)
     {
         SV_IconList.Clear();                             
-        for (int i = 0; i < AreaObjects.Count; i++)            //loop through hiddenObjectData count
+        for (int i = 0; i < AreaObjects.Count; i++)       
         {
-                                                                    //create the icon object and set its parent
-            GameObject icon = Instantiate(hiddenObjectIconPrefab, hiddenObjectIconHolder.transform);
-           // icon.name = "bauray";
-            icon.name = AreaObjects[i].ObjItself.name;         //set the icon name similar to object name, use when tracking icon for selected object
-            Image childImg = icon.transform.GetChild(0).GetComponent<Image>();  //get the image component from Icon object image child
-            Text childText = icon.transform.GetChild(1).GetComponent<Text>();   //get the text component from Icon object text child
 
-            childImg.sprite = AreaObjects[i].ObjItself.GetComponent<SpriteRenderer>().sprite; //set the sprite
-            childText.text = "0/"+ AreaObjects[i].Count;                         
+            //if (SV_IconList.Count==0)
+            //{
+
+            //}
+
+            for (int j = 0; j < SV_IconList.Count; j++)
+            {
+                if (AreaObjects[i].name != SV_IconList[j].name)
+                {
+
+                    SV_ObjectIcon icon = Instantiate(hiddenObjectIconPrefab, hiddenObjectIconHolder.transform);
+                    icon.setIconProperties(AreaObjects[i].ObjItself.name, AreaObjects[i].ObjItself.GetComponent<SpriteRenderer>().sprite);
+                    
+                    SV_IconList.Add(icon);
+                    icon.TotalObjects++;
+                }
+                else
+                {
+                    SV_IconList[j].TotalObjects++;
+
+                    SV_IconList[j].updateStats(PlayerPrefs.GetInt((SV_IconList[j].name + "Collected"), 0));
+
+                }
+
+            }
+
+
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            SV_IconList.Add(icon);                                     //add the icon to the list
+
+                                                 
 
 
 
@@ -92,16 +102,29 @@ public class UIManager : MonoBehaviour
     /// Method called when the player tap on active hidden object
     /// </summary>
     /// <param name="index">Name of hidden object</param>
-    public void CheckSelectedHiddenObject(string index)
+    public void CheckSelectedHiddenObject(Transform objtrans)
     {
+
+        string index = objtrans.gameObject.name;
         for (int i = 0; i < SV_IconList.Count; i++) //loop through the list
         {
             if (index == SV_IconList[i].name)      //check if index is same as name [our name is a number]
             {
+                string id= objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
 
-                Debug.Log("SV_IconList  "+ SV_IconList[i].name);
-                SV_IconList[i].SetActive(false);  //deactivate the icon
-                break;                                                          //break from the loop
+                PlayerPrefs.SetInt((id), 1);
+
+
+
+                string IconName= SV_IconList[i].name;
+                PlayerPrefs.SetInt((IconName+ "Collected"), PlayerPrefs.GetInt((IconName+ "Collected"), 0)+1);
+                SV_IconList[i].updateStats(PlayerPrefs.GetInt((IconName + "Collected"), 0));
+
+
+
+
+
+                break;                                                          
             }
         }
     }

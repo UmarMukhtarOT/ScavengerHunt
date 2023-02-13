@@ -16250,7 +16250,7 @@ MonoBehaviour:
   crossImg: {fileID: 1430720917}
   infoImg: {fileID: 353994748}
   hiddenObjectIconHolder: {fileID: 771235219}
-  hiddenObjectIconPrefab: {fileID: 2759112387911330908, guid: 428883db37dcf744e9a0a2545cea89ce, type: 3}
+  hiddenObjectIconPrefab: {fileID: 7947629146677224234, guid: 428883db37dcf744e9a0a2545cea89ce, type: 3}
   gameCompleteObj: {fileID: 85059540}
   timerText: {fileID: 1807391906}
 --- !u!4 &431826734
@@ -43738,7 +43738,7 @@ MonoBehaviour:
   Cam: {fileID: 1865376384}
   perLevelReqCount: 
   timeLimit: 150
-  maxHiddenObjectToFound: 6
+  maxHiddenObjectToFound: 25
   objectHolderPrefab: {fileID: 8301995129518054504, guid: eee1d0668840b3a4d86745497855ecd9, type: 3}
   gameStatus: 1
   objectHolder:
