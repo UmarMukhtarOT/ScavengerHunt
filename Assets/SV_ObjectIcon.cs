@@ -1,27 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SV_ObjectIcon : MonoBehaviour
 {
    public Image childImg;
-   public Text childText;
-    public int TotalObjects=0;
-   
-            
-   
-    // Start is called before the first frame update
-    void Start()
+   public Text CollectedObjectsText;
+   public Text TotalObjectsText;
+   public int TotalObjects=0;
+
+    private void Start()
     {
-        
+        Invoke("updateCollectedText",0.1f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 
     public void setIconProperties(string IconName, Sprite IconSpr)
@@ -29,14 +23,12 @@ public class SV_ObjectIcon : MonoBehaviour
         if (!PlayerPrefs.HasKey(IconName + "Collected"))
         {
             PlayerPrefs.SetInt((IconName + "Collected"), 0);
-
         }
 
         transform.name = IconName;
         childImg.sprite = IconSpr;
-        
-
-        updateStats(PlayerPrefs.GetInt((IconName + "Collected"), 0));
+        updateCollectedText();
+       
 
     }
 
@@ -45,17 +37,30 @@ public class SV_ObjectIcon : MonoBehaviour
 
 
 
-    public void updateStats(int collected)
+    public void updateCollectedText()
     {
 
-        childText.text = collected + "/" + TotalObjects;
+        int collected = PlayerPrefs.GetInt((transform.name + "Collected"), 0);
+
+        CollectedObjectsText.text = collected+"";
+        TotalObjectsText.text = TotalObjects + "";
+
+        if (collected>=TotalObjects&&TotalObjects!=0)
+        {
+
+            Debug.Log("completes an object"+ transform.name);
+
+            transform.SetAsLastSibling();
 
 
-
-
+        }
     }
 
-
+   
+     public void updateTotalObjText()
+     {
+       
+     }
 
 
 

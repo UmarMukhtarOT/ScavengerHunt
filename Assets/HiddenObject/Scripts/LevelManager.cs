@@ -4,12 +4,12 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public class AreaObjectPropertiesClass
+public class AreaProperties
 {
-    public string name;
-    public int Count=0;
-    public GameObject ObjItself;
-    public bool makeHidden = false;
+    
+   
+    public GameObject AreaItself;
+   
 }
 
 public enum GameStatus
@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float timeLimit = 0;                       
     [SerializeField] private int maxHiddenObjectToFound = 6;            
     [SerializeField] private AreaHolder objectHolderPrefab;           //ObjectHolderPrefab contains list of all the hiddenObjects available in it
-    [HideInInspector] public GameStatus gameStatus = GameStatus.NEXT;   
+    [HideInInspector]public GameStatus gameStatus = GameStatus.NEXT;   
    
     private List<AreaObjectPropertiesClass> activeHiddenObjectList;              //list hidden objects which are marked as hidden from the above list
     private float currentTime;                                          
@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
     private Vector3 pos;                                                //hold Mouse Tap position converted to WorldPoint
 
     [SerializeField]
-    public List<AreaHolder> objectHolder;
+    public List<AreaHolder> AreaHolder;
     public LayerMask requiredLayer;
 
 
@@ -66,13 +66,9 @@ public class LevelManager : MonoBehaviour
 
     void AssignHiddenObjects()  //Method select objects from the hiddenobjects list which should be hidden
     {
-        
-      
         totalHiddenObjectsFound = 0;                                      
         activeHiddenObjectList.Clear();                                    
         gameStatus = GameStatus.PLAYING;
-
-
 
 
         if (IsTimeLimited)
@@ -88,45 +84,13 @@ public class LevelManager : MonoBehaviour
         }
 
 
-        //for (int i = 0; i < objectHolder[0].HiddenObjectList.Count; i++)
-        //{
-        //    //deacivate collider, as we only want selected hidden objects to have collider active
-        //    objectHolder[0].HiddenObjectList[i].ObjItself.GetComponent<Collider2D>().enabled = false;
-        //}
-
-
-
-
-
-
-
-
-        {
-            //int k = 0;
-            //while (k < maxHiddenObjectToFound) //we check while k is less than maxHiddenObjectToFound, keep looping
-            //{
-            //    //we randomly select any number between 0 to hiddenObjectList.Count
-            //    int randomNo = UnityEngine.Random.Range(0, objectHolder[0].HiddenObjectList.Count);
-
-
-            //    //then we check is the makeHidden bool of that hiddenObject is false
-            //    if (!objectHolder[0].HiddenObjectList[randomNo].makeHidden)
-            //    {
-            //        objectHolder[0].HiddenObjectList[randomNo].makeHidden = true;          //if false, then we set it to true
-            //        objectHolder[0].HiddenObjectList[randomNo].ObjItself.GetComponent<Collider2D>().enabled = true;//activate its collider, so we can detect it on tap
-            //        activeHiddenObjectList.Add(objectHolder[0].HiddenObjectList[randomNo]);//add the hidden object to the activeHiddenObjectList
-            //        k++;                                                                //and increase the k
-            //    }
-            //}
-        }
        
         
         
-        for (int i = 0; i < objectHolder[0].HiddenObjectList.Count; i++)
+        for (int i = 0; i < AreaHolder[0].HiddenObjectList.Count; i++)
         {
-            objectHolder[0].HiddenObjectList[i].makeHidden = true;          
-            objectHolder[0].HiddenObjectList[i].ObjItself.GetComponent<Collider2D>().enabled = true;
-            activeHiddenObjectList.Add(objectHolder[0].HiddenObjectList[i]);
+            
+            activeHiddenObjectList.Add(AreaHolder[0].HiddenObjectList[i]);
 
         }
 
@@ -135,10 +99,6 @@ public class LevelManager : MonoBehaviour
         UIManager.instance.PopulateHiddenObjectIcons(activeHiddenObjectList);   //send the activeHiddenObjectList to UIManager
         gameStatus = GameStatus.PLAYING;                                        //set gamestatus to Playing
     }
-
-
-
-    
 
 
 
@@ -215,6 +175,12 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         activeHiddenObjectList[randomValue].ObjItself.transform.localScale = originalScale;
     }
+
+
+
+
+
+
 
 
 
