@@ -16228,7 +16228,7 @@ GameObject:
   - component: {fileID: 431826734}
   - component: {fileID: 431826733}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: UIManagerScav
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16252,6 +16252,8 @@ MonoBehaviour:
   hiddenObjectIconPrefab: {fileID: 7947629146677224234, guid: 428883db37dcf744e9a0a2545cea89ce, type: 3}
   gameCompleteObj: {fileID: 85059540}
   timerText: {fileID: 1807391906}
+  Sv_fillText: {fileID: 0}
+  Sv_FillBar: {fileID: 0}
 --- !u!4 &431826734
 Transform:
   m_ObjectHideFlags: 0
@@ -43284,7 +43286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.0000078678}
+  m_AnchoredPosition: {x: 0, y: 0.0000076293945}
   m_SizeDelta: {x: 100, y: 84.55}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1759806887
@@ -43920,7 +43922,7 @@ GameObject:
   - component: {fileID: 1972266946}
   - component: {fileID: 1972266945}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: LevelManagerScav
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
