@@ -71,11 +71,6 @@ public class UIManagerScav : MonoBehaviour
                 SV_IconList[matchingIndex].TotalObjects++;
                 SV_IconList[matchingIndex].updateCollectedText();
 
-
-
-
-
-
             }
 
 

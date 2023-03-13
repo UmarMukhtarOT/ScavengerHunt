@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/HyperCausalGame/Scenes/FirstScene.unity
+    guid: a7304b8bea12e4b1888a38a365387eac
+  - enabled: 1
+    path: Assets/HyperCausalGame/Scenes/GamePlay.unity
+    guid: 03a4de0ac57c8410aab4ffebbc38c38e
   m_configObjects: {}

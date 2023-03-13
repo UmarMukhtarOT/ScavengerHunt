@@ -1,32 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Content;
+
 using UnityEngine;
-using UnityEngine.UI;
+
+
 
 public class Env_ObjectToFind : MonoBehaviour
 {
-    //public string ObjName;
+    public bool IsTaken = false;
     public string Id;
-    public bool IsTaken=false;
+    public SpriteRendererData ObjectsProperties;
 
 
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        Id=transform.parent.name+"_"+transform.name+transform.GetSiblingIndex()+ "_IsTaken";
+        ObjectsProperties.spriteRenderer = GetComponent<SpriteRenderer>();
+
+
+        Id =transform.parent.name+"_"+transform.name+transform.GetSiblingIndex()+ "_IsTaken";
 
         if (!PlayerPrefs.HasKey(Id))
         {
             PlayerPrefs.SetInt((Id ), 0);
 
         }
-
-
-
 
         if (PlayerPrefs.GetInt((Id), 0) != 0)
         {
@@ -41,20 +37,7 @@ public class Env_ObjectToFind : MonoBehaviour
 
         }
 
-
-
-
-
-
-
-
-
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

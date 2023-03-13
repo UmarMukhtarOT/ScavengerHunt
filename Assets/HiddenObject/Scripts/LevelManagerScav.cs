@@ -64,7 +64,7 @@ public class LevelManagerScav : MonoBehaviour
         AssignHiddenObjects();                                  
     }
 
-    void AssignHiddenObjects()  //Method select objects from the hiddenobjects list which should be hidden
+    void AssignHiddenObjects()  //Method selects objects from the hiddenobjects list which should be hidden
     {
         totalHiddenObjectsFound = 0;                                      
         activeHiddenObjectList.Clear();                                    
