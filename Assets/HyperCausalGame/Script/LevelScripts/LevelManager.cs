@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-
+using TinyK.Common;
+using UnityEditor;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -8,11 +9,12 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance = null;
     [HideInInspector]
     public LevelInfo CurrentLevel = null;
-
+    public LeanConstrainToColliders ColliderContainer;
     public List<LevelInfo> Levels = new List<LevelInfo>();
     GameObject LevelParent = null;
     public bool TestLevel = false;
     public int levelnumber = 1;
+
 
     public bool allowLevelsRandomizationOrderAfterAllLevelsPlayed = true;
 
@@ -197,6 +199,11 @@ public class LevelManager : MonoBehaviour
         LI.transform.eulerAngles = Vector3.zero;
         LI.transform.localScale = Vector3.one;
 
+
+      
+
+        
+
         CurrentLevel = LI;
 
 
@@ -207,7 +214,7 @@ public class LevelManager : MonoBehaviour
 
         levelCreateFuncEvent.Invoke(level + 1);
 
-
+        ColliderContainer.AssignAreaColliders(LI.GetComponent<AreaHolder>().areaColliders);
 
 
     }

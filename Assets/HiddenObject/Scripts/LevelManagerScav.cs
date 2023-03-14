@@ -87,12 +87,12 @@ public class LevelManagerScav : MonoBehaviour
        
         
         
-        for (int i = 0; i < AreaHolder[0].HiddenObjectList.Count; i++)
-        {
+        //for (int i = 0; i < AreaHolder[0].HiddenObjectList.Count; i++)
+        //{
             
-            activeHiddenObjectList.Add(AreaHolder[0].HiddenObjectList[i]);
+        //    activeHiddenObjectList.Add(AreaHolder[0].HiddenObjectList[i]);
 
-        }
+        //}
 
 
 
@@ -103,7 +103,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-
+    //In Update() we will check the mouse tap and decide if it is a valid hidden object, also if the required count is completed
     private void Update()
     {
         if (gameStatus == GameStatus.PLAYING)                               //check if gamestatus is Playing
@@ -121,7 +121,7 @@ public class LevelManagerScav : MonoBehaviour
 
                     hit.collider.gameObject.SetActive(false);               //deactivate the hit object
                     //Remember we renamed all our object to their respective Index, we did it for UIManager
-                    UIManagerScav.instance.CheckSelectedHiddenObject(hit.collider.transform); //send the name of hit object to UIManager
+                    UIManagerScav.instance.CheckSelectedHiddenObject(hit.collider.transform); //send the transform of hit object to UIManager
 
                     for (int i = 0; i < activeHiddenObjectList.Count; i++)
                     {

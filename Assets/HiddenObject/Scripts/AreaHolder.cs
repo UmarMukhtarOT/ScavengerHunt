@@ -20,7 +20,6 @@ public class SpriteRendererData
     public SpriteRenderer spriteRenderer;
     public List<Sprite> sprites;
     public float duration = 1f; // in seconds
-
     public int currentSpriteIndex = 0;
     private float elapsedTime = 0f;
 
@@ -50,27 +49,16 @@ public class SpriteRendererData
 public class AreaHolder : MonoBehaviour
 {
 
-    public Transform CollectableObjects;
-    [SerializeField]
-    public List<AreaObjectPropertiesClass> HiddenObjectList;   //list of all the hiddenObjects available in the scene
+    [SerializeField] public bool EditorSpawn;
+
+    [SerializeField] public Env_ObjectToFind AreaObjPrefab;
+    [SerializeField] public Transform Objectparent;
+    [SerializeField] public Transform CollectableObjects;
+    [SerializeField] public List<AreaObjectPropertiesClass> HiddenObjectList;   //list of all the hiddenObjects available in the scene
+    
+    [SerializeField] public List<BoxCollider> areaColliders;
+    [SerializeField] public List<Env_ObjectToFind> spriteRendererDataList;
    
-    public void ArrangeList()
-    {
-        HiddenObjectList = new List<AreaObjectPropertiesClass>();
-       
-        for (int i = 0; i < CollectableObjects.transform.childCount; i++)
-        {
-            AreaObjectPropertiesClass hiddenObjectData = new AreaObjectPropertiesClass();
-            hiddenObjectData.ObjItself.name = CollectableObjects.transform.GetChild(i).name;
-            string name = CollectableObjects.transform.GetChild(i).name;
-            HiddenObjectList.Add(hiddenObjectData);
-
-        }
-
-
-    }
-    public List<Env_ObjectToFind> spriteRendererDataList;
-
 
 
 
@@ -97,7 +85,66 @@ public class AreaHolder : MonoBehaviour
                 item.ObjectsProperties.SwitchSprite();
             }
         }
+
     }
+    public List<Sprite> Sprites1;
+    public List<Sprite> Sprites2;
+
+    public void ArrangeList()
+    {
+        //HiddenObjectList = new List<AreaObjectPropertiesClass>();
+
+        //for (int i = 0; i < CollectableObjects.transform.childCount; i++)
+        //{
+        //    AreaObjectPropertiesClass hiddenObjectData = new AreaObjectPropertiesClass();
+        //    hiddenObjectData.ObjItself.name = CollectableObjects.transform.GetChild(i).name;
+        //    string name = CollectableObjects.transform.GetChild(i).name;
+        //    HiddenObjectList.Add(hiddenObjectData);
+
+        //}
+
+
+
+        if (EditorSpawn)
+        {
+
+
+            for (int i = 0; i < Sprites1.Count; i++)
+            {
+
+
+                Env_ObjectToFind objToFind = Instantiate(AreaObjPrefab, Objectparent);
+
+                spriteRendererDataList.Add(objToFind);
+
+
+                string name = Sprites1[i].name.Remove(Sprites1[i].name.Length - 2);
+
+
+
+
+                spriteRendererDataList[i].name = name;
+
+
+                objToFind.ObjectsProperties.spriteRenderer = spriteRendererDataList[i].ObjectsProperties.spriteRenderer.GetComponent<SpriteRenderer>();
+                objToFind.ObjectsProperties.spriteRenderer.sprite = Sprites1[i];
+                objToFind.ObjectsProperties.sprites[0] = Sprites1[i];
+                objToFind.ObjectsProperties.sprites[1] = Sprites2[i];
+                objToFind.ObjectsProperties.duration = UnityEngine.Random.Range(0.1f, 0.2f);
+
+
+
+
+
+            }
+
+        }
+        else
+        {
+            Debug.Log("Set the 'EditorSpawn' bool true to spawn objects. ");
+
+
+        }
 
 
 
@@ -105,23 +152,7 @@ public class AreaHolder : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 

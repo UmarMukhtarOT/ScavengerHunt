@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManagerScav : MonoBehaviour
 {
     public static UIManagerScav instance;
-
+    
 
     public Image crossImg;
     public Image infoImg;
@@ -19,12 +19,12 @@ public class UIManagerScav : MonoBehaviour
 
     public Text Sv_fillText;
     public Image Sv_FillBar;
-
+    public Animator SvAnim;
 
 
     public GameObject GameCompleteObj { get => gameCompleteObj; } 
-    public Text TimerText { get => timerText; }                    
-
+    public Text TimerText { get => timerText; }
+    public GameObject SVUpBtn, SVDownBtn;
 
 
 
@@ -87,17 +87,17 @@ public class UIManagerScav : MonoBehaviour
 
 
 
-    /// <summary>
-    /// Method called when the player tap on active hidden object
-    /// </summary>
-    /// <param name="index">Name of hidden object</param>
+    ///// <summary>
+    ///// Method called when the player tap on active hidden object
+    ///// </summary>
+    ///// <param name="index">Name of hidden object</param>
     public void CheckSelectedHiddenObject(Transform objtrans)
     {
 
-        string index = objtrans.gameObject.name;
+        string SelectedObjName = objtrans.gameObject.name;
         for (int i = 0; i < SV_IconList.Count; i++) //loop through the list
         {
-            if (index == SV_IconList[i].name)      //check if index is same as name [our name is a number]
+            if (SelectedObjName == SV_IconList[i].name)      //check if index is same as name [our name is a number]
             {
                 string id= objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
 
@@ -121,12 +121,45 @@ public class UIManagerScav : MonoBehaviour
 
 
 
-
+    public bool IsUp=true;
 
     public void NextButton() //Method called when NextButton is clicked
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);       //load the scene
     }
+
+
+    public void DropDownTheSV()
+    {
+
+        Debug.Log("sv down ");
+
+        SvAnim.SetTrigger("Down");
+        SVUpBtn.SetActive(true);
+        SVDownBtn.SetActive(false);
+    }
+
+
+    public void UpTheSV()
+    {
+
+        Debug.Log("sv up ");
+
+        SvAnim.SetTrigger("UP");
+        SVUpBtn.SetActive(false);
+        SVDownBtn.SetActive(true);
+
+
+    }
+
+
+
+
+
+
+
+
+
 
     public void HintButton()
     {

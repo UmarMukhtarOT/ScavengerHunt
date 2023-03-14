@@ -15,10 +15,25 @@ namespace TinyK.Common
 		public List<Collider> Colliders { get { if (colliders == null) colliders = new List<Collider>(); return colliders; } } [SerializeField] private List<Collider> colliders;
 
 
-		private void Start()
+		
+
+
+		public void AssignAreaColliders(List<BoxCollider> AreaColl)
 		{
-            transform.position = colliders[colliders.Count-1].transform.position;
+
+			for (int i = 0; i < AreaColl.Count; i++)
+			{
+				
+
+				colliders.Add(AreaColl[i]);
+            }
+
+            transform.position = colliders[colliders.Count - 1].transform.position;
+
         }
+
+
+
 
 
 
