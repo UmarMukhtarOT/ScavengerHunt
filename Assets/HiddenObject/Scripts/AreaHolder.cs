@@ -130,7 +130,7 @@ public class AreaHolder : MonoBehaviour
                 objToFind.ObjectsProperties.spriteRenderer.sprite = Sprites1[i];
                 objToFind.ObjectsProperties.sprites[0] = Sprites1[i];
                 objToFind.ObjectsProperties.sprites[1] = Sprites2[i];
-                objToFind.ObjectsProperties.duration = UnityEngine.Random.Range(0.1f, 0.2f);
+                objToFind.ObjectsProperties.duration = 1;
 
 
 
