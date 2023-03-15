@@ -659,7 +659,6 @@ MonoBehaviour:
   SvAnim: {fileID: 1837386435}
   SVUpBtn: {fileID: 1506257439}
   SVDownBtn: {fileID: 244966461}
-  IsUp: 1
 --- !u!4 &182870292
 Transform:
   m_ObjectHideFlags: 0

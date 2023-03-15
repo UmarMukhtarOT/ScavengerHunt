@@ -6,10 +6,10 @@ using System.Collections;
 [System.Serializable]
 public class AreaProperties
 {
-    
-   
+
+
     public GameObject AreaItself;
-   
+
 }
 
 public enum GameStatus
@@ -28,15 +28,15 @@ public class LevelManagerScav : MonoBehaviour
     public int[] perLevelReqCount;
 
 
-    [SerializeField] private float timeLimit = 0;                       
-    [SerializeField] private int maxHiddenObjectToFound = 6;            
+    [SerializeField] private float timeLimit = 0;
+    [SerializeField] private int maxHiddenObjectToFound = 6;
     [SerializeField] private AreaHolder objectHolderPrefab;           //ObjectHolderPrefab contains list of all the hiddenObjects available in it
-    [HideInInspector]public GameStatus gameStatus = GameStatus.NEXT;   
-   
+    [HideInInspector] public GameStatus gameStatus = GameStatus.NEXT;
+
     private List<AreaObjectPropertiesClass> activeHiddenObjectList;              //list hidden objects which are marked as hidden from the above list
-    private float currentTime;                                          
-    private int totalHiddenObjectsFound = 0;                            
-    private TimeSpan time;                                              
+    private float currentTime;
+    private int totalHiddenObjectsFound = 0;
+    private TimeSpan time;
     private RaycastHit2D hit;
     private Vector3 pos;                                                //hold Mouse Tap position converted to WorldPoint
 
@@ -57,17 +57,17 @@ public class LevelManagerScav : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     void Start()
     {
-        activeHiddenObjectList = new List<AreaObjectPropertiesClass>();          
-        AssignHiddenObjects();                                  
+        activeHiddenObjectList = new List<AreaObjectPropertiesClass>();
+        AssignHiddenObjects();
     }
 
     void AssignHiddenObjects()  //Method selects objects from the hiddenobjects list which should be hidden
     {
-        totalHiddenObjectsFound = 0;                                      
-        activeHiddenObjectList.Clear();                                    
+        totalHiddenObjectsFound = 0;
+        activeHiddenObjectList.Clear();
         gameStatus = GameStatus.PLAYING;
 
 
@@ -84,12 +84,12 @@ public class LevelManagerScav : MonoBehaviour
         }
 
 
-       
-        
-        
+
+
+
         //for (int i = 0; i < AreaHolder[0].HiddenObjectList.Count; i++)
         //{
-            
+
         //    activeHiddenObjectList.Add(AreaHolder[0].HiddenObjectList[i]);
 
         //}
@@ -111,8 +111,8 @@ public class LevelManagerScav : MonoBehaviour
             if (Input.GetMouseButtonDown(0))                                //check for left mouse tap
             {
                 pos = Cam.ScreenToWorldPoint(Input.mousePosition);  //get the position of mouse tap and conver it to WorldPoint
-                hit = Physics2D.Raycast(pos, Vector2.zero,100,requiredLayer);                 //create a Raycast hit from mouse tap position
-               
+                hit = Physics2D.Raycast(pos, Vector2.zero, 100, requiredLayer);                 //create a Raycast hit from mouse tap position
+
 
                 if (hit && hit.collider != null)                            //check if hit and collider is not null
                 {
@@ -135,7 +135,7 @@ public class LevelManagerScav : MonoBehaviour
                     totalHiddenObjectsFound++;                              //increase totalHiddenObjectsFound count
 
                     //check if totalHiddenObjectsFound is more or equal to maxHiddenObjectToFound
-                    if (totalHiddenObjectsFound >= maxHiddenObjectToFound)  
+                    if (totalHiddenObjectsFound >= maxHiddenObjectToFound)
                     {
                         Debug.Log("You won the game");                      //if yes then we have won the game
                         UIManagerScav.instance.GameCompleteObj.SetActive(true); //activate GameComplete panel

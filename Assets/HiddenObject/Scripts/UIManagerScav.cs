@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManagerScav : MonoBehaviour
 {
     public static UIManagerScav instance;
-    
+
 
     public Image crossImg;
     public Image infoImg;
@@ -22,7 +22,7 @@ public class UIManagerScav : MonoBehaviour
     public Animator SvAnim;
 
 
-    public GameObject GameCompleteObj { get => gameCompleteObj; } 
+    public GameObject GameCompleteObj { get => gameCompleteObj; }
     public Text TimerText { get => timerText; }
     public GameObject SVUpBtn, SVDownBtn;
 
@@ -49,7 +49,7 @@ public class UIManagerScav : MonoBehaviour
     public void PopulateHiddenObjectIcons(List<AreaObjectPropertiesClass> AreaObjects)
     {
 
-         SV_IconList.Clear();                             
+        SV_IconList.Clear();
         for (int i = 0; i < AreaObjects.Count; i++)
         {
 
@@ -99,14 +99,14 @@ public class UIManagerScav : MonoBehaviour
         {
             if (SelectedObjName == SV_IconList[i].name)      //check if index is same as name [our name is a number]
             {
-                string id= objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
+                string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
 
                 PlayerPrefs.SetInt((id), 1);
 
 
 
-                string IconName= SV_IconList[i].name;
-                PlayerPrefs.SetInt((IconName+ "Collected"), PlayerPrefs.GetInt((IconName+ "Collected"), 0)+1);
+                string IconName = SV_IconList[i].name;
+                PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
 
                 SV_IconList[i].updateCollectedText();
 
@@ -114,14 +114,14 @@ public class UIManagerScav : MonoBehaviour
 
 
 
-                break;                                                          
+                break;
             }
         }
     }
 
 
 
-    public bool IsUp=true;
+
 
     public void NextButton() //Method called when NextButton is clicked
     {

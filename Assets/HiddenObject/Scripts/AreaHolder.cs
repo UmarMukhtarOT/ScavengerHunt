@@ -55,10 +55,10 @@ public class AreaHolder : MonoBehaviour
     [SerializeField] public Transform Objectparent;
     [SerializeField] public Transform CollectableObjects;
     [SerializeField] public List<AreaObjectPropertiesClass> HiddenObjectList;   //list of all the hiddenObjects available in the scene
-    
+
     [SerializeField] public List<BoxCollider> areaColliders;
     [SerializeField] public List<Env_ObjectToFind> spriteRendererDataList;
-   
+
 
 
 
@@ -96,8 +96,12 @@ public class AreaHolder : MonoBehaviour
 
         //for (int i = 0; i < CollectableObjects.transform.childCount; i++)
         //{
+
         //    AreaObjectPropertiesClass hiddenObjectData = new AreaObjectPropertiesClass();
+        //    Debug.Log("dfdsfsd " + hiddenObjectData.ObjItself);
+
         //    hiddenObjectData.ObjItself.name = CollectableObjects.transform.GetChild(i).name;
+
         //    string name = CollectableObjects.transform.GetChild(i).name;
         //    HiddenObjectList.Add(hiddenObjectData);
 
@@ -144,16 +148,10 @@ public class AreaHolder : MonoBehaviour
             Debug.Log("Set the 'EditorSpawn' bool true to spawn objects. ");
 
 
+
         }
 
-
-
-
-
-
-
     }
-
 
 
 }
