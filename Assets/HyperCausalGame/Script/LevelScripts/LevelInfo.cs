@@ -5,4 +5,6 @@ using UnityEngine;
 public class LevelInfo : MonoBehaviour
 {
 
+    public static LevelInfo Instance;
+
 }

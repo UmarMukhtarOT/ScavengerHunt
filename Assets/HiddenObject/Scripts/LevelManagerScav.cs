@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 [System.Serializable]
 public class AreaProperties
@@ -41,7 +41,7 @@ public class LevelManagerScav : MonoBehaviour
     private Vector3 pos;                                                //hold Mouse Tap position converted to WorldPoint
 
     [SerializeField]
-    public List<AreaHolder> AreaHolder;
+    public AreaHolder AreaHolderObj;
     public LayerMask requiredLayer;
 
 
@@ -60,15 +60,29 @@ public class LevelManagerScav : MonoBehaviour
 
     void Start()
     {
-        activeHiddenObjectList = new List<AreaObjectPropertiesClass>();
-        AssignHiddenObjects();
+
+        Invoke(nameof(AssignHiddenObjects), 1);
+        //AssignHiddenObjects();
     }
+
+
+
 
     void AssignHiddenObjects()  //Method selects objects from the hiddenobjects list which should be hidden
     {
+
+        //Debug.Log("LevelInfo "+ LevelManager.gameObject.name);
+        AreaHolderObj = LevelInfo.Instance.GetComponent<AreaHolder>();
+
+
+        activeHiddenObjectList = new List<AreaObjectPropertiesClass>();
         totalHiddenObjectsFound = 0;
         activeHiddenObjectList.Clear();
+
         gameStatus = GameStatus.PLAYING;
+
+
+
 
 
         if (IsTimeLimited)
@@ -87,12 +101,12 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-        //for (int i = 0; i < AreaHolder[0].HiddenObjectList.Count; i++)
-        //{
+        for (int i = 0; i < AreaHolderObj.HiddenObjectList.Count; i++)
+        {
 
-        //    activeHiddenObjectList.Add(AreaHolder[0].HiddenObjectList[i]);
+            activeHiddenObjectList.Add(AreaHolderObj.HiddenObjectList[i]);
 
-        //}
+        }
 
 
 
@@ -120,7 +134,8 @@ public class LevelManagerScav : MonoBehaviour
                     //Debug.Log("hit.collider" + hit.collider.name);
 
                     hit.collider.gameObject.SetActive(false);               //deactivate the hit object
-                    //Remember we renamed all our object to their respective Index, we did it for UIManager
+
+                    
                     UIManagerScav.instance.CheckSelectedHiddenObject(hit.collider.transform); //send the transform of hit object to UIManager
 
                     for (int i = 0; i < activeHiddenObjectList.Count; i++)
@@ -133,6 +148,9 @@ public class LevelManagerScav : MonoBehaviour
                     }
 
                     totalHiddenObjectsFound++;                              //increase totalHiddenObjectsFound count
+
+
+
 
                     //check if totalHiddenObjectsFound is more or equal to maxHiddenObjectToFound
                     if (totalHiddenObjectsFound >= maxHiddenObjectToFound)
