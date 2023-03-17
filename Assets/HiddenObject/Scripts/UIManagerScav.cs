@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -46,7 +47,7 @@ public class UIManagerScav : MonoBehaviour
 
 
 
-    public void PopulateHiddenObjectIcons(List<AreaObjectPropertiesClass> AreaObjects)
+    public void PopulateHiddenObjectIcons(List<Transform> AreaObjects)
     {
 
         SV_IconList.Clear();
@@ -54,17 +55,17 @@ public class UIManagerScav : MonoBehaviour
         {
 
 
-            if (!SV_IconList.Exists(x => x.name == AreaObjects[i].ObjItself.name))
+            if (!SV_IconList.Exists(x => x.name == AreaObjects[i].name))
             {
                 SV_ObjectIcon icon = Instantiate(hiddenObjectIconPrefab, hiddenObjectIconHolder.transform);
-                icon.setIconProperties(AreaObjects[i].ObjItself.name, AreaObjects[i].ObjItself.GetComponent<SpriteRenderer>().sprite);
+                icon.setIconProperties(AreaObjects[i].name, AreaObjects[i].GetComponent<SpriteRenderer>().sprite);
                 SV_IconList.Add(icon);
 
 
             }
 
 
-            int matchingIndex = SV_IconList.FindIndex(x => x.name == AreaObjects[i].ObjItself.name);
+            int matchingIndex = SV_IconList.FindIndex(x => x.name == AreaObjects[i].name);
             if (matchingIndex >= 0)
             {
                 // A matching SV_ObjectIcon was found at index matchingIndex
@@ -99,12 +100,16 @@ public class UIManagerScav : MonoBehaviour
         {
             if (SelectedObjName == SV_IconList[i].name)      //check if index is same as name [our name is a number]
             {
+
+
+               // ScrollToTarget(SV_IconList[i].GetComponent<Transform>());
+                Debug.Log("Found a Match "+ SelectedObjName);
                 string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
 
                 PlayerPrefs.SetInt((id), 1);
 
 
-
+                Sv_fillText.text = 0+"/" +0;
                 string IconName = SV_IconList[i].name;
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
 
@@ -154,9 +159,36 @@ public class UIManagerScav : MonoBehaviour
 
 
 
+    [SerializeField]
+    private ScrollRect scrollRect; //your scroll rect component
+    [SerializeField]
+    RectTransform _container; //content transform of the scrollrect
 
 
 
+
+    public float scrollSpeed = 5f;
+
+    public void ScrollToTarget(Transform targetPosition)
+    {
+        if (scrollRect == null || targetPosition == null)
+            return;
+        Vector2 targetPos = new Vector2(targetPosition.localPosition.x, targetPosition.localPosition.y);
+        StartCoroutine(ScrollTo(targetPos));
+    }
+
+    private IEnumerator ScrollTo(Vector2 targetPos)
+    {
+        while (Vector2.Distance(scrollRect.content.localPosition, targetPos) > 0.01f)
+        {
+            scrollRect.content.localPosition = Vector2.Lerp(scrollRect.content.localPosition, targetPos, Time.deltaTime * scrollSpeed);
+
+            yield return null;
+        }
+
+        // Once we're done scrolling, make sure we snap to the target position
+        scrollRect.content.localPosition = targetPos;
+    }
 
 
 

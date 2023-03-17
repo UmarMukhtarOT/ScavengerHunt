@@ -48,7 +48,7 @@ public class SV_ObjectIcon : MonoBehaviour
         if (collected>=TotalObjects&&TotalObjects!=0)
         {
 
-            Debug.Log("completes an object"+ transform.name);
+          //  Debug.Log("completes an object"+ transform.name);
 
             transform.SetAsLastSibling();
 
