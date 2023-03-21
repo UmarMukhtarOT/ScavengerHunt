@@ -16,11 +16,15 @@ public class UIManagerScav : MonoBehaviour
     [SerializeField] private SV_ObjectIcon hiddenObjectIconPrefab;     //reference to Icon prefab
     [SerializeField] private GameObject gameCompleteObj;            //reference to GameComplete panel
     [SerializeField] private Text timerText;                        //reference to time text
-    private List<SV_ObjectIcon> SV_IconList;                  //list to store Icons of active hidden objects
+    
+    [HideInInspector]
+    public List<SV_ObjectIcon> SV_IconList;                  //list to store Icons of active hidden objects
 
     public Text Sv_fillText;
     public Image Sv_FillBar;
     public Animator SvAnim;
+
+    public ScrollRectSnapHelper AutoScroller;
 
 
     public GameObject GameCompleteObj { get => gameCompleteObj; }
@@ -45,7 +49,10 @@ public class UIManagerScav : MonoBehaviour
     }
 
 
-
+    private void Start()
+    {
+       // 
+    }
 
     public void PopulateHiddenObjectIcons(List<Transform> AreaObjects)
     {
@@ -107,7 +114,7 @@ public class UIManagerScav : MonoBehaviour
                 string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
 
                 PlayerPrefs.SetInt((id), 1);
-
+                AutoScroller.SnapToElement(SV_IconList[0].GetComponent<RectTransform>());
 
                 Sv_fillText.text = 0+"/" +0;
                 string IconName = SV_IconList[i].name;

@@ -1,55 +1,96 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ScrollRectSnapHelper : MonoBehaviour, IEndDragHandler, IBeginDragHandler
+public class ScrollRectSnapHelper : MonoBehaviour
 {
+    public ScrollRect scrollRect;
+    public RectTransform content;
+    public float snapSpeed = 10f;
+    public float snapThreshold = 0.1f;
 
-    public int NumberOfScreens = 3;
-    [Tooltip("How fast does it tween to next page when Flick gesture is detected")]
-    public float ThrowSpeed = 5;
-    [Tooltip("Percent scroll needs to be moved to detect Flick gesture")]
-    public float FlickPercentThreshold = .05f;
-    [Tooltip("Maximum time length from drag begin to drag end to clasify as a Flick gesture")]
-    public float FlickTimeThreshold = .2f;
+    public RectTransform[] children;
+    private int childIndex = -1;
+    private bool isSnapping = false;
+    private Vector2 targetPosition;
 
-    public float desiredScreenPos;
-    private float screenStep, dragStartPos, flickStartTimeStamp;
-    private bool canAnimate = false;
-    private ScrollRect scrollRect;
-
-    // Use t$$anonymous$$s for initialization
-    void Start()
+    IEnumerator Start()
     {
-        scrollRect = GetComponent<ScrollRect>();
-        screenStep = 1.0f / (NumberOfScreens - 1.0f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    { 
-       // if (canAnimate)
-            scrollRect.horizontalNormalizedPosition = Mathf.Lerp(scrollRect.horizontalNormalizedPosition, desiredScreenPos, Time.deltaTime * ThrowSpeed);
-    }
-
-    public void OnBeginDrag(PointerEventData data)
-    {
-        canAnimate = false;
-        dragStartPos = scrollRect.horizontalNormalizedPosition;
-        flickStartTimeStamp = Time.time;
-    }
-
-    public void OnEndDrag(PointerEventData data)
-    {
-        desiredScreenPos = Mathf.Round(scrollRect.horizontalNormalizedPosition / screenStep) * screenStep;
-
-        if (Time.time - flickStartTimeStamp < FlickTimeThreshold &&
-            Mathf.Abs(scrollRect.horizontalNormalizedPosition - dragStartPos) > FlickPercentThreshold)
+        yield return new WaitForSeconds(0.25f);
+        children = new RectTransform[content.childCount];
+        for (int i = 0; i < children.Length; i++)
         {
-            desiredScreenPos = Mathf.Clamp01(desiredScreenPos + screenStep * Mathf.Sign(scrollRect.horizontalNormalizedPosition - dragStartPos));
+            children[i] = content.GetChild(i).GetComponent<RectTransform>();
         }
 
-        canAnimate = true;
+
+
+        SnapToElement(UIManagerScav.instance.SV_IconList[1].GetComponent<RectTransform>());
+    }
+
+    void Update()
+    {
+        if (isSnapping)
+        {
+            float step = snapSpeed * Time.deltaTime;
+            content.anchoredPosition = Vector2.Lerp(content.anchoredPosition, targetPosition, step);
+            if (Vector2.Distance(content.anchoredPosition, targetPosition) < snapThreshold)
+            {
+                content.anchoredPosition = targetPosition;
+                isSnapping = false;
+            }
+        }
+    }
+
+    public void SnapToElement(RectTransform element)
+    {
+
+        Debug.Log(" element wasn't visible"+ children.Length);
+        if (isSnapping) return;
+        childIndex = -1;
+        for (int i = 0; i < children.Length; i++)
+        {
+            if (children[i] == element)
+            {
+                childIndex = i;
+                break;
+            }
+        }
+        if (childIndex < 0) return;
+        Debug.Log(" element wasn't visible");
+        // Get the visible area of the viewport
+        RectTransform viewport = scrollRect.viewport;
+        Vector2 viewportTopLeft = (Vector2)viewport.position - (viewport.rect.size * 0.5f);
+        Vector2 viewportBottomRight = (Vector2)viewport.position + (viewport.rect.size * 0.5f);
+
+        // Get the visible area of the element in the content space
+        Vector2 elementTopLeft = (Vector2)element.position - (element.rect.size * 0.5f);
+        Vector2 elementBottomRight = (Vector2)element.position + (element.rect.size * 0.5f);
+        elementTopLeft = content.InverseTransformPoint(elementTopLeft);
+        elementBottomRight = content.InverseTransformPoint(elementBottomRight);
+
+        // Check if the element is within the visible area of the viewport
+        bool isElementVisible = (elementTopLeft.x <= viewportBottomRight.x && elementBottomRight.x >= viewportTopLeft.x);
+
+        // Calculate the target position for the content to snap to
+        float targetX = content.anchoredPosition.x;
+        if (!isElementVisible)
+        {
+
+
+            Debug.Log(" element wasn't visible");
+            if (elementBottomRight.x > viewportBottomRight.x)
+            {
+                targetX -= (elementBottomRight.x - viewportBottomRight.x);
+            }
+            else if (elementTopLeft.x < viewportTopLeft.x)
+            {
+                targetX += (viewportTopLeft.x - elementTopLeft.x);
+            }
+            targetPosition = new Vector2(targetX, content.anchoredPosition.y);
+            isSnapping = true;
+        }
     }
 }
