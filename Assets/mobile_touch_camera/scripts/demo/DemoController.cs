@@ -62,10 +62,23 @@ namespace BitBenderGames {
       ShowInfoText("Mobile Touch Camera Demo\nSwipe: Scroll\nPinch: Zoom\nTap: Pick Item", introTextOnScreenTime);
     }
 
+        public Collider TapedCollider;
+
     public void OnPickItem(RaycastHit hitInfo) {
       Debug.Log("Picked a collider: " + hitInfo.collider);
+            TapedCollider = hitInfo.collider;
       ShowInfoText("" + hitInfo.collider, 2);
     }
+
+        public Collider tapResult()
+        {
+
+            Debug.Log("TapedCollider "+ TapedCollider);
+            return TapedCollider;
+        
+        }
+
+
 
     public void OnPickItem2D(RaycastHit2D hitInfo2D) {
       Debug.Log("Picked a 2D collider: " + hitInfo2D.collider);

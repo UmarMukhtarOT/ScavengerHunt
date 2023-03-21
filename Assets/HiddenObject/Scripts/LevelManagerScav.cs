@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using DG.Tweening;
 
+using BitBenderGames;
+
 [System.Serializable]
 public class AreaProperties
 {
@@ -46,9 +48,18 @@ public class LevelManagerScav : MonoBehaviour
     [SerializeField]
     public AreaHolder AreaHolderObj;
     public LayerMask requiredLayer;
-    
+    public DemoController _Controller;
 
 
+
+
+
+    public void OnPickItem(RaycastHit hitInfo)
+    {
+        Debug.Log("Picked a collider:////////////////////// " + hitInfo.collider);
+        // TapedCollider = hitInfo.collider;
+        // ShowInfoText("" + hitInfo.collider, 2);
+    }
 
 
 
@@ -57,7 +68,7 @@ public class LevelManagerScav : MonoBehaviour
     private void Awake()
     {
 
-       
+
         if (instance == null)
         {
             instance = this;
@@ -86,7 +97,7 @@ public class LevelManagerScav : MonoBehaviour
         AreaHolderObj = LevelManager.instance.CurrentLevel.GetComponent<AreaHolder>();
 
 
-       activeHiddenObjectList = new List<Transform>();
+        activeHiddenObjectList = new List<Transform>();
         //totalHiddenObjectsFound = 0;
         activeHiddenObjectList.Clear();
 
@@ -139,69 +150,72 @@ public class LevelManagerScav : MonoBehaviour
             //    hit = Physics2D.Raycast(pos, Vector2.zero, 100, requiredLayer);                 //create a Raycast hit from mouse tap position
 
 
-            //   
+
             //}
 
 
-            if (Input.GetMouseButtonDown(0)) // Detect if the left mouse button was clicked
+            //if (Input.GetMouseButtonDown(0)) // Detect if the left mouse button was clicked
+            //{
+            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Create a ray from the camera through the mouse position
+            //    RaycastHit hit; // Create a RaycastHit variable to store information about the hit
+
+            //    if (Physics.Raycast(ray, out hit, 500)) // Cast the ray and check if it hit an object within the specified length
+            //    {
+            //        Debug.Log("Hit object: " + hit.collider.gameObject.name); // Log the name of the hit object
+
+
+
+
+            if (_Controller.TapedCollider != null)                            //check if hit and collider is not null
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Create a ray from the camera through the mouse position
-                RaycastHit hit; // Create a RaycastHit variable to store information about the hit
 
-                if (Physics.Raycast(ray, out hit, 500)) // Cast the ray and check if it hit an object within the specified length
+                Debug.Log("hit.collider" + _Controller.TapedCollider.name);
+
+                _Controller.TapedCollider.gameObject.SetActive(false);               //deactivate the hit object
+
+
+                UIManagerScav.instance.CheckSelectedHiddenObject(_Controller.TapedCollider.transform); //send the transform of hit object to UIManager
+
+                for (int i = 0; i < activeHiddenObjectList.Count; i++)
                 {
-                    Debug.Log("Hit object: " + hit.collider.gameObject.name); // Log the name of the hit object
-
-
-
-
-                    if (hit.collider != null)                            //check if hit and collider is not null
+                    if (activeHiddenObjectList[i].name == _Controller.TapedCollider.gameObject.name)
                     {
-
-                        Debug.Log("hit.collider" + hit.collider.name);
-
-                        hit.collider.gameObject.SetActive(false);               //deactivate the hit object
-
-
-                        UIManagerScav.instance.CheckSelectedHiddenObject(hit.collider.transform); //send the transform of hit object to UIManager
-
-                        for (int i = 0; i < activeHiddenObjectList.Count; i++)
-                        {
-                            if (activeHiddenObjectList[i].name == hit.collider.gameObject.name)
-                            {
-                                activeHiddenObjectList.RemoveAt(i);
-                                break;
-                            }
-                        }
-
-                        totalHiddenObjectsFound++;                              //increase totalHiddenObjectsFound count
-
-                        UIManagerScav.instance.Sv_fillText.text = totalHiddenObjectsFound + "/" + maxHiddenObjectToFound;
-                        Debug.Log(totalHiddenObjectsFound + "/" + maxHiddenObjectToFound);
-
-                        //check if totalHiddenObjectsFound is more or equal to maxHiddenObjectToFound
-                        if (totalHiddenObjectsFound >= maxHiddenObjectToFound)
-                        {
-                            Debug.Log("You won the game");                      //if yes then we have won the game
-                            UIManagerScav.instance.GameCompleteObj.SetActive(true); //activate GameComplete panel
-                            gameStatus = GameStatus.NEXT;                       //set gamestatus to Next
-                        }
+                        activeHiddenObjectList.RemoveAt(i);
+                        break;
                     }
-
-
-
-
-
-
-
-
-
-
-
                 }
 
-                Debug.DrawRay(ray.origin, Vector3.forward * 500, Color.red, 0.5f); // Draw a red line to show the raycast in the specified direction and length
+                totalHiddenObjectsFound++;                              //increase totalHiddenObjectsFound count
+
+                UIManagerScav.instance.Sv_fillText.text = totalHiddenObjectsFound + "/" + maxHiddenObjectToFound;
+                Debug.Log(totalHiddenObjectsFound + "/" + maxHiddenObjectToFound);
+
+                //check if totalHiddenObjectsFound is more or equal to maxHiddenObjectToFound
+                if (totalHiddenObjectsFound >= maxHiddenObjectToFound)
+                {
+                    Debug.Log("You won the game");                      //if yes then we have won the game
+                    UIManagerScav.instance.GameCompleteObj.SetActive(true); //activate GameComplete panel
+                    gameStatus = GameStatus.NEXT;                       //set gamestatus to Next
+                }
+
+                _Controller.TapedCollider = null;
+
             }
+
+
+
+
+
+
+
+
+
+
+
+            //  }//
+
+            // Debug.DrawRay(ray.origin, Vector3.forward * 500, Color.red, 0.5f); // Draw a red line to show the raycast in the specified direction and length
+            //}//
         }
 
 
@@ -227,7 +241,12 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-
+    //public void OnPickItem(RaycastHit hitInfo)
+    //{
+    //    Debug.Log("Picked a collider:///////////////////// " + hitInfo.collider);
+    //  //  TapedCollider = hitInfo.collider;
+    //   // ShowInfoText("" + hitInfo.collider, 2);
+    //}
 
 
 
