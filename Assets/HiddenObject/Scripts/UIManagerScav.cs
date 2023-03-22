@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static GameManager;
 
 public class UIManagerScav : MonoBehaviour
 {
@@ -114,16 +115,20 @@ public class UIManagerScav : MonoBehaviour
                 string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
 
                 PlayerPrefs.SetInt((id), 1);
-                AutoScroller.SnapToElement(SV_IconList[0].GetComponent<RectTransform>());
+              //  AutoScroller.SnapToElement(SV_IconList[0].GetComponent<RectTransform>());
 
                 Sv_fillText.text = 0+"/" +0;
+
+              
                 string IconName = SV_IconList[i].name;
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
 
+
+
+
                 SV_IconList[i].updateCollectedText();
 
-
-
+               
 
 
                 break;
@@ -197,7 +202,10 @@ public class UIManagerScav : MonoBehaviour
         scrollRect.content.localPosition = targetPos;
     }
 
-
+    public float Remap(float value, float from1, float to1, float from2, float to2)
+    {
+        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+    }
 
 
     public void HintButton()

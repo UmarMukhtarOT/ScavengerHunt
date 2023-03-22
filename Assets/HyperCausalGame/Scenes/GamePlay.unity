@@ -5972,7 +5972,7 @@ MonoBehaviour:
   camZoomMin: 1
   camZoomMax: 18
   camOverzoomMargin: 1
-  camOverdragMargin: 1
+  camOverdragMargin: 0.3
   boundaryMin: {x: -25, y: -10}
   boundaryMax: {x: 10, y: 30}
   camFollowFactor: 15
@@ -6598,7 +6598,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -1.1999764}
-  m_SizeDelta: {x: 128, y: 128}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1161518484
 MonoBehaviour:
@@ -9964,7 +9964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsTimeLimited: 0
-  Cam: {fileID: 422121622}
+  Cam: {fileID: 1105049503}
   perLevelReqCount: 
   timeLimit: 150
   maxHiddenObjectToFound: 50

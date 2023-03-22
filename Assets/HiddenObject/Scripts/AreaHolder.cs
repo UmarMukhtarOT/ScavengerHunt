@@ -23,6 +23,9 @@ public class SpriteRendererData
     public int currentSpriteIndex = 0;
     private float elapsedTime = 0f;
 
+
+
+
     public void SwitchSprite()
     {
         currentSpriteIndex = (currentSpriteIndex + 1) % sprites.Count;
@@ -58,6 +61,10 @@ public class AreaHolder : MonoBehaviour
 
     [SerializeField] public List<BoxCollider> areaColliders;
     [SerializeField] public List<Env_ObjectToFind> spriteRendererDataList;
+    public List<Sprite> Sprites1;
+    public List<Sprite> Sprites2;
+    [SerializeField] public List<AreaBoundaries> areaBoundaries;
+    [SerializeField] public int AreaUnlockedTill;
 
 
 
@@ -87,8 +94,7 @@ public class AreaHolder : MonoBehaviour
         }
 
     }
-    public List<Sprite> Sprites1;
-    public List<Sprite> Sprites2;
+  
 
     public void ArrangeList()
     {
