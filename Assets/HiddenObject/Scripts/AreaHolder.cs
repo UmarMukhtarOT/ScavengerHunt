@@ -54,18 +54,17 @@ public class AreaHolder : MonoBehaviour
 
     [SerializeField] public bool EditorSpawn;
 
+    public List<Sprite> Sprites1;
+    public List<Sprite> Sprites2;
+    [SerializeField] public int AreaUnlockedTill;
+
     [SerializeField] public Env_ObjectToFind AreaObjPrefab;
     [SerializeField] public Transform Objectparent;
     [SerializeField] public Transform CollectableObjects;
     [SerializeField] public List<Transform> HiddenObjectList;   //list of all the hiddenObjects available in the scene
-
-    [SerializeField] public List<BoxCollider> areaColliders;
     [SerializeField] public List<Env_ObjectToFind> spriteRendererDataList;
-    public List<Sprite> Sprites1;
-    public List<Sprite> Sprites2;
-    [SerializeField] public List<AreaBoundaries> areaBoundaries;
-    [SerializeField] public int AreaUnlockedTill;
-
+    [SerializeField] public List<BoxCollider> areaColliders;
+    [SerializeField] public List<int> AreaObjNum;
 
 
 

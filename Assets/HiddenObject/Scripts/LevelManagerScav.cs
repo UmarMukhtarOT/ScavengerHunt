@@ -12,8 +12,8 @@ using BitBenderGames;
 public class AreaBoundaries
 {
 
-    public Vector2 MinBound;
-    public Vector2 MaxBound;
+   // public Vector2 MinBound;
+  //  public Vector2 MaxBound;
    
 
 }
@@ -48,7 +48,7 @@ public class LevelManagerScav : MonoBehaviour
 
     [SerializeField]
     public AreaHolder AreaHolderObj;
-    public LayerMask requiredLayer;
+    
     public DemoController _Controller;
     
    
@@ -74,40 +74,40 @@ public class LevelManagerScav : MonoBehaviour
 
     void Start()
     {
-        UIManagerScav.instance.Sv_fillText.text = totalHiddenObjectsFound + "/" + maxHiddenObjectToFound;
-        UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
+      
         if (!PlayerPrefs.HasKey("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"))
         {
             PlayerPrefs.SetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
 
         }
 
-        AreaHolderObj.AreaUnlockedTill = PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
-        Invoke(nameof(AssignHiddenObjects), 1);
+       
+        Invoke(nameof(SetupLevel), 1);
         
 
 
 
-        //AssignHiddenObjects();
+        
     }
 
 
 
 
-    void AssignHiddenObjects()  //Method selects objects from the hiddenobjects list which should be hidden
+    void SetupLevel()  //Method selects objects from the hiddenobjects list which should be hidden
     {
-        UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
-
-        Cam.BoundaryMin = AreaHolderObj.areaBoundaries[AreaHolderObj.AreaUnlockedTill].MinBound;
-        Cam.BoundaryMin = AreaHolderObj.areaBoundaries[AreaHolderObj.AreaUnlockedTill].MaxBound;
-
-        //Debug.Log("LevelInfo "+ LevelManager.gameObject.name);
+       
+        
         AreaHolderObj = LevelManager.instance.CurrentLevel.GetComponent<AreaHolder>();
 
 
+        UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
+        AreaHolderObj.AreaUnlockedTill = PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
+        Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(AreaHolderObj.areaColliders[AreaHolderObj.AreaUnlockedTill]);
         activeHiddenObjectList = new List<Transform>();
-        //totalHiddenObjectsFound = 0;
         activeHiddenObjectList.Clear();
+        maxHiddenObjectToFound = AreaHolderObj.AreaObjNum[AreaHolderObj.AreaUnlockedTill];
+        UIManagerScav.instance.Sv_fillText.text = totalHiddenObjectsFound + "/" + maxHiddenObjectToFound;
+        UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
 
         gameStatus = GameStatus.PLAYING;
 
@@ -200,11 +200,26 @@ public class LevelManagerScav : MonoBehaviour
                
 
                 UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound); 
+
+
                 //check if totalHiddenObjectsFound is more or equal to maxHiddenObjectToFound
                 if (totalHiddenObjectsFound >= maxHiddenObjectToFound)
                 {
-                    Debug.Log("You won the game");                      //if yes then we have won the game
-                    UIManagerScav.instance.GameCompleteObj.SetActive(true); //activate GameComplete panel
+
+                    if (AreaHolderObj.AreaUnlockedTill < AreaHolderObj.areaColliders.Count)
+                    {
+                        UnlockNextArea();
+                      //  SetupLevel();
+                    }
+                    else
+                    {
+                        Debug.Log("You won the game");                      //if yes then we have won the game
+                        UIManagerScav.instance.GameCompleteObj.SetActive(true); //activate GameComplete panel
+
+
+
+                    }
+                   
                     gameStatus = GameStatus.NEXT;                       //set gamestatus to Next
                 }
 
@@ -241,17 +256,29 @@ public class LevelManagerScav : MonoBehaviour
         }
     }
 
+    public void UnlockNextArea()
+    {
 
+
+
+        AreaHolderObj.AreaUnlockedTill++; //= PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
+        PlayerPrefs.SetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), AreaHolderObj.AreaUnlockedTill);
+
+        BoxCollider NextBound = AreaHolderObj.areaColliders[AreaHolderObj.AreaUnlockedTill];
+
+
+
+        Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(NextBound);
+        
+
+        Vector3 Nextpos= NextBound.transform.position;
+        Nextpos.z=Cam.transform.position.z;
+
+
+        Cam.transform.DOMove(Nextpos, 2);
+
+    }
    
-
-    //public void OnPickItem(RaycastHit hitInfo)
-    //{
-    //    Debug.Log("Picked a collider:///////////////////// " + hitInfo.collider);
-    //  //  TapedCollider = hitInfo.collider;
-    //   // ShowInfoText("" + hitInfo.collider, 2);
-    //}
-
-
 
 
 
