@@ -30,40 +30,46 @@ namespace BitBenderGames
     public class SetBoundaryFromCollider : MonoBehaviour
     {
 
+        MobileTouchCamera m_MobileTouchCamera;
+
+
         //[SerializeField]
         //private BoxCollider boxCollider = null;
 
         public void Start()
         {
+           
 
+            m_MobileTouchCamera =GetComponent<MobileTouchCamera>();
 
+            m_MobileTouchCamera.CamZoom = m_MobileTouchCamera.CamZoomMax;
         }
 
 
         public void SetBoundary(BoxCollider boxCollider)
         {
-
+           
             if (boxCollider == null)
             {
                 Debug.LogError("This script requires a box collider to be assigned.");
                 return;
             }
-
-            MobileTouchCamera mobileTouchCam = GetComponent<MobileTouchCamera>();
+            m_MobileTouchCamera.CamZoom = m_MobileTouchCamera.CamZoomMax;
+            
 
             var boxMin = boxCollider.bounds.min;
             var boxMax = boxCollider.bounds.max;
-            if (mobileTouchCam.CameraAxes == CameraPlaneAxes.XY_2D_SIDESCROLL)
+            if (m_MobileTouchCamera.CameraAxes == CameraPlaneAxes.XY_2D_SIDESCROLL)
             {
-                mobileTouchCam.BoundaryMin = new Vector2(boxMin.x, boxMin.y);
-                mobileTouchCam.BoundaryMax = new Vector2(boxMax.x, boxMax.y);
+                m_MobileTouchCamera.BoundaryMin = new Vector2(boxMin.x, boxMin.y);
+                m_MobileTouchCamera.BoundaryMax = new Vector2(boxMax.x, boxMax.y);
             }
             else
             {
-                mobileTouchCam.BoundaryMin = new Vector2(boxMin.x, boxMin.z);
-                mobileTouchCam.BoundaryMax = new Vector2(boxMax.x, boxMax.z);
+                m_MobileTouchCamera.BoundaryMin = new Vector2(boxMin.x, boxMin.z);
+                m_MobileTouchCamera.BoundaryMax = new Vector2(boxMax.x, boxMax.z);
             }
-            mobileTouchCam.ResetCameraBoundaries();
+            m_MobileTouchCamera.ResetCameraBoundaries();
 
         }
 

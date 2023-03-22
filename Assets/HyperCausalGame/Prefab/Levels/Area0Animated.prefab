@@ -6565,8 +6565,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3143733561280687912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.8208, y: 10.8, z: 2.3}
-  m_LocalScale: {x: 31.267704, y: 38.31602, z: 1}
+  m_LocalPosition: {x: 14.1162, y: 10.8, z: 2.3}
+  m_LocalScale: {x: 78.6758, y: 38.31602, z: 1}
   m_Children: []
   m_Father: {fileID: 8301995129518054511}
   m_RootOrder: 4
@@ -6631,8 +6631,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5031683, y: 1, z: 1}
-  m_Center: {x: -0.7515831, y: 0, z: 0}
+  m_Size: {x: 0.98903203, y: 1, z: 1}
+  m_Center: {x: 0.0054860055, y: 0, z: 0}
 --- !u!1 &3152793043418923150
 GameObject:
   m_ObjectHideFlags: 0
@@ -17221,7 +17221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8301995129518054511
 Transform:
   m_ObjectHideFlags: 0
@@ -17504,7 +17504,7 @@ MonoBehaviour:
   - {fileID: 7461143730290821052}
   - {fileID: 8433565691676797029}
   - {fileID: 2830036834377393047}
-  AreaObjNum: 0a0000000f00000014000000
+  AreaObjNum: 050000000a0000000f000000
 --- !u!114 &3044730386586408547
 MonoBehaviour:
   m_ObjectHideFlags: 0

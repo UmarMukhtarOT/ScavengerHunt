@@ -147,37 +147,18 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-    //In Update() we will check the mouse tap and decide if it is a valid hidden object, also if the required count is completed
+    
     private void Update()
     {
         if (gameStatus == GameStatus.PLAYING)                               //check if gamestatus is Playing
         {
-            //if (Input.GetMouseButtonDown(0))                                //check for left mouse tap
-            //{
-            //    pos = Cam.ScreenToWorldPoint(Input.mousePosition);  //get the position of mouse tap and conver it to WorldPoint
-            //    hit = Physics2D.Raycast(pos, Vector2.zero, 100, requiredLayer);                 //create a Raycast hit from mouse tap position
-
-
-
-            //}
-
-
-            //if (Input.GetMouseButtonDown(0)) // Detect if the left mouse button was clicked
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Create a ray from the camera through the mouse position
-            //    RaycastHit hit; // Create a RaycastHit variable to store information about the hit
-
-            //    if (Physics.Raycast(ray, out hit, 500)) // Cast the ray and check if it hit an object within the specified length
-            //    {
-            //        Debug.Log("Hit object: " + hit.collider.gameObject.name); // Log the name of the hit object
-
-
+            
 
 
             if (_Controller.TapedCollider != null)                            //check if hit and collider is not null
             {
 
-                Debug.Log("hit.collider" + _Controller.TapedCollider.name);
+                Debug.Log("hit.collider//////////" + _Controller.TapedCollider.name);
 
                 _Controller.TapedCollider.gameObject.SetActive(false);               //deactivate the hit object
 
@@ -206,21 +187,28 @@ public class LevelManagerScav : MonoBehaviour
                 if (totalHiddenObjectsFound >= maxHiddenObjectToFound)
                 {
 
+                    Debug.Log("AreaUnlockedTill " + AreaHolderObj.AreaUnlockedTill);
+
                     if (AreaHolderObj.AreaUnlockedTill < AreaHolderObj.areaColliders.Count)
                     {
+
+                        Debug.Log("AreaUnlockedTill "+ AreaHolderObj.AreaUnlockedTill);
                         UnlockNextArea();
-                      //  SetupLevel();
+                        SetupLevel();
                     }
                     else
                     {
                         Debug.Log("You won the game");                      //if yes then we have won the game
-                        UIManagerScav.instance.GameCompleteObj.SetActive(true); //activate GameComplete panel
+                        //UIManagerScav.instance.GameCompleteObj.SetActive(true); //activate GameComplete panel
+                        PlayerPrefs.DeleteAll();
+                        GameManager.instance.levelCompleteManager.LevelComplete(1);
 
-
+                        
+                      //  gameStatus = GameStatus.NEXT;
 
                     }
                    
-                    gameStatus = GameStatus.NEXT;                       //set gamestatus to Next
+                                       //set gamestatus to Next
                 }
 
                 _Controller.TapedCollider = null;
@@ -229,10 +217,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-            //  }//
-
-            // Debug.DrawRay(ray.origin, Vector3.forward * 500, Color.red, 0.5f); // Draw a red line to show the raycast in the specified direction and length
-            //}//
+         
         }
 
 
@@ -261,7 +246,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-        AreaHolderObj.AreaUnlockedTill++; //= PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
+        AreaHolderObj.AreaUnlockedTill++; 
         PlayerPrefs.SetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), AreaHolderObj.AreaUnlockedTill);
 
         BoxCollider NextBound = AreaHolderObj.areaColliders[AreaHolderObj.AreaUnlockedTill];

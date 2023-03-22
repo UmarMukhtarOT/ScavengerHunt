@@ -67,6 +67,7 @@ namespace BitBenderGames {
     public void OnPickItem(RaycastHit hitInfo) {
       Debug.Log("Picked a collider: " + hitInfo.collider);
             TapedCollider = hitInfo.collider;
+            TapedCollider.enabled = false;
       ShowInfoText("" + hitInfo.collider, 2);
     }
 
