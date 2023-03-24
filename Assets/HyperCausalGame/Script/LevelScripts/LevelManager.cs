@@ -137,6 +137,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         LevelStart();
+        
     }
 
     public void LevelStart()
@@ -214,7 +215,7 @@ public class LevelManager : MonoBehaviour
 
         levelCreateFuncEvent.Invoke(level + 1);
 
-        ColliderContainer.AssignAreaColliders(LI.GetComponent<AreaHolder>().areaColliders);
+       // ColliderContainer.AssignAreaColliders(LI.GetComponent<AreaHolder>().areaProps.areaColliders);
 
 
     }

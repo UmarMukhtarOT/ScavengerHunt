@@ -2,21 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 using DG.Tweening;
 
 using BitBenderGames;
 
-[System.Serializable]
-public class AreaBoundaries
-{
-
-   // public Vector2 MinBound;
-  //  public Vector2 MaxBound;
-   
-
-}
 
 public enum GameStatus
 {
@@ -102,10 +91,10 @@ public class LevelManagerScav : MonoBehaviour
 
         UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
         AreaHolderObj.AreaUnlockedTill = PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
-        Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(AreaHolderObj.areaColliders[AreaHolderObj.AreaUnlockedTill]);
+        Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill]);
         activeHiddenObjectList = new List<Transform>();
         activeHiddenObjectList.Clear();
-        maxHiddenObjectToFound = AreaHolderObj.AreaObjNum[AreaHolderObj.AreaUnlockedTill];
+        maxHiddenObjectToFound = AreaHolderObj.areaProps.AreaObjNum[AreaHolderObj.AreaUnlockedTill];
         UIManagerScav.instance.Sv_fillText.text = totalHiddenObjectsFound + "/" + maxHiddenObjectToFound;
         UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
 
@@ -142,6 +131,25 @@ public class LevelManagerScav : MonoBehaviour
 
         UIManagerScav.instance.PopulateHiddenObjectIcons(activeHiddenObjectList);   //send the activeHiddenObjectList to UIManager
         gameStatus = GameStatus.PLAYING;                                        //set gamestatus to Playing
+
+
+
+        // PlayerPrefs.SetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), AreaHolderObj.AreaUnlockedTill);
+
+        Debug.Log("unlocked till"+ AreaHolderObj.AreaUnlockedTill);
+
+
+        for (int i = 1; i < AreaHolderObj.AreaUnlockedTill; i++)
+        {
+
+            AreaHolderObj.areaProps.areaColliders[i].GetComponent<Animator>().enabled=true;
+
+
+
+        }
+
+
+
     }
 
 
@@ -189,7 +197,7 @@ public class LevelManagerScav : MonoBehaviour
 
                     Debug.Log("AreaUnlockedTill " + AreaHolderObj.AreaUnlockedTill);
 
-                    if (AreaHolderObj.AreaUnlockedTill < AreaHolderObj.areaColliders.Count)
+                    if (AreaHolderObj.AreaUnlockedTill < AreaHolderObj.areaProps.areaColliders.Count)
                     {
 
                         Debug.Log("AreaUnlockedTill "+ AreaHolderObj.AreaUnlockedTill);
@@ -244,25 +252,29 @@ public class LevelManagerScav : MonoBehaviour
     public void UnlockNextArea()
     {
 
-
-
-        AreaHolderObj.AreaUnlockedTill++; 
+        AreaHolderObj.AreaUnlockedTill++;
         PlayerPrefs.SetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), AreaHolderObj.AreaUnlockedTill);
-
-        BoxCollider NextBound = AreaHolderObj.areaColliders[AreaHolderObj.AreaUnlockedTill];
-
-
-
+        BoxCollider NextBound = AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill];
+        Vector3 NextAreaPos = AreaHolderObj.areaProps.AreaPos[AreaHolderObj.AreaUnlockedTill].transform.position;
         Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(NextBound);
+
+
+
+        NextAreaPos.z = Cam.transform.position.z;
+        Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
+        {
+            NextBound.GetComponent<Animator>().enabled = true;
+           Debug.Log("dsfd");
+        }
         
+        );
 
-        Vector3 Nextpos= NextBound.transform.position;
-        Nextpos.z=Cam.transform.position.z;
-
-
-        Cam.transform.DOMove(Nextpos, 2);
-
+      
     }
+
+
+
+
    
 
 

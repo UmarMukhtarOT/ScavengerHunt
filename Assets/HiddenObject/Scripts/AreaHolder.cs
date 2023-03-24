@@ -3,15 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class AreaObjectPropertiesClass
-{
-
-
-    public GameObject ObjItself;
-
-}
-
 
 
 [System.Serializable]
@@ -46,6 +37,16 @@ public class SpriteRendererData
 
 
 
+[System.Serializable]
+public class AreaProps
+{
+
+   // public List<Transform> clouds;
+    public List<Transform> AreaPos;
+    public List<int> AreaObjNum;
+    public List<BoxCollider> areaColliders;
+    
+}
 
 
 
@@ -63,8 +64,9 @@ public class AreaHolder : MonoBehaviour
     [SerializeField] public Transform CollectableObjects;
     [SerializeField] public List<Transform> HiddenObjectList;   //list of all the hiddenObjects available in the scene
     [SerializeField] public List<Env_ObjectToFind> spriteRendererDataList;
-    [SerializeField] public List<BoxCollider> areaColliders;
-    [SerializeField] public List<int> AreaObjNum;
+    [Space(10)]
+    public AreaProps areaProps;
+
 
 
 
