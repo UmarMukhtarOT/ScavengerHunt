@@ -34,7 +34,7 @@ namespace BitBenderGames
 
 
         //[SerializeField]
-        //private BoxCollider boxCollider = null;
+       // public BoxCollider boxCollider = null;
 
         public void Start()
         {

@@ -12,6 +12,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using DG.Tweening.Plugins.Options;
+using UnityEditor.PackageManager;
 
 namespace BitBenderGames {
 
@@ -63,12 +65,15 @@ namespace BitBenderGames {
     }
 
         public Collider TapedCollider;
-
+       
     public void OnPickItem(RaycastHit hitInfo) {
-      Debug.Log("Picked a collider: " + hitInfo.collider);
+     //// Debug.Log("Picked a collider: " + hitInfo.collider);
+     ///
+
+            LevelManagerScav.instance.OnPickItemLM(hitInfo);
             TapedCollider = hitInfo.collider;
             TapedCollider.enabled = false;
-      ShowInfoText("" + hitInfo.collider, 2);
+            ShowInfoText("" + hitInfo.collider, 2);
     }
 
         public Collider tapResult()
@@ -275,10 +280,17 @@ namespace BitBenderGames {
         textDetail.text = message;
       }
     }
-
+       
+        /// //UmarEdit
     private void OnInputClick(Vector3 clickScreenPosition, bool isDoubleClick, bool isLongTap) {
       SetTextDetail("OnInputClick(clickScreenPosition: " + clickScreenPosition + ", isDoubleClick: " + isDoubleClick + ", isLongTap: " + isLongTap + ")");
       Debug.Log("OnInputClick(clickScreenPosition: " + clickScreenPosition + ", isDoubleClick: " + isDoubleClick + ", isLongTap: " + isLongTap + ")");
+
+            LevelManagerScav.instance.HitPos = clickScreenPosition;
+            LevelManagerScav.instance.showCrossOrInfo(clickScreenPosition);
+
+          //  HitPos = clickScreenPosition;
+
     }
 
     private void OnPinchUpdate(PinchUpdateData pinchUpdateData) {

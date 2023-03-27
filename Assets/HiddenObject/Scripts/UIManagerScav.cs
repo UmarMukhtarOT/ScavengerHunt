@@ -100,41 +100,41 @@ public class UIManagerScav : MonoBehaviour
     ///// Method called when the player tap on active hidden object
     ///// </summary>
     ///// <param name="index">Name of hidden object</param>
-    public void CheckSelectedHiddenObject(Transform objtrans)
-    {
+    //public void CheckSelectedHiddenObject(Transform objtrans)
+    //{
 
-        string SelectedObjName = objtrans.gameObject.name;
-        for (int i = 0; i < SV_IconList.Count; i++) //loop through the list
-        {
-            if (SelectedObjName == SV_IconList[i].name)      //check if index is same as name [our name is a number]
-            {
+    //    string SelectedObjName = objtrans.gameObject.name;
+    //    for (int i = 0; i < SV_IconList.Count; i++) //loop through the list
+    //    {
+    //        if (SelectedObjName == SV_IconList[i].name)      //check if index is same as name [our name is a number]
+    //        {
 
 
-               // ScrollToTarget(SV_IconList[i].GetComponent<Transform>());
-                Debug.Log("Found a Match "+ SelectedObjName);
-                string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
+    //           // ScrollToTarget(SV_IconList[i].GetComponent<Transform>());
+    //           // Debug.Log("Found a Match "+ SelectedObjName);
+    //            string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
 
-                PlayerPrefs.SetInt((id), 1);
-              //  AutoScroller.SnapToElement(SV_IconList[0].GetComponent<RectTransform>());
+    //            PlayerPrefs.SetInt((id), 1);
+    //          //  AutoScroller.SnapToElement(SV_IconList[0].GetComponent<RectTransform>());
 
-                Sv_fillText.text = 0+"/" +0;
+    //            Sv_fillText.text = 0+"/" +0;
 
               
-                string IconName = SV_IconList[i].name;
-                PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
+    //            string IconName = SV_IconList[i].name;
+    //            PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
 
 
 
 
-                SV_IconList[i].updateCollectedText();
+    //            SV_IconList[i].updateCollectedText();
 
                
 
 
-                break;
-            }
-        }
-    }
+    //            break;
+    //        }
+    //    }
+    //}
 
 
 
@@ -172,7 +172,7 @@ public class UIManagerScav : MonoBehaviour
 
 
     [SerializeField]
-    private ScrollRect scrollRect; //your scroll rect component
+    public ScrollRect scrollRect; //your scroll rect component
     [SerializeField]
     RectTransform _container; //content transform of the scrollrect
 

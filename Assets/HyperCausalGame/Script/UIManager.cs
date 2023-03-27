@@ -24,6 +24,10 @@ public class UIManager : MonoBehaviour
     [Header("GameOverUI")]
     public GameObject GameOverDialogue = null;
 
+
+    
+    public GameObject crossImage = null;
+
     private void Awake()
     {
         instance = this;

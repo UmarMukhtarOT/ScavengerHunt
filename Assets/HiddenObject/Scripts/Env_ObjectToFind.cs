@@ -18,7 +18,7 @@ public class Env_ObjectToFind : MonoBehaviour
     {
         ObjectsProperties.spriteRenderer = GetComponent<SpriteRenderer>();
 
-
+        ObjectsProperties.duration = UnityEngine.Random.Range(0.25f,0.4f) ;
 
         if (IsFindAble)
         {
