@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using static GameManager;
+//using static GameManager;
 
 public class UIManagerScav : MonoBehaviour
 {
@@ -31,7 +31,7 @@ public class UIManagerScav : MonoBehaviour
     public GameObject GameCompleteObj { get => gameCompleteObj; }
     public Text TimerText { get => timerText; }
     public GameObject SVUpBtn, SVDownBtn;
-
+    public Canvas ScavCanv;
 
 
 

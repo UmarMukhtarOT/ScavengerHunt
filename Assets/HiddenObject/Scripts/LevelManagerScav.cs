@@ -109,27 +109,23 @@ public class LevelManagerScav : MonoBehaviour
 
         AreaHolderObj = LevelManager.instance.CurrentLevel.GetComponent<AreaHolder>();
 
-
+        TouchInput.enabled = false;
         for (int i = 0; i <= PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea")); i++)
         {
 
-
-
-
-          //  Debug.Log(" ////// unlocked areas " + PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea")));
+            //  Debug.Log(" ////// unlocked areas " + PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea")));
 
             AreaHolderObj.areaProps.areaColliders[i].GetComponent<Animator>().enabled = true;
             // AreaHolderObj.areaProps.areaColliders[i].enabled = true;
-
-
-
-
 
         }
 
         UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
         AreaHolderObj.AreaUnlockedTill = PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
+
+
         Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill]);
+
         activeHiddenObjectList = new List<Transform>();
         activeHiddenObjectList.Clear();
         maxHiddenObjectToFound = AreaHolderObj.areaProps.AreaObjNum[AreaHolderObj.AreaUnlockedTill];
@@ -167,6 +163,22 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
+        Vector3 NextAreaPos = AreaHolderObj.areaProps.AreaPos[AreaHolderObj.AreaUnlockedTill].transform.position;
+        NextAreaPos.z = Cam.transform.position.z;
+
+
+
+        Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
+        {
+            TouchInput.enabled = true;
+
+            //  NextBound.GetComponent<Animator>().enabled = true;
+
+        }
+
+        );
+
+
         UIManagerScav.instance.PopulateHiddenObjectIcons(activeHiddenObjectList);   //send the activeHiddenObjectList to UIManager
         gameStatus = GameStatus.PLAYING;                                        //set gamestatus to Playing
 
@@ -183,14 +195,6 @@ public class LevelManagerScav : MonoBehaviour
         if (gameStatus == GameStatus.PLAYING)                               //check if gamestatus is Playing
         {
 
-
-
-            if (_Controller.TapedCollider != null)                            //check if hit and collider is not null
-            {
-
-
-
-            }
 
 
 
@@ -227,27 +231,39 @@ public class LevelManagerScav : MonoBehaviour
         if (AreaHolderObj.AreaUnlockedTill < AreaHolderObj.areaProps.areaColliders.Count - 1)
         {
             Debug.Log("AreaUnlockedTill Pehly" + AreaHolderObj.AreaUnlockedTill);
-
+            TouchInput.enabled = false;
             PlayerPrefs.SetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), AreaHolderObj.AreaUnlockedTill + 1);
             AreaHolderObj.AreaUnlockedTill = PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
             Debug.Log("AreaUnlockedTill Baad" + AreaHolderObj.AreaUnlockedTill);
 
             PlayerPrefs.SetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), AreaHolderObj.AreaUnlockedTill);
+
+
+
             BoxCollider NextBound = AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill];
-            Vector3 NextAreaPos = AreaHolderObj.areaProps.AreaPos[AreaHolderObj.AreaUnlockedTill].transform.position;
+
+
             Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(NextBound);
 
-            AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill].GetComponent<Animator>().enabled = true;
 
+
+            // AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill].GetComponent<Animator>().enabled = true;
+
+            //  Debug.Log("NextAreaPos " + NextAreaPos);
+
+
+
+            Vector3 NextAreaPos = AreaHolderObj.areaProps.AreaPos[AreaHolderObj.AreaUnlockedTill].transform.position;
             NextAreaPos.z = Cam.transform.position.z;
 
-            TouchInput.enabled = false;
+
+
             Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
             {
                 TouchInput.enabled = true;
 
                 NextBound.GetComponent<Animator>().enabled = true;
-                // Debug.Log("dsfd");
+
             }
 
             );
@@ -258,7 +274,7 @@ public class LevelManagerScav : MonoBehaviour
 
             UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
 
-            Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill]);
+            //   Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill]);
             activeHiddenObjectList = new List<Transform>();
             activeHiddenObjectList.Clear();
             maxHiddenObjectToFound = AreaHolderObj.areaProps.AreaObjNum[AreaHolderObj.AreaUnlockedTill];
@@ -290,10 +306,9 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-
-
-    private bool HitAnObj;
     public Vector3 HitPos;
+
+
     public IEnumerator HintObject() //Method called by HintButton of UIManager
     {
         int randomValue = UnityEngine.Random.Range(0, activeHiddenObjectList.Count);
@@ -303,20 +318,27 @@ public class LevelManagerScav : MonoBehaviour
         activeHiddenObjectList[randomValue].transform.localScale = originalScale;
     }
 
+
+
+
+
     public void OnPickItemLM(RaycastHit hitInfo)
     {
 
         if (gameStatus == GameStatus.PLAYING)
         {
             GameObject go = hitInfo.collider.gameObject;
+
+           
             if (go.CompareTag("HidddenObject"))
             {
                 go.tag = "Untagged";
 
 
-                HitAnObj = true;
-                CheckSelectedHiddenObject(go.transform);
-                
+
+                CheckSelectedHiddenObject(go.transform, hitInfo.point);
+
+
                 for (int i = 0; i < activeHiddenObjectList.Count; i++)
                 {
                     if (activeHiddenObjectList[i].name == go.name)
@@ -325,6 +347,7 @@ public class LevelManagerScav : MonoBehaviour
                         break;
                     }
                 }
+
 
                 totalHiddenObjectsFound++;                              //increase totalHiddenObjectsFound count
 
@@ -343,38 +366,20 @@ public class LevelManagerScav : MonoBehaviour
                     CheckNextArea();
 
 
-
-                    //if (AreaHolderObj.AreaUnlockedTill < AreaHolderObj.areaProps.areaColliders.Count)
-                    //{
-
-                    //    //Debug.Log("AreaUnlockedTill "+ AreaHolderObj.AreaUnlockedTill);
-                    //    CheckNextArea();
-
-                    //}
-
-
-
                 }
-
-
-
-
-
 
 
             }
             else
             {
 
-                HitAnObj = false;
+
+                  showCross(HitPos);
+
+
 
             }
-            
 
-
-
-
-            
 
         }
     }
@@ -385,7 +390,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-    public void CheckSelectedHiddenObject(Transform objtrans)
+    public void CheckSelectedHiddenObject(Transform objtrans, Vector3 pos)
     {
         Vector3 SvPos = Cam.Cam.WorldToScreenPoint(UIManagerScav.instance.scrollRect.transform.position);
 
@@ -400,7 +405,7 @@ public class LevelManagerScav : MonoBehaviour
             });
 
         });
-       
+
 
 
 
@@ -414,14 +419,32 @@ public class LevelManagerScav : MonoBehaviour
 
                 string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
 
+
+
                 PlayerPrefs.SetInt((id), 1);
+
+
                 UIManagerScav.instance.Sv_fillText.text = 0 + "/" + 0;
 
 
                 string IconName = UIManagerScav.instance.SV_IconList[i].name;
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
 
+                Debug.Log(" count " + PlayerPrefs.GetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"))));
 
+                UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),
+                    PlayerPrefs.GetInt((IconName + "Collected"))) +
+                    "/" + UIManagerScav.instance.SV_IconList[i].TotalObjects, UIManagerScav.instance.SV_IconList[i].childImg.sprite);
+
+
+
+
+
+
+                HitPos.y +=100;
+                UIManagerScav.instance.infoImg.transform.position = HitPos;
+                UIManagerScav.instance.infoImg.gameObject.SetActive(true);
+                
 
 
                 UIManagerScav.instance.SV_IconList[i].updateCollectedText();
@@ -436,22 +459,11 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-    public void showCrossOrInfo(Vector3 pos)
+
+    public void showCross(Vector3 poss)
     {
-
-        if (HitAnObj)
-        {
-            Debug.Log("show object info");
-            HitAnObj = false;
-        }
-        else
-        {
-
-            Debug.Log("MisMatch/*/*/*/*/*/ ");
-           // UIManager.instance.crossImage.SetActive(true);
-           // UIManager.instance.crossImage.transform.position = HitPos;
-
-        }
+        UIManagerScav.instance.crossImg.gameObject.SetActive(true);
+        UIManagerScav.instance.crossImg.transform.position = poss;
 
 
 
@@ -459,37 +471,6 @@ public class LevelManagerScav : MonoBehaviour
 
     }
 
-
-
-
-
-
-
-
-
-
-    //private void OnInputClick(Vector3 clickScreenPosition, bool isDoubleClick, bool isLongTap)
-    //{
-
-    //    Debug.Log("OnInputClick(clickScreenPosition: " + clickScreenPosition + ", isDoubleClick: " + isDoubleClick + ", isLongTap: " + isLongTap + ")");
-    //}
-
-
-
-
-
-    //private void OnEnable()
-    //{
-    //    TouchInput.OnInputClick += OnInputClick;
-    //    //TouchInput.OnInputClick += 
-
-    //}
-
-    //private void OnDisable()
-    //{
-    //    TouchInput.OnInputClick -= OnInputClick;
-
-    //}
 
 
 

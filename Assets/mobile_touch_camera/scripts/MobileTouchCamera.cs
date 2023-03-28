@@ -498,7 +498,7 @@ namespace BitBenderGames
         private Vector3 mouseRotationCenter = Vector3.zero;
         private float timeKeyDown;
         #endregion
-
+       
         public void Awake()
         {
             if (cameraTransform != null)
@@ -1656,8 +1656,14 @@ namespace BitBenderGames
             isTiltModeEvaluated = false;
         }
 
+       
+
+        //******
         private void InputControllerOnInputClick(Vector3 clickPosition, bool isDoubleClick, bool isLongTap)
         {
+
+           
+
 
             if (isLongTap == true)
             {
@@ -1670,17 +1676,41 @@ namespace BitBenderGames
                 RaycastHit hitInfo;
                 if (Physics.Raycast(camRay, out hitInfo) == true)
                 {
+
+
+
                     if (OnPickItem != null)
                     {
+
+                        Debug.Log("hit pos " + hitInfo.point);
                         OnPickItem.Invoke(hitInfo);
-                       
+
 
                     }
+                    else
+                    { 
+                    
+                        Debug.Log("hit pos " + hitInfo.point);
+
+                 //   LevelManagerScav.instance.showCross(clickPosition);
+
+                    }
+
+
+
+
+
+
+
+
+
+
                     if (isDoubleClick == true)
                     {
                         if (OnPickItemDoubleClick != null)
                         {
                             // OnPickItemDoubleClick.Invoke(hitInfo);
+
                         }
                     }
                 }

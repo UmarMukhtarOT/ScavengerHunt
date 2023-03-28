@@ -66,7 +66,8 @@ public class AreaHolder : MonoBehaviour
     [SerializeField] public List<Env_ObjectToFind> spriteRendererDataList;
     [Space(10)]
     public AreaProps areaProps;
-
+    public Transform infoCanv;
+    public Transform CrossCanv;
 
 
 

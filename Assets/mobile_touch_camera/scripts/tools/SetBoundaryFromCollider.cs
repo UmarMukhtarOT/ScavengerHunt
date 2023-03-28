@@ -55,8 +55,10 @@ namespace BitBenderGames
                 return;
             }
             m_MobileTouchCamera.CamZoom = m_MobileTouchCamera.CamZoomMax;
-            
 
+            //   Debug.Log("boundary Collider "+ boxCollider);
+
+            //boxCollider.bounds.
             var boxMin = boxCollider.bounds.min;
             var boxMax = boxCollider.bounds.max;
             if (m_MobileTouchCamera.CameraAxes == CameraPlaneAxes.XY_2D_SIDESCROLL)
@@ -74,18 +76,7 @@ namespace BitBenderGames
         }
 
 
-
-
-
-
-
-
-
     }
-
-
-
-
 
 
 

@@ -591,7 +591,15 @@ namespace BitBenderGames {
     }
 
     private void Select(Component colliderComponent, bool isDoubleClick, bool isLongTap) {
-      MobileTouchPickable mobileTouchPickable = colliderComponent.GetComponent<MobileTouchPickable>();
+
+
+           // LevelManagerScav.instance.showCross(colliderComponent.GetComponent<Collider>().bounds);
+
+            //Debug.Log("coll "+colliderComponent.GetComponent<Collider>());
+
+
+
+            MobileTouchPickable mobileTouchPickable = colliderComponent.GetComponent<MobileTouchPickable>();
       if (mobileTouchPickable != null) {
         if (SelectedColliders.Contains(colliderComponent) == false) {
           SelectedColliders.Add(colliderComponent);
