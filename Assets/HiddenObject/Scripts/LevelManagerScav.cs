@@ -81,22 +81,8 @@ public class LevelManagerScav : MonoBehaviour
 
         }
 
-
-
-
-
-
-
-
-
         TouchInput = Cam.GetComponent<TouchInputController>();
         Invoke(nameof(SetupLevel), 1);
-
-
-
-
-
-
 
     }
 
@@ -192,21 +178,7 @@ public class LevelManagerScav : MonoBehaviour
 
     private void Update()
     {
-        if (gameStatus == GameStatus.PLAYING)                               //check if gamestatus is Playing
-        {
-
-
-
-
-
-        }
-
-
-
-
-
-
-
+      
         if (IsTimeLimited)
         {
             currentTime -= Time.deltaTime;  //as long as gamestatus i in playing, we keep reducing currentTime by Time.deltaTime
@@ -329,10 +301,15 @@ public class LevelManagerScav : MonoBehaviour
         {
             GameObject go = hitInfo.collider.gameObject;
 
-           
+
             if (go.CompareTag("HidddenObject"))
             {
+
+
                 go.tag = "Untagged";
+
+                GameObject clickprt = Instantiate(UIManagerScav.instance.ClickParticlePrefab, go.transform);
+                clickprt.transform.localPosition = Vector3.zero;
 
 
 
@@ -374,7 +351,7 @@ public class LevelManagerScav : MonoBehaviour
             {
 
 
-                  showCross(HitPos);
+                showCross(HitPos);
 
 
 
@@ -410,6 +387,8 @@ public class LevelManagerScav : MonoBehaviour
 
 
         string SelectedObjName = objtrans.gameObject.name;
+
+
         for (int i = 0; i < UIManagerScav.instance.SV_IconList.Count; i++) //loop through the list
         {
             if (SelectedObjName == UIManagerScav.instance.SV_IconList[i].name)      //check if index is same as name [our name is a number]
@@ -418,9 +397,6 @@ public class LevelManagerScav : MonoBehaviour
 
 
                 string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
-
-
-
                 PlayerPrefs.SetInt((id), 1);
 
 
@@ -430,7 +406,7 @@ public class LevelManagerScav : MonoBehaviour
                 string IconName = UIManagerScav.instance.SV_IconList[i].name;
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
 
-                Debug.Log(" count " + PlayerPrefs.GetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"))));
+               // Debug.Log(" count " + PlayerPrefs.GetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"))));
 
                 UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),
                     PlayerPrefs.GetInt((IconName + "Collected"))) +
@@ -438,15 +414,12 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
+                GetSnapToPositionToBringChildIntoView(UIManagerScav.instance.SV_IconList[i].GetComponent<RectTransform>());
 
 
-
-                HitPos.y +=100;
+                HitPos.y += 100;
                 UIManagerScav.instance.infoImg.transform.position = HitPos;
                 UIManagerScav.instance.infoImg.gameObject.SetActive(true);
-                
-
-
                 UIManagerScav.instance.SV_IconList[i].updateCollectedText();
 
 
@@ -457,6 +430,25 @@ public class LevelManagerScav : MonoBehaviour
         }
     }
 
+    public void GetSnapToPositionToBringChildIntoView(RectTransform child)
+    {
+        RectTransform contentRt = UIManagerScav.instance.scrollRect.content;
+
+
+        Debug.Log("changing SV position");
+        Canvas.ForceUpdateCanvases();
+        Vector2 viewportLocalPosition = UIManagerScav.instance.scrollRect.viewport.localPosition;
+        Vector2 childLocalPosition = child.localPosition;
+        Vector2 result = new Vector2(0 - (viewportLocalPosition.x + childLocalPosition.x),0 - (viewportLocalPosition.y + childLocalPosition.y));
+
+        contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.2f).SetEase(Ease.Linear);
+        
+    }
+
+
+
+
+
 
 
 
@@ -465,12 +457,27 @@ public class LevelManagerScav : MonoBehaviour
         UIManagerScav.instance.crossImg.gameObject.SetActive(true);
         UIManagerScav.instance.crossImg.transform.position = poss;
 
-
-
-
-
     }
 
+
+
+    private void OnEnable()
+    {
+        Cam.GetComponent<TouchInputController>().OnInputClick += OnInputClick;
+    }
+
+    private void OnDisable()
+    {
+       // Cam.GetComponent<TouchInputController>().OnInputClick -= OnInputClick;
+    }
+
+
+    private void OnInputClick(Vector3 clickScreenPosition, bool isDoubleClick, bool isLongTap)
+    {
+
+        HitPos = clickScreenPosition;
+
+    }
 
 
 

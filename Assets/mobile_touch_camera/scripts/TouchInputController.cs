@@ -224,6 +224,7 @@ namespace BitBenderGames {
 
               if (OnInputClick != null) {
                 OnInputClick.Invoke(lastFinger0DownPos, isDoubleClick, isLongTap);
+
               }
 
               lastClickTimeReal = Time.realtimeSinceStartup;

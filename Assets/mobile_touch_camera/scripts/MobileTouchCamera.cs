@@ -127,7 +127,7 @@ namespace BitBenderGames
         [Tooltip("When holding down a key for rotate/tilt/zoom there's a small delay between the first press action and the repeated input action. This value allows to tweak that delay.")]
         private float keyboardRepeatDelay = 0.5f;
         #endregion
-
+        public TouchInputController touchController;
         public CameraPlaneAxes CameraAxes
         {
             get { return (cameraAxes); }
@@ -1692,15 +1692,9 @@ namespace BitBenderGames
                     
                         Debug.Log("hit pos " + hitInfo.point);
 
-                 //   LevelManagerScav.instance.showCross(clickPosition);
+                 
 
                     }
-
-
-
-
-
-
 
 
 

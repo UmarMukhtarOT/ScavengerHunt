@@ -13,7 +13,7 @@ public class UIManagerScav : MonoBehaviour
     public Image crossImg;
     public Image infoImg;
 
-    [SerializeField] private GameObject hiddenObjectIconHolder;     //reference to Icon Holder object
+    [SerializeField] public GameObject hiddenObjectIconHolder;     //reference to Icon Holder object
     [SerializeField] private SV_ObjectIcon hiddenObjectIconPrefab;     //reference to Icon prefab
     [SerializeField] private GameObject gameCompleteObj;            //reference to GameComplete panel
     [SerializeField] private Text timerText;                        //reference to time text
@@ -25,15 +25,15 @@ public class UIManagerScav : MonoBehaviour
     public Image Sv_FillBar;
     public Animator SvAnim;
 
-    public ScrollRectSnapHelper AutoScroller;
+    
 
 
     public GameObject GameCompleteObj { get => gameCompleteObj; }
     public Text TimerText { get => timerText; }
     public GameObject SVUpBtn, SVDownBtn;
     public Canvas ScavCanv;
-
-
+    public GameObject ClickParticlePrefab;
+    public contentViewHandler ContentViewHandler;
 
     private void Awake()
     {
