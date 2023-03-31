@@ -423,22 +423,7 @@ public class LevelManagerScav : MonoBehaviour
 
                 CurrentIcone.updateCollectedText();
 
-                int collected = PlayerPrefs.GetInt((CurrentIcone.transform.name + "Collected"), 0);
-
-                if (collected >= CurrentIcone.TotalObjects && CurrentIcone.TotalObjects != 0)
-                {
-
-                    //  Debug.Log("completes an object"+ transform.name);
-
-                    CurrentIcone.transform.SetAsLastSibling();
-
-
-                }
-
-
-
-
-
+               
 
 
                 break;

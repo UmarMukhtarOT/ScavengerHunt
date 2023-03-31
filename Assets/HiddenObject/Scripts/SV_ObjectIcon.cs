@@ -44,23 +44,29 @@ public class SV_ObjectIcon : MonoBehaviour
 
         CollectedObjectsText.text = collected+"";
         TotalObjectsText.text = TotalObjects + "";
+        Invoke("updateSibling",5);
 
-        //if (collected>=TotalObjects&&TotalObjects!=0)
-        //{
-
-        //  //  Debug.Log("completes an object"+ transform.name);
-
-        //    transform.SetAsLastSibling();
-
-
-        //}
+        
     }
 
    
-     public void updateTotalObjText()
+     public void updateSibling()
      {
-       
-     }
+
+        int collected = PlayerPrefs.GetInt((transform.name + "Collected"), 0);
+
+        if (collected >= TotalObjects && TotalObjects != 0)
+        {
+
+            //  Debug.Log("completes an object"+ transform.name);
+
+            transform.SetAsLastSibling();
+
+
+        }
+
+
+    }
 
 
 
