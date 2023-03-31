@@ -45,15 +45,15 @@ public class SV_ObjectIcon : MonoBehaviour
         CollectedObjectsText.text = collected+"";
         TotalObjectsText.text = TotalObjects + "";
 
-        if (collected>=TotalObjects&&TotalObjects!=0)
-        {
+        //if (collected>=TotalObjects&&TotalObjects!=0)
+        //{
 
-          //  Debug.Log("completes an object"+ transform.name);
+        //  //  Debug.Log("completes an object"+ transform.name);
 
-            transform.SetAsLastSibling();
+        //    transform.SetAsLastSibling();
 
 
-        }
+        //}
     }
 
    

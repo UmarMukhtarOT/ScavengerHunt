@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using UnityEngine.UI;
 using BitBenderGames;
 using static UnityEngine.GraphicsBuffer;
 
@@ -83,6 +83,8 @@ public class LevelManagerScav : MonoBehaviour
 
         TouchInput = Cam.GetComponent<TouchInputController>();
         Invoke(nameof(SetupLevel), 1);
+        UIManagerScav.instance.AnimatedImage.gameObject.SetActive(false);
+
 
     }
 
@@ -370,30 +372,20 @@ public class LevelManagerScav : MonoBehaviour
     public void CheckSelectedHiddenObject(Transform objtrans, Vector3 pos)
     {
         Vector3 SvPos = Cam.Cam.WorldToScreenPoint(UIManagerScav.instance.scrollRect.transform.position);
-
-        objtrans.transform.DOScale(Vector3.one * 2, 0.2f).OnComplete(() =>
-        {
-
-            objtrans.transform.DOMove(SvPos, 5).OnComplete(() =>
-            {
-                objtrans.gameObject.SetActive(false);
-
-
-            });
-
-        });
-
-
-
+        objtrans.gameObject.SetActive(false);
+       
 
         string SelectedObjName = objtrans.gameObject.name;
 
 
         for (int i = 0; i < UIManagerScav.instance.SV_IconList.Count; i++) //loop through the list
         {
-            if (SelectedObjName == UIManagerScav.instance.SV_IconList[i].name)      //check if index is same as name [our name is a number]
-            {
 
+            SV_ObjectIcon CurrentIcone = UIManagerScav.instance.SV_IconList[i];
+
+            if (SelectedObjName == CurrentIcone.name)      //check if index is same as name [our name is a number]
+            {
+                
 
 
                 string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
@@ -403,24 +395,48 @@ public class LevelManagerScav : MonoBehaviour
                 UIManagerScav.instance.Sv_fillText.text = 0 + "/" + 0;
 
 
-                string IconName = UIManagerScav.instance.SV_IconList[i].name;
+                string IconName = CurrentIcone.name;
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
 
                // Debug.Log(" count " + PlayerPrefs.GetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"))));
 
                 UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),
-                    PlayerPrefs.GetInt((IconName + "Collected"))) +
-                    "/" + UIManagerScav.instance.SV_IconList[i].TotalObjects, UIManagerScav.instance.SV_IconList[i].childImg.sprite);
+
+                PlayerPrefs.GetInt((IconName + "Collected"))) +
+                    
+                    "/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
+
+
+                GetSnapToPositionToBringChildIntoView(CurrentIcone.GetComponent<RectTransform>(),i);
+               
 
 
 
-                GetSnapToPositionToBringChildIntoView(UIManagerScav.instance.SV_IconList[i].GetComponent<RectTransform>());
 
+              
+               
 
                 HitPos.y += 100;
                 UIManagerScav.instance.infoImg.transform.position = HitPos;
                 UIManagerScav.instance.infoImg.gameObject.SetActive(true);
-                UIManagerScav.instance.SV_IconList[i].updateCollectedText();
+
+
+                CurrentIcone.updateCollectedText();
+
+                int collected = PlayerPrefs.GetInt((CurrentIcone.transform.name + "Collected"), 0);
+
+                if (collected >= CurrentIcone.TotalObjects && CurrentIcone.TotalObjects != 0)
+                {
+
+                    //  Debug.Log("completes an object"+ transform.name);
+
+                    CurrentIcone.transform.SetAsLastSibling();
+
+
+                }
+
+
+
 
 
 
@@ -430,7 +446,7 @@ public class LevelManagerScav : MonoBehaviour
         }
     }
 
-    public void GetSnapToPositionToBringChildIntoView(RectTransform child)
+    public void GetSnapToPositionToBringChildIntoView(RectTransform child,int i)
     {
         RectTransform contentRt = UIManagerScav.instance.scrollRect.content;
 
@@ -441,14 +457,35 @@ public class LevelManagerScav : MonoBehaviour
         Vector2 childLocalPosition = child.localPosition;
         Vector2 result = new Vector2(0 - (viewportLocalPosition.x + childLocalPosition.x),0 - (viewportLocalPosition.y + childLocalPosition.y));
 
-        contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.2f).SetEase(Ease.Linear);
+        contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.2f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+
+
+            UIManagerScav.instance.AnimatedImage.gameObject.SetActive(true);
+
+            UIManagerScav.instance.AnimatedImage.transform.position = HitPos;
+            UIManagerScav.instance.AnimatedImage.GetComponent<Image>().sprite = UIManagerScav.instance.SV_IconList[i].childImg.sprite;
+
+           
+
+
+            UIManagerScav.instance.AnimatedImage.transform.DOMove(UIManagerScav.instance.SV_IconList[i].transform.position, 0.75f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+
+
+
+
+                UIManagerScav.instance.AnimatedImage.gameObject.SetActive(false);
+
+
+            });
+
+
+
+
+        }); ;
         
     }
-
-
-
-
-
 
 
 

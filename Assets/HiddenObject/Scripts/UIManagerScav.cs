@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 //using static GameManager;
 
 public class UIManagerScav : MonoBehaviour
@@ -24,6 +25,7 @@ public class UIManagerScav : MonoBehaviour
     public Text Sv_fillText;
     public Image Sv_FillBar;
     public Animator SvAnim;
+    public Transform AnimatedImage;
 
     
 
@@ -37,6 +39,9 @@ public class UIManagerScav : MonoBehaviour
 
     private void Awake()
     {
+
+        
+
         if (instance == null)
         {
             instance = this;
