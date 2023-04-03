@@ -294,7 +294,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-
+    public Transform hitobj;
 
     public void OnPickItemLM(RaycastHit hitInfo)
     {
@@ -303,7 +303,7 @@ public class LevelManagerScav : MonoBehaviour
         {
             GameObject go = hitInfo.collider.gameObject;
 
-
+            hitobj = go.transform;
             if (go.CompareTag("HidddenObject"))
             {
 
@@ -313,7 +313,7 @@ public class LevelManagerScav : MonoBehaviour
                 GameObject clickprt = Instantiate(UIManagerScav.instance.ClickParticlePrefab, go.transform);
                 clickprt.transform.localPosition = Vector3.zero;
 
-
+               
 
                 CheckSelectedHiddenObject(go.transform, hitInfo.point);
 
@@ -347,6 +347,7 @@ public class LevelManagerScav : MonoBehaviour
 
                 }
 
+                SoundsManager.instance.PlayScavSound(SoundsManager.instance.AssetFound_Scav);
 
             }
             else
@@ -372,7 +373,7 @@ public class LevelManagerScav : MonoBehaviour
     public void CheckSelectedHiddenObject(Transform objtrans, Vector3 pos)
     {
         Vector3 SvPos = Cam.Cam.WorldToScreenPoint(UIManagerScav.instance.scrollRect.transform.position);
-        objtrans.gameObject.SetActive(false);
+       // objtrans.gameObject.SetActive(false);
        
 
         string SelectedObjName = objtrans.gameObject.name;
@@ -385,8 +386,8 @@ public class LevelManagerScav : MonoBehaviour
 
             if (SelectedObjName == CurrentIcone.name)      //check if index is same as name [our name is a number]
             {
-                
 
+                hitobj.DOMove(CurrentIcone.GetComponent<RectTransform>().position, 5);
 
                 string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
                 PlayerPrefs.SetInt((id), 1);
@@ -442,22 +443,40 @@ public class LevelManagerScav : MonoBehaviour
         Vector2 childLocalPosition = child.localPosition;
         Vector2 result = new Vector2(0 - (viewportLocalPosition.x + childLocalPosition.x),0 - (viewportLocalPosition.y + childLocalPosition.y));
 
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+
         contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.2f).SetEase(Ease.Linear).OnComplete(() =>
         {
 
+
+
+
+           
 
             UIManagerScav.instance.AnimatedImage.gameObject.SetActive(true);
 
             UIManagerScav.instance.AnimatedImage.transform.position = HitPos;
             UIManagerScav.instance.AnimatedImage.GetComponent<Image>().sprite = UIManagerScav.instance.SV_IconList[i].childImg.sprite;
 
-           
+
 
 
             UIManagerScav.instance.AnimatedImage.transform.DOMove(UIManagerScav.instance.SV_IconList[i].transform.position, 0.75f).SetEase(Ease.InBack).OnComplete(() =>
             {
 
-
+                SoundsManager.instance.PlayScavSound(SoundsManager.instance.AssetCollect_Scav);
 
 
                 UIManagerScav.instance.AnimatedImage.gameObject.SetActive(false);
@@ -500,8 +519,6 @@ public class LevelManagerScav : MonoBehaviour
         HitPos = clickScreenPosition;
 
     }
-
-
 
 
 

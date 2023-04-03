@@ -16,6 +16,9 @@ public class SoundsManager : MonoBehaviour
     public AudioClip hitSound = null;
     public AudioClip backGroundSound = null;
     public AudioClip achivementSound = null;
+    public AudioClip ClickScav = null;
+    public AudioClip AssetCollect_Scav = null;
+    public AudioClip AssetFound_Scav = null;
     public AudioSource AS = null;
     private void Awake()
     {
@@ -116,5 +119,19 @@ public class SoundsManager : MonoBehaviour
             return;
         AS.volume = 1f;
         PlaySound(achivementSound, AS);
+    }
+
+
+    public void PlayScavSound(AudioClip Ac)
+    {
+
+
+        if (AS == null)
+            return;
+
+
+        AS.clip = Ac;
+        AS.loop = false;
+        AS.Play();
     }
 }
