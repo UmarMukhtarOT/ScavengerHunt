@@ -5,7 +5,9 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using BitBenderGames;
-using static UnityEngine.GraphicsBuffer;
+using MoreMountains.NiceVibrations;
+
+
 
 
 public enum GameStatus
@@ -174,13 +176,16 @@ public class LevelManagerScav : MonoBehaviour
 
     }
 
-
+    public static void VibrateIt(HapticTypes Type)
+    {
+        MMVibrationManager.Haptic(Type);
+    }
 
 
 
     private void Update()
     {
-      
+
         if (IsTimeLimited)
         {
             currentTime -= Time.deltaTime;  //as long as gamestatus i in playing, we keep reducing currentTime by Time.deltaTime
@@ -313,7 +318,7 @@ public class LevelManagerScav : MonoBehaviour
                 GameObject clickprt = Instantiate(UIManagerScav.instance.ClickParticlePrefab, go.transform);
                 clickprt.transform.localPosition = Vector3.zero;
 
-               
+
 
                 CheckSelectedHiddenObject(go.transform, hitInfo.point);
 
@@ -373,8 +378,8 @@ public class LevelManagerScav : MonoBehaviour
     public void CheckSelectedHiddenObject(Transform objtrans, Vector3 pos)
     {
         Vector3 SvPos = Cam.Cam.WorldToScreenPoint(UIManagerScav.instance.scrollRect.transform.position);
-       // objtrans.gameObject.SetActive(false);
-       
+        // objtrans.gameObject.SetActive(false);
+
 
         string SelectedObjName = objtrans.gameObject.name;
 
@@ -397,25 +402,17 @@ public class LevelManagerScav : MonoBehaviour
 
 
                 string IconName = CurrentIcone.name;
+
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
-
-               // Debug.Log(" count " + PlayerPrefs.GetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"))));
-
-                UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),
-
-                PlayerPrefs.GetInt((IconName + "Collected"))) +
-                    
-                    "/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
-
-
-                GetSnapToPositionToBringChildIntoView(CurrentIcone.GetComponent<RectTransform>(),i);
-               
+                UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),PlayerPrefs.GetInt((IconName + "Collected")))+"/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
+                GetSnapToPositionToBringChildIntoView(CurrentIcone.GetComponent<RectTransform>(), i);
 
 
 
 
-              
-               
+
+
+
 
                 HitPos.y += 100;
                 UIManagerScav.instance.infoImg.transform.position = HitPos;
@@ -424,7 +421,7 @@ public class LevelManagerScav : MonoBehaviour
 
                 CurrentIcone.updateCollectedText();
 
-               
+
 
 
                 break;
@@ -432,7 +429,7 @@ public class LevelManagerScav : MonoBehaviour
         }
     }
 
-    public void GetSnapToPositionToBringChildIntoView(RectTransform child,int i)
+    public void GetSnapToPositionToBringChildIntoView(RectTransform child, int i)
     {
         RectTransform contentRt = UIManagerScav.instance.scrollRect.content;
 
@@ -441,55 +438,40 @@ public class LevelManagerScav : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         Vector2 viewportLocalPosition = UIManagerScav.instance.scrollRect.viewport.localPosition;
         Vector2 childLocalPosition = child.localPosition;
-        Vector2 result = new Vector2(0 - (viewportLocalPosition.x + childLocalPosition.x),0 - (viewportLocalPosition.y + childLocalPosition.y));
+        Vector2 result = new Vector2(0 - (viewportLocalPosition.x + childLocalPosition.x), 0 - (viewportLocalPosition.y + childLocalPosition.y));
 
 
 
-
-
-
-
-
-
-
-
-
-        
-        
-
-        contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.2f).SetEase(Ease.Linear).OnComplete(() =>
+        contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.1f).SetEase(DG.Tweening.Ease.Linear).OnComplete(() =>
         {
 
 
-
-
-           
-
             UIManagerScav.instance.AnimatedImage.gameObject.SetActive(true);
-
-            UIManagerScav.instance.AnimatedImage.transform.position = HitPos;
+            UIManagerScav.instance.AnimatedImage.transform.position = UIManagerScav.instance.infoImg.GetComponent<InfoImage>().img.transform.position;
             UIManagerScav.instance.AnimatedImage.GetComponent<Image>().sprite = UIManagerScav.instance.SV_IconList[i].childImg.sprite;
 
 
-
-
-            UIManagerScav.instance.AnimatedImage.transform.DOMove(UIManagerScav.instance.SV_IconList[i].transform.position, 0.75f).SetEase(Ease.InBack).OnComplete(() =>
+            UIManagerScav.instance.AnimatedImage.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1);
+            UIManagerScav.instance.AnimatedImage.transform.DOMove(UIManagerScav.instance.SV_IconList[i].childImg.transform.position, 1f).
+            SetEase(DG.Tweening.Ease.InBack).OnComplete(() =>
             {
 
                 SoundsManager.instance.PlayScavSound(SoundsManager.instance.AssetCollect_Scav);
-
-
+                UIManagerScav.instance.AnimatedImage.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
                 UIManagerScav.instance.AnimatedImage.gameObject.SetActive(false);
 
-
-            });
-
+            }); 
 
 
 
-        }); ;
-        
+          
+
+
+
+        });
+
     }
+
 
 
 
@@ -509,7 +491,7 @@ public class LevelManagerScav : MonoBehaviour
 
     private void OnDisable()
     {
-       // Cam.GetComponent<TouchInputController>().OnInputClick -= OnInputClick;
+        // Cam.GetComponent<TouchInputController>().OnInputClick -= OnInputClick;
     }
 
 
