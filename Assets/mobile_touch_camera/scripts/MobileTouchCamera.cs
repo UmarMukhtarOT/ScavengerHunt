@@ -11,6 +11,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 namespace BitBenderGames
 {
@@ -552,6 +553,7 @@ namespace BitBenderGames
             touchInputController.OnPinchUpdateExtended += InputControllerOnPinchUpdate;
             touchInputController.OnPinchStop += InputControllerOnPinchStop;
             isStarted = true;
+            IsControllable = true;
             StartCoroutine(InitCamBoundariesDelayed());
         }
 
@@ -1236,7 +1238,19 @@ namespace BitBenderGames
 
         public void Update()
         {
+            if (MouseOverUI())
+            {
 
+                IsControllable = false;
+                Debug.Log("Over UI");
+            }
+            else
+            {
+                IsControllable = true;
+
+
+
+            }
             #region auto scroll code
 
             if (cameraScrollVelocity.sqrMagnitude > float.Epsilon)
@@ -1261,8 +1275,19 @@ namespace BitBenderGames
 
         }
 
+        private bool MouseOverUI()
+        {
+            return EventSystem.current.IsPointerOverGameObject();
+        }
+
         public void LateUpdate()
         {
+
+           
+
+
+
+
 
             //Pinch.
             UpdatePinch(Time.unscaledDeltaTime);
@@ -1502,15 +1527,21 @@ namespace BitBenderGames
 
         private void InputControllerOnDragUpdate(Vector3 dragPosStart, Vector3 dragPosCurrent, Vector3 correctionOffset)
         {
-            if (isDraggingSceneObject == false)
+            if (IsControllable)
             {
-                Vector3 dragVector = GetDragVector(dragPosStart, dragPosCurrent + correctionOffset);
-                Vector3 posNewClamped = GetClampToBoundaries(dragStartCamPos - dragVector);
-                SetTargetPosition(posNewClamped);
-            }
-            else
-            {
-                IsDragging = false;
+
+
+
+                if (isDraggingSceneObject == false)
+                {
+                    Vector3 dragVector = GetDragVector(dragPosStart, dragPosCurrent + correctionOffset);
+                    Vector3 posNewClamped = GetClampToBoundaries(dragStartCamPos - dragVector);
+                    SetTargetPosition(posNewClamped);
+                }
+                else
+                {
+                    IsDragging = false;
+                }
             }
         }
 
@@ -1656,13 +1687,13 @@ namespace BitBenderGames
             isTiltModeEvaluated = false;
         }
 
-       
+        public bool IsControllable;
 
         //******
         private void InputControllerOnInputClick(Vector3 clickPosition, bool isDoubleClick, bool isLongTap)
         {
 
-           
+
 
 
             if (isLongTap == true)
@@ -1670,59 +1701,67 @@ namespace BitBenderGames
                 return;
             }
 
-            Ray camRay = Cam.ScreenPointToRay(clickPosition);
-            if (OnPickItem != null || OnPickItemDoubleClick != null)
+            if (IsControllable)
             {
-                RaycastHit hitInfo;
-                if (Physics.Raycast(camRay, out hitInfo) == true)
+
+
+
+
+
+                Ray camRay = Cam.ScreenPointToRay(clickPosition);
+                if (OnPickItem != null || OnPickItemDoubleClick != null)
                 {
-
-
-
-                    if (OnPickItem != null)
+                    RaycastHit hitInfo;
+                    if (Physics.Raycast(camRay, out hitInfo) == true)
                     {
 
-                        Debug.Log("hit pos " + hitInfo.point);
-                        OnPickItem.Invoke(hitInfo);
 
 
-                    }
-                    else
-                    { 
-                    
-                        Debug.Log("hit pos " + hitInfo.point);
-
-                 
-
-                    }
-
-
-
-
-                    if (isDoubleClick == true)
-                    {
-                        if (OnPickItemDoubleClick != null)
+                        if (OnPickItem != null)
                         {
-                            // OnPickItemDoubleClick.Invoke(hitInfo);
 
+                            Debug.Log("hit pos " + hitInfo.point);
+                            OnPickItem.Invoke(hitInfo);
+
+
+                        }
+                        else
+                        {
+
+                            Debug.Log("hit pos " + hitInfo.point);
+
+
+
+                        }
+
+
+
+
+                        if (isDoubleClick == true)
+                        {
+                            if (OnPickItemDoubleClick != null)
+                            {
+                                // OnPickItemDoubleClick.Invoke(hitInfo);
+
+                            }
                         }
                     }
                 }
-            }
-            if (OnPickItem2D != null || OnPickItem2DDoubleClick != null)
-            {
-                RaycastHit2D hitInfo2D = Physics2D.Raycast(camRay.origin, camRay.direction);
-                if (hitInfo2D == true)
+                if (OnPickItem2D != null || OnPickItem2DDoubleClick != null)
                 {
-                    if (OnPickItem2D != null)
+                    RaycastHit2D hitInfo2D = Physics2D.Raycast(camRay.origin, camRay.direction);
+                    if (hitInfo2D == true)
                     {
-                        OnPickItem2D.Invoke(hitInfo2D);
-                    }
-                    if (isDoubleClick == true)
-                    {
-                        if (OnPickItem2DDoubleClick != null)
+                        if (OnPickItem2D != null)
                         {
-                            OnPickItem2DDoubleClick.Invoke(hitInfo2D);
+                            OnPickItem2D.Invoke(hitInfo2D);
+                        }
+                        if (isDoubleClick == true)
+                        {
+                            if (OnPickItem2DDoubleClick != null)
+                            {
+                                OnPickItem2DDoubleClick.Invoke(hitInfo2D);
+                            }
                         }
                     }
                 }

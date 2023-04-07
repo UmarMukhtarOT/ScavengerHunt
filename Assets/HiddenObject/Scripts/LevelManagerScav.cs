@@ -174,6 +174,9 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
+
+
+
     }
 
     public static void VibrateIt(HapticTypes Type)
@@ -392,27 +395,23 @@ public class LevelManagerScav : MonoBehaviour
             if (SelectedObjName == CurrentIcone.name)      //check if index is same as name [our name is a number]
             {
 
+
                 hitobj.DOMove(CurrentIcone.GetComponent<RectTransform>().position, 5);
 
                 string id = objtrans.parent.name + "_" + objtrans.name + objtrans.GetSiblingIndex() + "_IsTaken";
                 PlayerPrefs.SetInt((id), 1);
-
+                VibrateIt(HapticTypes.SoftImpact);
 
                 UIManagerScav.instance.Sv_fillText.text = 0 + "/" + 0;
 
 
                 string IconName = CurrentIcone.name;
+               
+                
 
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
                 UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),PlayerPrefs.GetInt((IconName + "Collected")))+"/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
                 GetSnapToPositionToBringChildIntoView(CurrentIcone.GetComponent<RectTransform>(), i);
-
-
-
-
-
-
-
 
                 HitPos.y += 100;
                 UIManagerScav.instance.infoImg.transform.position = HitPos;
@@ -444,29 +443,34 @@ public class LevelManagerScav : MonoBehaviour
 
         contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.1f).SetEase(DG.Tweening.Ease.Linear).OnComplete(() =>
         {
-
-
             UIManagerScav.instance.AnimatedImage.gameObject.SetActive(true);
             UIManagerScav.instance.AnimatedImage.transform.position = UIManagerScav.instance.infoImg.GetComponent<InfoImage>().img.transform.position;
             UIManagerScav.instance.AnimatedImage.GetComponent<Image>().sprite = UIManagerScav.instance.SV_IconList[i].childImg.sprite;
-
-
             UIManagerScav.instance.AnimatedImage.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1);
             UIManagerScav.instance.AnimatedImage.transform.DOMove(UIManagerScav.instance.SV_IconList[i].childImg.transform.position, 1f).
             SetEase(DG.Tweening.Ease.InBack).OnComplete(() =>
             {
 
+
+
                 SoundsManager.instance.PlayScavSound(SoundsManager.instance.AssetCollect_Scav);
+
+                UIManagerScav.instance.SV_IconList[i].childImg.transform.DOScale(new Vector3(1.25f, 1.25f, 1.25f), 0.15f).OnComplete(() => { UIManagerScav.instance.SV_IconList[i].childImg.transform.localScale = Vector3.one;   });
                 UIManagerScav.instance.AnimatedImage.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
                 UIManagerScav.instance.AnimatedImage.gameObject.SetActive(false);
 
+                UIManagerScav.instance.FlyingGem.transform.position = UIManagerScav.instance.SV_IconList[i].transform.position;
+                UIManagerScav.instance.FlyingGem.SetActive(true);
+                UIManagerScav.instance.FlyingGem.transform.DOMove(UIManagerScav.instance.GemCounter.transform.position,1).
+                SetEase(DG.Tweening.Ease.InBack).OnComplete(() =>
+                {
+
+                    UIManagerScav.instance.FlyingGem.SetActive(false);
+
+
+                }); 
+
             }); 
-
-
-
-          
-
-
 
         });
 

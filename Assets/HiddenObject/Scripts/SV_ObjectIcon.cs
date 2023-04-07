@@ -10,10 +10,13 @@ public class SV_ObjectIcon : MonoBehaviour
    public Text CollectedObjectsText;
    public Text TotalObjectsText;
    public int TotalObjects=0;
+   public GameObject tickmark;
 
     private void Start()
     {
+        tickmark.SetActive(false);
         Invoke("updateCollectedText",0.1f);
+
     }
 
 
@@ -61,6 +64,8 @@ public class SV_ObjectIcon : MonoBehaviour
             //  Debug.Log("completes an object"+ transform.name);
 
             transform.SetAsLastSibling();
+           tickmark.SetActive(true);
+
 
 
         }
