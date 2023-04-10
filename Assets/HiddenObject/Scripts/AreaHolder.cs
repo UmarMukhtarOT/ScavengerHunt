@@ -64,6 +64,7 @@ public class AreaHolder : MonoBehaviour
     [SerializeField] public Transform CollectableObjects;
     [SerializeField] public List<Transform> HiddenObjectList;   //list of all the hiddenObjects available in the scene
     [SerializeField] public List<Env_ObjectToFind> spriteRendererDataList;
+
     [Space(10)]
     public AreaProps areaProps;
    

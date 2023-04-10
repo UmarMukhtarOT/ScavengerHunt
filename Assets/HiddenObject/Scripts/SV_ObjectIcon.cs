@@ -12,6 +12,7 @@ public class SV_ObjectIcon : MonoBehaviour
    public int TotalObjects=0;
    public GameObject tickmark;
 
+
     private void Start()
     {
         tickmark.SetActive(false);
@@ -49,11 +50,31 @@ public class SV_ObjectIcon : MonoBehaviour
         TotalObjectsText.text = TotalObjects + "";
         Invoke("updateSibling",5);
 
+
+       
+
+        int val = collected % LevelManagerScav.instance.appreciateEveryTurn;
+
+       // Debug.Log(" val is currently " + val);
+
+        if (collected>0)
+        {
+            if (LevelManagerScav.instance.appreciateEveryTurn % collected == 0)
+            {
+                Debug.Log("apper " + val + " collected " + collected);
+                //   UIManagerScav.instance.AppericiateWithAdpanel.SetActive(true);
+
+            }
+
+        }
         
+
+
+
     }
 
-   
-     public void updateSibling()
+
+    public void updateSibling()
      {
 
         int collected = PlayerPrefs.GetInt((transform.name + "Collected"), 0);

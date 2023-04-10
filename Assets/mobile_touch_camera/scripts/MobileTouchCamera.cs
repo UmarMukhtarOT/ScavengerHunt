@@ -1720,7 +1720,7 @@ namespace BitBenderGames
                         if (OnPickItem != null)
                         {
 
-                            Debug.Log("hit pos " + hitInfo.point);
+                           // Debug.Log("hit pos " + hitInfo.point);
                             OnPickItem.Invoke(hitInfo);
 
 

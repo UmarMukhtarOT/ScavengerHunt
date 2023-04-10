@@ -38,6 +38,7 @@ public class UIManagerScav : MonoBehaviour
     public Canvas ScavCanv;
     public GameObject ClickParticlePrefab;
     public contentViewHandler ContentViewHandler;
+    public GameObject AppericiateWithAdpanel;
 
     private void Awake()
     {

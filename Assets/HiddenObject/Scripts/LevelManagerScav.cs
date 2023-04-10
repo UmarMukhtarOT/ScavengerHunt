@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using BitBenderGames;
 using MoreMountains.NiceVibrations;
 
-
+using GoogleMobileAds.Api;
 
 
 public enum GameStatus
@@ -19,6 +19,8 @@ public enum GameStatus
 
 public class LevelManagerScav : MonoBehaviour
 {
+
+    public int appreciateEveryTurn;
     public static LevelManagerScav instance;
     public bool IsTimeLimited;
     public MobileTouchCamera Cam;
@@ -87,7 +89,7 @@ public class LevelManagerScav : MonoBehaviour
         Invoke(nameof(SetupLevel), 1);
         UIManagerScav.instance.AnimatedImage.gameObject.SetActive(false);
 
-
+        AdsManagerWrapper.Instance.ShowBanner(AdPosition.Top, AdSize.SmartBanner);
     }
 
 
@@ -124,21 +126,6 @@ public class LevelManagerScav : MonoBehaviour
         UIManagerScav.instance.TimerText.transform.parent.gameObject.SetActive(false);
         gameStatus = GameStatus.PLAYING;
 
-
-
-
-
-        //if (IsTimeLimited)
-        //{
-        //    UIManagerScav.instance.TimerText.text = "" + timeLimit;
-        //    currentTime = timeLimit;
-        //}
-        //else
-        //{
-        //  UIManagerScav.instance.TimerText.transform.parent.gameObject.SetActive(false);
-
-
-        // }
 
 
 
@@ -191,19 +178,19 @@ public class LevelManagerScav : MonoBehaviour
     private void Update()
     {
 
-        if (IsTimeLimited)
-        {
-            currentTime -= Time.deltaTime;  //as long as gamestatus i in playing, we keep reducing currentTime by Time.deltaTime
+        //if (IsTimeLimited)
+        //{
+        //    currentTime -= Time.deltaTime;  //as long as gamestatus i in playing, we keep reducing currentTime by Time.deltaTime
 
-            time = TimeSpan.FromSeconds(currentTime);                       //set the time value
-            UIManagerScav.instance.TimerText.text = time.ToString("mm':'ss");   //convert time to Time format
-            if (currentTime <= 0)                                           //if currentTime is less or equal to zero
-            {
-                Debug.Log("Time Up");                                       //if yes then we have lost the game
-                UIManagerScav.instance.GameCompleteObj.SetActive(true);         //activate GameComplete panel
-                gameStatus = GameStatus.NEXT;                               //set gamestatus to Next
-            }
-        }
+        //    time = TimeSpan.FromSeconds(currentTime);                       //set the time value
+        //    UIManagerScav.instance.TimerText.text = time.ToString("mm':'ss");   //convert time to Time format
+        //    if (currentTime <= 0)                                           //if currentTime is less or equal to zero
+        //    {
+        //        Debug.Log("Time Up");                                       //if yes then we have lost the game
+        //        UIManagerScav.instance.GameCompleteObj.SetActive(true);         //activate GameComplete panel
+        //        gameStatus = GameStatus.NEXT;                               //set gamestatus to Next
+        //    }
+        //}
     }
 
     public void CheckNextArea()
@@ -474,6 +461,11 @@ public class LevelManagerScav : MonoBehaviour
                     GameCurrencyHandler.instance.AddToCoins(1);
 
                     UIManagerScav.instance.scrollRect.elasticity = 0.2f;
+
+
+
+
+
 
                 }); 
 
