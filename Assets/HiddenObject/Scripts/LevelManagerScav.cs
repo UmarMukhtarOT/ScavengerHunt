@@ -157,12 +157,14 @@ public class LevelManagerScav : MonoBehaviour
         NextAreaPos.z = Cam.transform.position.z;
 
 
-
+        Cam.enabled = false;
         Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
         {
             TouchInput.enabled = true;
 
             //  NextBound.GetComponent<Animator>().enabled = true;
+            Cam.enabled = true;
+
 
         }
 
@@ -239,12 +241,15 @@ public class LevelManagerScav : MonoBehaviour
             NextAreaPos.z = Cam.transform.position.z;
 
 
+            Cam.enabled = false;
 
             Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
             {
                 TouchInput.enabled = true;
 
                 NextBound.GetComponent<Animator>().enabled = true;
+                Cam.enabled = true;
+
 
             }
 
@@ -439,7 +444,7 @@ public class LevelManagerScav : MonoBehaviour
         Vector2 childLocalPosition = child.localPosition;
         Vector2 result = new Vector2(0 - (viewportLocalPosition.x + childLocalPosition.x), 0 - (viewportLocalPosition.y + childLocalPosition.y));
 
-
+        UIManagerScav.instance.scrollRect.elasticity = 2;
 
         contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.1f).SetEase(DG.Tweening.Ease.Linear).OnComplete(() =>
         {
@@ -466,7 +471,9 @@ public class LevelManagerScav : MonoBehaviour
                 {
 
                     UIManagerScav.instance.FlyingGem.SetActive(false);
+                    GameCurrencyHandler.instance.AddToCoins(1);
 
+                    UIManagerScav.instance.scrollRect.elasticity = 0.2f;
 
                 }); 
 

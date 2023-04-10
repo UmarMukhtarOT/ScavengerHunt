@@ -43,6 +43,9 @@ public class UIManager : MonoBehaviour
         GameManager.instance.gameResetFuncEvent += SetGameResetUI;
         GameManager.instance.gameOverManager.gameOverFuncEvent += SetGameOverUI;
         GameManager.instance.levelCompleteManager.levelCompleteFuncEvent += SetLevelCompleteUI;
+        Time.timeScale = 0;
+
+        //SetGameResetUI();
     }
     public void SetGamePlayLevelNumberText(int Level)
     {
@@ -50,6 +53,7 @@ public class UIManager : MonoBehaviour
     }
     public void SetGameStartUI()
     {
+        Time.timeScale = 1;
         MainMenuDialogue.gameObject.SetActive(false);
         GamePlayDialogue.gameObject.SetActive(true);
     }

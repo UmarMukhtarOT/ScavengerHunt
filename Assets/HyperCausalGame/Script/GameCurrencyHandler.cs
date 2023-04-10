@@ -36,6 +36,7 @@ public class GameCurrencyHandler : MonoBehaviour
         if (Coins < 0)
             Coins = 0;
         GameData.instance.SetCoins(Coins);
+        UpdateUI();
     }
 
     public void UpdateUI()
