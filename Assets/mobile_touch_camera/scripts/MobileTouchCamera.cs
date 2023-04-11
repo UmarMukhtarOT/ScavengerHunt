@@ -1277,17 +1277,20 @@ namespace BitBenderGames
 
         private bool MouseOverUI()
         {
-            return EventSystem.current.IsPointerOverGameObject();
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            return results.Count > 0;
+
+
+            //return EventSystem.current.IsPointerOverGameObject();
         }
 
         public void LateUpdate()
         {
 
-           
-
-
-
-
+          
 
             //Pinch.
             UpdatePinch(Time.unscaledDeltaTime);
@@ -1701,7 +1704,7 @@ namespace BitBenderGames
                 return;
             }
 
-            if (IsControllable)
+           // if (IsControllable)
             {
 
 

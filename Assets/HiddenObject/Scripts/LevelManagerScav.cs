@@ -87,9 +87,9 @@ public class LevelManagerScav : MonoBehaviour
 
         TouchInput = Cam.GetComponent<TouchInputController>();
         Invoke(nameof(SetupLevel), 1);
-        UIManagerScav.instance.AnimatedImage.gameObject.SetActive(false);
+       
 
-        AdsManagerWrapper.Instance.ShowBanner(AdPosition.Top, AdSize.SmartBanner);
+        AdsManagerWrapper.Instance.ShowBanner(AdPosition.Top, AdsManagerWrapper.Instance.adaptiveSize);
     }
 
 
@@ -420,6 +420,8 @@ public class LevelManagerScav : MonoBehaviour
         }
     }
 
+    private int animPoolNum=0;
+
     public void GetSnapToPositionToBringChildIntoView(RectTransform child, int i)
     {
         RectTransform contentRt = UIManagerScav.instance.scrollRect.content;
@@ -433,43 +435,32 @@ public class LevelManagerScav : MonoBehaviour
 
         UIManagerScav.instance.scrollRect.elasticity = 2;
 
+
+
+        //Move scrollView
         contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.1f).SetEase(DG.Tweening.Ease.Linear).OnComplete(() =>
         {
-            UIManagerScav.instance.AnimatedImage.gameObject.SetActive(true);
-            UIManagerScav.instance.AnimatedImage.transform.position = UIManagerScav.instance.infoImg.GetComponent<InfoImage>().img.transform.position;
-            UIManagerScav.instance.AnimatedImage.GetComponent<Image>().sprite = UIManagerScav.instance.SV_IconList[i].childImg.sprite;
-            UIManagerScav.instance.AnimatedImage.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1);
-            UIManagerScav.instance.AnimatedImage.transform.DOMove(UIManagerScav.instance.SV_IconList[i].childImg.transform.position, 1f).
-            SetEase(DG.Tweening.Ease.InBack).OnComplete(() =>
+            UIManagerScav.instance.AnimatedImage[animPoolNum].gameObject.SetActive(true);
+            UIManagerScav.instance.AnimatedImage[animPoolNum].GetComponent<AnimatdImage>().AnimateFlyingImage(HitPos, i) ;
+
+           
+
+
+            if (animPoolNum >= UIManagerScav.instance.AnimatedImage.Length - 1)
             {
+                animPoolNum = 0;
+
+            }
+            else
+            {
+                //  UIManagerScav.instance.AnimatedImage[animPoolNum].transform.position = Vector3.zero;
+
+                animPoolNum++;
 
 
-
-                SoundsManager.instance.PlayScavSound(SoundsManager.instance.AssetCollect_Scav);
-
-                UIManagerScav.instance.SV_IconList[i].childImg.transform.DOScale(new Vector3(1.25f, 1.25f, 1.25f), 0.15f).OnComplete(() => { UIManagerScav.instance.SV_IconList[i].childImg.transform.localScale = Vector3.one;   });
-                UIManagerScav.instance.AnimatedImage.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
-                UIManagerScav.instance.AnimatedImage.gameObject.SetActive(false);
-
-                UIManagerScav.instance.FlyingGem.transform.position = UIManagerScav.instance.SV_IconList[i].transform.position;
-                UIManagerScav.instance.FlyingGem.SetActive(true);
-                UIManagerScav.instance.FlyingGem.transform.DOMove(UIManagerScav.instance.GemCounter.transform.position,1).
-                SetEase(DG.Tweening.Ease.InBack).OnComplete(() =>
-                {
-
-                    UIManagerScav.instance.FlyingGem.SetActive(false);
-                    GameCurrencyHandler.instance.AddToCoins(1);
-
-                    UIManagerScav.instance.scrollRect.elasticity = 0.2f;
+            }
 
 
-
-
-
-
-                }); 
-
-            }); 
 
         });
 

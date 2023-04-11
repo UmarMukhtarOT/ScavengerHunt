@@ -25,7 +25,7 @@ public class UIManagerScav : MonoBehaviour
     public Text Sv_fillText;
     public Image Sv_FillBar;
     public Animator SvAnim;
-    public Transform AnimatedImage;
+    public Transform[] AnimatedImage;
     public GameObject FlyingGem;
     public GameObject GemCounter;
 
