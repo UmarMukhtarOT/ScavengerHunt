@@ -45,7 +45,8 @@ public class LevelManagerScav : MonoBehaviour
     public AreaHolder AreaHolderObj;
 
     public DemoController _Controller;
-
+    private bool FirstItemPicked;
+    
 
 
 
@@ -85,12 +86,57 @@ public class LevelManagerScav : MonoBehaviour
 
         }
 
+        if (!PlayerPrefs.HasKey("TutorialPlayed"))
+        {
+            PlayerPrefs.SetInt("TutorialPlayed", 0);
+
+
+        }
+
+        if (PlayerPrefs.GetInt("TutorialPlayed", 0) == 0)
+        {
+
+            UIManagerScav.instance.LowerBarButton.SetActive(false);
+            StartCoroutine(StartTutorial());
+
+        }
+       
+
+
+
+
+
+
         TouchInput = Cam.GetComponent<TouchInputController>();
         Invoke(nameof(SetupLevel), 1);
        
 
         AdsManagerWrapper.Instance.ShowBanner(AdPosition.Top, AdsManagerWrapper.Instance.adaptiveSize);
     }
+
+
+   IEnumerator StartTutorial()
+   {
+        yield return new WaitForSeconds(4);
+        UIManagerScav.instance.TutorialPanel.SetActive(true);
+        UIManagerScav.instance.TutInfoGp.SetActive(true);
+        yield return new WaitUntil(() => FirstItemPicked);
+        yield return new WaitForSeconds(2);
+        UIManagerScav.instance.TutInfoGp.SetActive(false);
+
+        UIManagerScav.instance.TutInfoBar.SetActive(true);
+        yield return new WaitForSeconds(4);
+        UIManagerScav.instance.TutorialPanel.SetActive(false);
+        PlayerPrefs.SetInt("TutorialPlayed", 1);
+
+        AreaHolderObj.TutorialEnd();
+
+
+
+
+   }
+
+
 
 
 
@@ -168,10 +214,7 @@ public class LevelManagerScav : MonoBehaviour
 
     }
 
-    public static void VibrateIt(HapticTypes Type)
-    {
-        MMVibrationManager.Haptic(Type);
-    }
+   
 
 
 
@@ -201,7 +244,13 @@ public class LevelManagerScav : MonoBehaviour
 
         if (AreaHolderObj.AreaUnlockedTill < AreaHolderObj.areaProps.areaColliders.Count - 1)
         {
-            Debug.Log("AreaUnlockedTill Pehly" + AreaHolderObj.AreaUnlockedTill);
+
+            UIManagerScav.instance.NewAreaPanle.SetActive(true);
+
+
+
+
+
             TouchInput.enabled = false;
             PlayerPrefs.SetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), AreaHolderObj.AreaUnlockedTill + 1);
             AreaHolderObj.AreaUnlockedTill = PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
@@ -211,53 +260,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-            BoxCollider NextBound = AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill];
-
-
-            Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(NextBound);
-
-
-
-            // AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill].GetComponent<Animator>().enabled = true;
-
-            //  Debug.Log("NextAreaPos " + NextAreaPos);
-
-
-
-            Vector3 NextAreaPos = AreaHolderObj.areaProps.AreaPos[AreaHolderObj.AreaUnlockedTill].transform.position;
-            NextAreaPos.z = Cam.transform.position.z;
-
-
-            Cam.enabled = false;
-
-            Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
-            {
-                TouchInput.enabled = true;
-
-                NextBound.GetComponent<Animator>().enabled = true;
-                Cam.enabled = true;
-
-
-            }
-
-            );
-
-
-
-
-
-            UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
-
-            //   Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill]);
-            activeHiddenObjectList = new List<Transform>();
-            activeHiddenObjectList.Clear();
-            maxHiddenObjectToFound = AreaHolderObj.areaProps.AreaObjNum[AreaHolderObj.AreaUnlockedTill];
-            UIManagerScav.instance.Sv_fillText.text = totalHiddenObjectsFound + "/" + maxHiddenObjectToFound;
-            UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
-
-
-
-
+           
 
         }
         else
@@ -275,6 +278,70 @@ public class LevelManagerScav : MonoBehaviour
 
 
     }
+
+
+
+
+
+    public void OpenNextArea()
+    {
+
+        AdsManagerWrapper.Instance.ShowInterstitial();
+        UIManagerScav.instance.NewAreaPanle.SetActive(false);
+        BoxCollider NextBound = AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill];
+        Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(NextBound);
+        Vector3 NextAreaPos = AreaHolderObj.areaProps.AreaPos[AreaHolderObj.AreaUnlockedTill].transform.position;
+        NextAreaPos.z = Cam.transform.position.z;
+
+
+        Cam.enabled = false;
+
+        Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
+        {
+            TouchInput.enabled = true;
+
+            NextBound.GetComponent<Animator>().enabled = true;
+            Cam.enabled = true;
+
+
+        }
+        );
+
+        UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
+
+        //   Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill]);
+        activeHiddenObjectList = new List<Transform>();
+        activeHiddenObjectList.Clear();
+        maxHiddenObjectToFound = AreaHolderObj.areaProps.AreaObjNum[AreaHolderObj.AreaUnlockedTill];
+        UIManagerScav.instance.Sv_fillText.text = totalHiddenObjectsFound + "/" + maxHiddenObjectToFound;
+        UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
+
+    }
+
+
+
+    public void checkAppericite()
+    {
+        if (PlayerPrefs.GetInt("Level"+GameData.instance.GetLevelNumber()+"LatestUnlockedArea_AppericiateFirstTime",0)==0)
+        {
+            if (totalHiddenObjectsFound==10)
+            {
+
+                UIManagerScav.instance.Appericiatepanel.SetActive(true);
+
+            }
+        
+        
+        }
+      
+
+
+
+    }
+
+
+
+
 
 
 
@@ -398,19 +465,29 @@ public class LevelManagerScav : MonoBehaviour
 
 
                 string IconName = CurrentIcone.name;
-               
-                
-
-                PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
-                UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),PlayerPrefs.GetInt((IconName + "Collected")))+"/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
-                GetSnapToPositionToBringChildIntoView(CurrentIcone.GetComponent<RectTransform>(), i);
 
                 HitPos.y += 100;
                 UIManagerScav.instance.infoImg.transform.position = HitPos;
                 UIManagerScav.instance.infoImg.gameObject.SetActive(true);
-
-
                 CurrentIcone.updateCollectedText();
+                checkAppericite();
+
+                PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
+                UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),
+                PlayerPrefs.GetInt((IconName + "Collected")))+"/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
+              
+                
+                
+                StartCoroutine(GetSnapToPositionToBringChildIntoView(CurrentIcone.GetComponent<RectTransform>(), i));
+
+                if (PlayerPrefs.GetInt("TutorialPlayed", 0) == 0)
+                {
+
+                    FirstItemPicked=true;
+
+
+
+                }
 
 
 
@@ -422,47 +499,53 @@ public class LevelManagerScav : MonoBehaviour
 
     private int animPoolNum=0;
 
-    public void GetSnapToPositionToBringChildIntoView(RectTransform child, int i)
+    IEnumerator GetSnapToPositionToBringChildIntoView(RectTransform child, int i)
     {
         RectTransform contentRt = UIManagerScav.instance.scrollRect.content;
 
-
+        Debug.Log("Icon Number "+i);
         Debug.Log("changing SV position");
         Canvas.ForceUpdateCanvases();
         Vector2 viewportLocalPosition = UIManagerScav.instance.scrollRect.viewport.localPosition;
         Vector2 childLocalPosition = child.localPosition;
         Vector2 result = new Vector2(0 - (viewportLocalPosition.x + childLocalPosition.x), 0 - (viewportLocalPosition.y + childLocalPosition.y));
 
-        UIManagerScav.instance.scrollRect.elasticity = 2;
+        // UIManagerScav.instance.scrollRect.elasticity = 2;
+
 
 
 
         //Move scrollView
-        contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.1f).SetEase(DG.Tweening.Ease.Linear).OnComplete(() =>
+        contentRt.DOLocalMove(new Vector2(result.x, contentRt.localPosition.y), 0.01f).SetEase(DG.Tweening.Ease.OutBack);
+
+
+        yield return new WaitForSeconds(0.2f);
+        UIManagerScav.instance.AnimatedImage[animPoolNum].gameObject.SetActive(true);
+        UIManagerScav.instance.AnimatedImage[animPoolNum].GetComponent<AnimatdImage>().AnimateFlyingImage(HitPos, i);
+
+
+
+
+        if (animPoolNum >= UIManagerScav.instance.AnimatedImage.Length - 1)
         {
-            UIManagerScav.instance.AnimatedImage[animPoolNum].gameObject.SetActive(true);
-            UIManagerScav.instance.AnimatedImage[animPoolNum].GetComponent<AnimatdImage>().AnimateFlyingImage(HitPos, i) ;
+            animPoolNum = 0;
 
-           
+        }
+        else
+        {
+            //  UIManagerScav.instance.AnimatedImage[animPoolNum].transform.position = Vector3.zero;
 
-
-            if (animPoolNum >= UIManagerScav.instance.AnimatedImage.Length - 1)
-            {
-                animPoolNum = 0;
-
-            }
-            else
-            {
-                //  UIManagerScav.instance.AnimatedImage[animPoolNum].transform.position = Vector3.zero;
-
-                animPoolNum++;
+            animPoolNum++;
 
 
-            }
+        }
 
 
 
-        });
+
+
+
+
 
     }
 
@@ -483,10 +566,7 @@ public class LevelManagerScav : MonoBehaviour
         Cam.GetComponent<TouchInputController>().OnInputClick += OnInputClick;
     }
 
-    private void OnDisable()
-    {
-        // Cam.GetComponent<TouchInputController>().OnInputClick -= OnInputClick;
-    }
+   
 
 
     private void OnInputClick(Vector3 clickScreenPosition, bool isDoubleClick, bool isLongTap)
@@ -496,7 +576,10 @@ public class LevelManagerScav : MonoBehaviour
 
     }
 
-
+    public static void VibrateIt(HapticTypes Type)
+    {
+        MMVibrationManager.Haptic(Type);
+    }
 
 }
 

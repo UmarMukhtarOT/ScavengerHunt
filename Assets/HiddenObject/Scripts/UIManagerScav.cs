@@ -37,8 +37,14 @@ public class UIManagerScav : MonoBehaviour
     public GameObject SVUpBtn, SVDownBtn;
     public Canvas ScavCanv;
     public GameObject ClickParticlePrefab;
-    public contentViewHandler ContentViewHandler;
-    public GameObject AppericiateWithAdpanel;
+   
+    public GameObject Appericiatepanel;
+    public GameObject TutorialPanel;
+    public GameObject TutInfoGp;
+    public GameObject TutInfoBar;
+    public GameObject LowerBarButton;
+    public GameObject NewAreaPanle;
+
 
     private void Awake()
     {
@@ -221,4 +227,14 @@ public class UIManagerScav : MonoBehaviour
         //TODO: Using Coroutine is not recommended, try using TweenEngine. Eg:- DOtween, iTween
         StartCoroutine(LevelManagerScav.instance.HintObject());
     }
+
+
+    public void CloseAppericiation() 
+    {
+    
+    
+    
+    }
+
+
 }

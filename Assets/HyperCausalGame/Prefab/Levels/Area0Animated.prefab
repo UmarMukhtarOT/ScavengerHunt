@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 2668324776433258487}
   m_Layer: 9
   m_Name: parot
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3050,7 +3050,7 @@ GameObject:
   - component: {fileID: 8376091573375538512}
   m_Layer: 9
   m_Name: gun
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3886,8 +3886,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510305175741389654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11335, y: 10.799, z: 1.2}
-  m_LocalScale: {x: 62.102024, y: 52.60295, z: 1.0874225}
+  m_LocalPosition: {x: -0.90288, y: 10.799, z: 1.2481}
+  m_LocalScale: {x: 65.39343, y: 55.390907, z: 1.1450559}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7894673718258293527}
@@ -4172,7 +4172,7 @@ GameObject:
   - component: {fileID: 7968476145843925222}
   m_Layer: 9
   m_Name: parot
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6174,7 +6174,7 @@ GameObject:
   - component: {fileID: 4736047886968433032}
   m_Layer: 9
   m_Name: memo-card
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6377,7 +6377,7 @@ GameObject:
   - component: {fileID: 7964503359810060391}
   m_Layer: 9
   m_Name: magic-hat
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6496,7 +6496,7 @@ GameObject:
   - component: {fileID: 7014705953415321519}
   m_Layer: 9
   m_Name: flower
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7415,7 +7415,7 @@ GameObject:
   - component: {fileID: 1300565060934385639}
   m_Layer: 9
   m_Name: birthday-hat
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7606,6 +7606,89 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1024648670391155218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6884855931614874141}
+  - component: {fileID: 3161627435379264741}
+  m_Layer: 0
+  m_Name: Mask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6884855931614874141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024648670391155218}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.6, y: 6.2, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8301995129518054511}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!331 &3161627435379264741
+SpriteMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024648670391155218}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ff3ae3e7d30e79445823bc42823d63f8, type: 3}
+  m_MaskAlphaCutoff: 0.117
+  m_FrontSortingLayerID: 0
+  m_BackSortingLayerID: 0
+  m_FrontSortingLayer: 0
+  m_BackSortingLayer: 0
+  m_FrontSortingOrder: 0
+  m_BackSortingOrder: 0
+  m_IsCustomRangeActive: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1043198820942264648
 GameObject:
   m_ObjectHideFlags: 0
@@ -7704,7 +7787,7 @@ GameObject:
   - component: {fileID: 4505416348402635315}
   m_Layer: 9
   m_Name: elephant
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9425,7 +9508,7 @@ GameObject:
   - component: {fileID: 4636095398831770617}
   m_Layer: 9
   m_Name: spider
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9903,7 +9986,7 @@ GameObject:
   - component: {fileID: 7699025350679305469}
   m_Layer: 9
   m_Name: grapes
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10106,7 +10189,7 @@ GameObject:
   - component: {fileID: 6392106543929077155}
   m_Layer: 9
   m_Name: hot-dog
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10225,7 +10308,7 @@ GameObject:
   - component: {fileID: 7676852567922768340}
   m_Layer: 9
   m_Name: Cup
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10344,7 +10427,7 @@ GameObject:
   - component: {fileID: 8643869072653169118}
   m_Layer: 9
   m_Name: glove
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10923,7 +11006,7 @@ GameObject:
   - component: {fileID: 3121380021684474135}
   m_Layer: 9
   m_Name: hot-dog
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12426,7 +12509,7 @@ GameObject:
   - component: {fileID: 5143964563006175017}
   m_Layer: 9
   m_Name: parot
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13312,7 +13395,7 @@ GameObject:
   - component: {fileID: 9207537310838627607}
   m_Layer: 9
   m_Name: icecream
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14222,7 +14305,7 @@ GameObject:
   - component: {fileID: 6942299921108267776}
   m_Layer: 9
   m_Name: burger
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15265,7 +15348,7 @@ GameObject:
   - component: {fileID: 271671667621914033}
   m_Layer: 9
   m_Name: flower
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15557,7 +15640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2002758824387446291
 Transform:
   m_ObjectHideFlags: 0
@@ -15864,7 +15947,7 @@ GameObject:
   - component: {fileID: 2589204674654962725}
   m_Layer: 9
   m_Name: butterfly
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16482,7 +16565,7 @@ GameObject:
   - component: {fileID: 1629671024370810455}
   m_Layer: 9
   m_Name: dog
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16495,7 +16578,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2263708864287758004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08, y: 4.9, z: 0}
+  m_LocalPosition: {x: 8.26, y: -1.92, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16685,7 +16768,7 @@ GameObject:
   - component: {fileID: 6394806962127925004}
   m_Layer: 9
   m_Name: magic-hat
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17302,7 +17385,7 @@ GameObject:
   - component: {fileID: 8498079228599855577}
   m_Layer: 9
   m_Name: colorplatte
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18223,7 +18306,7 @@ GameObject:
   - component: {fileID: 5557612266116096142}
   m_Layer: 9
   m_Name: cookie
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18802,7 +18885,7 @@ Transform:
   - {fileID: 1467321213567058037}
   - {fileID: 6135143865536544711}
   m_Father: {fileID: 8301995129518054511}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2581587792462655805
 GameObject:
@@ -19154,7 +19237,7 @@ GameObject:
   - component: {fileID: 623993924028653588}
   m_Layer: 9
   m_Name: cookie
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19357,7 +19440,7 @@ GameObject:
   - component: {fileID: 5965806181824904490}
   m_Layer: 9
   m_Name: memo-card
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20035,7 +20118,7 @@ Transform:
   - {fileID: 4349970735782860966}
   - {fileID: 4510714925620931706}
   m_Father: {fileID: 8301995129518054511}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2656333932393155493
 GameObject:
@@ -20506,7 +20589,7 @@ GameObject:
   - component: {fileID: 2316539995276414601}
   m_Layer: 9
   m_Name: mice
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21846,7 +21929,7 @@ GameObject:
   - component: {fileID: 4900260003352065382}
   m_Layer: 9
   m_Name: spider
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22217,7 +22300,7 @@ GameObject:
   - component: {fileID: 2054625540392341510}
   m_Layer: 9
   m_Name: popcorn
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22336,7 +22419,7 @@ GameObject:
   - component: {fileID: 1143085952952088634}
   m_Layer: 9
   m_Name: glove
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24474,7 +24557,7 @@ GameObject:
   - component: {fileID: 5413930596815458806}
   m_Layer: 9
   m_Name: Dog-face
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25036,8 +25119,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3143733561280687912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.5, y: 10.691, z: 1.2}
-  m_LocalScale: {x: 90.42595, y: 51.19983, z: 1.1303245}
+  m_LocalPosition: {x: 15.538, y: 10.685, z: 1.2481}
+  m_LocalScale: {x: 95.21852, y: 53.913418, z: 1.1902317}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 802498950786655861}
@@ -25244,8 +25327,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3152793043418923150}
   m_LocalRotation: {x: -0, y: -0, z: -0.0061085457, w: 0.99998134}
-  m_LocalPosition: {x: 50.38, y: 7.26, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -0.78, y: 6.07, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 170391949701066753}
@@ -27253,7 +27336,7 @@ GameObject:
   - component: {fileID: 2949604643301847856}
   m_Layer: 9
   m_Name: cat
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27456,7 +27539,7 @@ GameObject:
   - component: {fileID: 4150093603864265798}
   m_Layer: 9
   m_Name: birthday-hat
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29090,7 +29173,7 @@ GameObject:
   - component: {fileID: 7678865749820759664}
   m_Layer: 9
   m_Name: glasses
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30761,7 +30844,7 @@ GameObject:
   - component: {fileID: 5662391752957141568}
   m_Layer: 9
   m_Name: Dog-face
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30964,7 +31047,7 @@ GameObject:
   - component: {fileID: 29884701899137313}
   m_Layer: 9
   m_Name: hot-dog
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31540,7 +31623,7 @@ GameObject:
   - component: {fileID: 1560289319425076882}
   m_Layer: 9
   m_Name: Cup
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32425,7 +32508,7 @@ GameObject:
   - component: {fileID: 384526315762989590}
   m_Layer: 9
   m_Name: burger
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32712,7 +32795,7 @@ GameObject:
   - component: {fileID: 1592836320348947012}
   m_Layer: 9
   m_Name: Dog-face
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32915,7 +32998,7 @@ GameObject:
   - component: {fileID: 3757924157014186790}
   m_Layer: 9
   m_Name: burger
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34166,7 +34249,7 @@ GameObject:
   - component: {fileID: 4743235406196752717}
   m_Layer: 9
   m_Name: colorplatte
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34621,7 +34704,7 @@ GameObject:
   - component: {fileID: 5804390131756160293}
   m_Layer: 9
   m_Name: cookie
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37610,7 +37693,7 @@ GameObject:
   - component: {fileID: 4599894550951755804}
   m_Layer: 9
   m_Name: pizza
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38763,7 +38846,7 @@ GameObject:
   - component: {fileID: 6505130138133935173}
   m_Layer: 9
   m_Name: mice
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39293,7 +39376,7 @@ GameObject:
   - component: {fileID: 8757532427388357224}
   m_Layer: 9
   m_Name: Cup
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40559,7 +40642,7 @@ GameObject:
   - component: {fileID: 5081592961326040360}
   m_Layer: 9
   m_Name: icecream
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41098,7 +41181,7 @@ GameObject:
   - component: {fileID: 2137511632261180656}
   m_Layer: 9
   m_Name: water-coller
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44121,6 +44204,90 @@ Transform:
   m_Father: {fileID: 7715766583146086645}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5438868922786709684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3001417606834775550}
+  - component: {fileID: 6623275832700877102}
+  m_Layer: 0
+  m_Name: TutorialHidePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3001417606834775550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438868922786709684}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.7183, y: 11.7215, z: -1.8}
+  m_LocalScale: {x: 31.61143, y: 10.91338, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8301995129518054511}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &6623275832700877102
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438868922786709684}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 50
+  m_Sprite: {fileID: 21300000, guid: a60cd5903f96aa045b3fd2f9e72f8035, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 2
+  m_SpriteSortPoint: 0
 --- !u!1 &5446226372244460054
 GameObject:
   m_ObjectHideFlags: 0
@@ -44466,7 +44633,7 @@ GameObject:
   - component: {fileID: 3427250295678564520}
   m_Layer: 9
   m_Name: popcorn
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44709,7 +44876,7 @@ GameObject:
   - component: {fileID: 6413882260521260067}
   m_Layer: 9
   m_Name: dog
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45616,7 +45783,7 @@ GameObject:
   - component: {fileID: 1303191770610422524}
   m_Layer: 9
   m_Name: popcorn
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45735,7 +45902,7 @@ GameObject:
   - component: {fileID: 968866876769865987}
   m_Layer: 9
   m_Name: magic-hat
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46147,7 +46314,7 @@ GameObject:
   - component: {fileID: 5478551822102309458}
   m_Layer: 9
   m_Name: dragon-fly
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46654,7 +46821,7 @@ GameObject:
   - component: {fileID: 4960508417244852480}
   m_Layer: 9
   m_Name: pizza
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46773,7 +46940,7 @@ GameObject:
   - component: {fileID: 6984957352574712721}
   m_Layer: 9
   m_Name: grapes
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48007,7 +48174,7 @@ GameObject:
   - component: {fileID: 3436749797784957830}
   m_Layer: 9
   m_Name: memo-card
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49218,7 +49385,7 @@ GameObject:
   - component: {fileID: 4928388087224884205}
   m_Layer: 9
   m_Name: water-coller
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49717,7 +49884,7 @@ GameObject:
   - component: {fileID: 5580830614202719659}
   m_Layer: 9
   m_Name: butterfly
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50599,7 +50766,7 @@ GameObject:
   - component: {fileID: 658671813660606462}
   m_Layer: 9
   m_Name: cat
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51496,7 +51663,7 @@ GameObject:
   - component: {fileID: 403611076}
   m_Layer: 9
   m_Name: dragon-fly
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51772,7 +51939,7 @@ GameObject:
   - component: {fileID: 1624845557157404503}
   m_Layer: 9
   m_Name: flower
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53090,7 +53257,7 @@ GameObject:
   - component: {fileID: 5074573105750571441}
   m_Layer: 9
   m_Name: elephant
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53209,7 +53376,7 @@ GameObject:
   - component: {fileID: 3018711077526653583}
   m_Layer: 9
   m_Name: grapes
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53580,7 +53747,7 @@ GameObject:
   - component: {fileID: 8622071646857056330}
   m_Layer: 9
   m_Name: icecream
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55378,7 +55545,7 @@ GameObject:
   - component: {fileID: 8547348972259992700}
   m_Layer: 9
   m_Name: dog
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57070,7 +57237,7 @@ GameObject:
   - component: {fileID: 2308765868763937579}
   m_Layer: 9
   m_Name: glasses
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57719,7 +57886,7 @@ GameObject:
   - component: {fileID: 4196082305272613992}
   m_Layer: 9
   m_Name: birthday-hat
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58043,7 +58210,7 @@ GameObject:
   - component: {fileID: 42810159496543527}
   m_Layer: 9
   m_Name: glasses
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58791,7 +58958,7 @@ GameObject:
   - component: {fileID: 2680741200457174492}
   m_Layer: 9
   m_Name: gun
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59645,7 +59812,7 @@ GameObject:
   - component: {fileID: 8586671483115204050}
   m_Layer: 9
   m_Name: water-coller
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59848,7 +60015,7 @@ GameObject:
   - component: {fileID: 6665721889854306642}
   m_Layer: 9
   m_Name: shoe
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60387,7 +60554,7 @@ GameObject:
   - component: {fileID: 6398234975638881247}
   m_Layer: 9
   m_Name: cat
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61991,7 +62158,7 @@ GameObject:
   - component: {fileID: 5383860638830361324}
   m_Layer: 9
   m_Name: mice
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62257,7 +62424,7 @@ GameObject:
   - component: {fileID: 4290264240799270282}
   m_Layer: 9
   m_Name: gun
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63546,7 +63713,7 @@ GameObject:
   - component: {fileID: 629525777240403804}
   m_Layer: 9
   m_Name: spider
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63704,7 +63871,7 @@ GameObject:
   - component: {fileID: 1628118978537460}
   m_Layer: 9
   m_Name: colorplatte
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65115,7 +65282,7 @@ GameObject:
   - component: {fileID: 373833759625160899}
   m_Layer: 9
   m_Name: casing
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65274,7 +65441,7 @@ GameObject:
   - component: {fileID: 7275097059642845407}
   m_Layer: 9
   m_Name: shoe
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69193,8 +69360,10 @@ Transform:
   - {fileID: 4686976247777726548}
   - {fileID: 6125952981607944860}
   - {fileID: 4311522102682370822}
-  - {fileID: 170391949701066753}
   - {fileID: 3240656966874255594}
+  - {fileID: 170391949701066753}
+  - {fileID: 3001417606834775550}
+  - {fileID: 6884855931614874141}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -69211,6 +69380,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EditorSpawn: 0
+  Plane: {fileID: 2182211473334258323}
+  TutorailBG: {fileID: 5438868922786709684}
+  tutorailmask: {fileID: 1024648670391155218}
   Sprites1:
   - {fileID: 21300000, guid: 20859cbf5d647fe4992bcd39f1380643, type: 3}
   - {fileID: 21300000, guid: c6d348626e6092b47a884527fb714485, type: 3}
@@ -70129,7 +70301,7 @@ GameObject:
   - component: {fileID: 6401713867256003244}
   m_Layer: 9
   m_Name: dragon-fly
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71705,7 +71877,7 @@ GameObject:
   - component: {fileID: 9196420616694003141}
   m_Layer: 9
   m_Name: casing
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73352,7 +73524,7 @@ GameObject:
   - component: {fileID: 2294723752035083958}
   m_Layer: 9
   m_Name: elephant
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74264,7 +74436,7 @@ GameObject:
   - component: {fileID: 1646829090}
   m_Layer: 9
   m_Name: butterfly
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74764,7 +74936,7 @@ GameObject:
   - component: {fileID: 5340390837917103287}
   m_Layer: 9
   m_Name: shoe
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75560,7 +75732,7 @@ GameObject:
   - component: {fileID: 4182167028555646963}
   m_Layer: 9
   m_Name: casing
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75679,7 +75851,7 @@ GameObject:
   - component: {fileID: 788628569435683241}
   m_Layer: 9
   m_Name: pizza
-  m_TagString: HidddenObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

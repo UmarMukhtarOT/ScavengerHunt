@@ -55,6 +55,9 @@ public class AreaHolder : MonoBehaviour
 
     [SerializeField] public bool EditorSpawn;
 
+    public GameObject Plane;
+    public GameObject TutorailBG;
+    public GameObject tutorailmask;
     public List<Sprite> Sprites1;
     public List<Sprite> Sprites2;
     [SerializeField] public int AreaUnlockedTill;
@@ -81,6 +84,21 @@ public class AreaHolder : MonoBehaviour
         {
             item.ObjectsProperties.spriteRenderer.sprite = item.ObjectsProperties.sprites[item.ObjectsProperties.currentSpriteIndex];
         }
+
+
+
+
+        if (PlayerPrefs.GetInt("TutorialPlayed", 0) == 1)
+        {
+
+           TutorialEnd();
+
+        }
+
+
+
+
+
     }
 
     private void Update()
@@ -160,6 +178,30 @@ public class AreaHolder : MonoBehaviour
         }
 
     }
+
+
+
+
+
+    public void TutorialEnd()
+    {
+        Plane.SetActive(true);
+        tutorailmask.SetActive(false);
+        TutorailBG.SetActive(false);
+
+
+
+        foreach (var item in HiddenObjectList)
+        {
+            item.tag = "HidddenObject";
+        }
+    
+    
+    
+    }
+
+
+
 
 
 }
