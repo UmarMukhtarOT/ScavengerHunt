@@ -126,6 +126,7 @@ namespace UnityEngine.UI.Extensions
         protected override void Awake()
         {
             base.Awake();
+            raycastTarget = false;
             if (!Initialize())
                 enabled = false;
         }

@@ -468,7 +468,7 @@ public class LevelManagerScav : MonoBehaviour
 
                 HitPos.y += 100;
                 UIManagerScav.instance.infoImg.transform.position = HitPos;
-                UIManagerScav.instance.infoImg.gameObject.SetActive(true);
+                   UIManagerScav.instance.infoImg.gameObject.SetActive(true);
                 CurrentIcone.updateCollectedText();
                 checkAppericite();
 
@@ -503,7 +503,7 @@ public class LevelManagerScav : MonoBehaviour
     {
         RectTransform contentRt = UIManagerScav.instance.scrollRect.content;
 
-        Debug.Log("Icon Number "+i);
+        //Debug.Log("Icon Number "+i);
         Debug.Log("changing SV position");
         Canvas.ForceUpdateCanvases();
         Vector2 viewportLocalPosition = UIManagerScav.instance.scrollRect.viewport.localPosition;
@@ -564,6 +564,11 @@ public class LevelManagerScav : MonoBehaviour
     private void OnEnable()
     {
         Cam.GetComponent<TouchInputController>().OnInputClick += OnInputClick;
+    }
+
+    private void OnDisable()
+    {
+       // Cam.GetComponent<TouchInputController>().OnInputClick -= OnInputClick;
     }
 
    

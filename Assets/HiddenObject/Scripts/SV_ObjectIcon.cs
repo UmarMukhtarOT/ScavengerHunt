@@ -61,7 +61,7 @@ public class SV_ObjectIcon : MonoBehaviour
         {
             if (LevelManagerScav.instance.appreciateEveryTurn % collected == 0)
             {
-                Debug.Log("apper " + val + " collected " + collected);
+                //Debug.Log("apper " + val + " collected " + collected);
                 //   UIManagerScav.instance.AppericiateWithAdpanel.SetActive(true);
 
             }

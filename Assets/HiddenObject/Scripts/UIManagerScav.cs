@@ -231,9 +231,10 @@ public class UIManagerScav : MonoBehaviour
 
     public void CloseAppericiation() 
     {
-    
-    
-    
+
+        LevelManagerScav.instance.Cam.touchController.enabled = true;
+        Appericiatepanel.SetActive(false);
+        SoundsManager.instance.PlayButtonClipSound(SoundsManager.instance.AS);
     }
 
 

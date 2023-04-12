@@ -499,7 +499,7 @@ namespace BitBenderGames
         private Vector3 mouseRotationCenter = Vector3.zero;
         private float timeKeyDown;
         #endregion
-       
+
         public void Awake()
         {
             if (cameraTransform != null)
@@ -553,7 +553,7 @@ namespace BitBenderGames
             touchInputController.OnPinchUpdateExtended += InputControllerOnPinchUpdate;
             touchInputController.OnPinchStop += InputControllerOnPinchStop;
             isStarted = true;
-            IsControllable = true;
+            IsOverUI = false;
             StartCoroutine(InitCamBoundariesDelayed());
         }
 
@@ -1042,10 +1042,11 @@ namespace BitBenderGames
         /// <summary>
         /// Method to compute all the necessary updates when the user moves the camera.
         /// </summary>
+        /// //umar
         private void UpdatePosition(float deltaTime)
         {
 
-            if (IsPinching == true && isPinchTiltMode == true)
+            if (IsPinching == true && isPinchTiltMode == true &&!IsCanvasClicked())
             {
                 return;
             }
@@ -1238,19 +1239,20 @@ namespace BitBenderGames
 
         public void Update()
         {
-            if (MouseOverUI())
-            {
+            //if (IsCanvasClicked())
+            //{
 
-                IsControllable = false;
-                Debug.Log("Over UI");
-            }
-            else
-            {
-                IsControllable = true;
+            //    IsOverUI = true;
+            //    Debug.Log("IS Over UI");
+            //}
+            //else
+            //{
+            //    IsOverUI = false;
+            //    Debug.Log("NOT Over UI");
 
 
 
-            }
+            //}
             #region auto scroll code
 
             if (cameraScrollVelocity.sqrMagnitude > float.Epsilon)
@@ -1283,14 +1285,57 @@ namespace BitBenderGames
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
             return results.Count > 0;
 
+            
+        }
 
-            //return EventSystem.current.IsPointerOverGameObject();
+        public static bool IsCanvasClicked()
+        {
+
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            return results.Count > 0;
+
+
+
+
+
+
+
+
+            //if (EventSystem.current == null) return false;
+
+            //if (EventSystem.current.IsPointerOverGameObject())
+            //{
+
+            //    GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
+            //    if (selectedObject != null)
+            //    {
+            //        Debug.Log("Mouse is over UI element: " + selectedObject.name + " V``");
+            //    }
+
+
+
+            //    return true;
+
+                
+            //}
+            //else
+            //{
+
+
+            //        Debug.Log("XXXXXXXXX");
+
+
+            //    return false;
+            //}
         }
 
         public void LateUpdate()
         {
 
-          
+
 
             //Pinch.
             UpdatePinch(Time.unscaledDeltaTime);
@@ -1530,7 +1575,7 @@ namespace BitBenderGames
 
         private void InputControllerOnDragUpdate(Vector3 dragPosStart, Vector3 dragPosCurrent, Vector3 correctionOffset)
         {
-            if (IsControllable)
+            if (!IsCanvasClicked())
             {
 
 
@@ -1690,7 +1735,7 @@ namespace BitBenderGames
             isTiltModeEvaluated = false;
         }
 
-        public bool IsControllable;
+        public bool IsOverUI;
 
         //******
         private void InputControllerOnInputClick(Vector3 clickPosition, bool isDoubleClick, bool isLongTap)
@@ -1704,71 +1749,78 @@ namespace BitBenderGames
                 return;
             }
 
-           // if (IsControllable)
+
+
+
+
+
+
+            Ray camRay = Cam.ScreenPointToRay(clickPosition);
+            if (OnPickItem != null || OnPickItemDoubleClick != null)
             {
 
 
 
-
-
-                Ray camRay = Cam.ScreenPointToRay(clickPosition);
-                if (OnPickItem != null || OnPickItemDoubleClick != null)
+                RaycastHit hitInfo;
+                if (Physics.Raycast(camRay, out hitInfo) == true&& !IsCanvasClicked())
                 {
-                    RaycastHit hitInfo;
-                    if (Physics.Raycast(camRay, out hitInfo) == true)
+
+
+                    if (OnPickItem != null)
                     {
 
+                        // Debug.Log("hit pos " + hitInfo.point);
+                        OnPickItem.Invoke(hitInfo);
 
 
-                        if (OnPickItem != null)
-                        {
-
-                           // Debug.Log("hit pos " + hitInfo.point);
-                            OnPickItem.Invoke(hitInfo);
-
-
-                        }
-                        else
-                        {
-
-                            Debug.Log("hit pos " + hitInfo.point);
-
-
-
-                        }
-
-
-
-
-                        if (isDoubleClick == true)
-                        {
-                            if (OnPickItemDoubleClick != null)
-                            {
-                                // OnPickItemDoubleClick.Invoke(hitInfo);
-
-                            }
-                        }
                     }
-                }
-                if (OnPickItem2D != null || OnPickItem2DDoubleClick != null)
-                {
-                    RaycastHit2D hitInfo2D = Physics2D.Raycast(camRay.origin, camRay.direction);
-                    if (hitInfo2D == true)
+                    else
                     {
-                        if (OnPickItem2D != null)
-                        {
-                            OnPickItem2D.Invoke(hitInfo2D);
-                        }
-                        if (isDoubleClick == true)
-                        {
-                            if (OnPickItem2DDoubleClick != null)
-                            {
-                                OnPickItem2DDoubleClick.Invoke(hitInfo2D);
-                            }
-                        }
+
+                        Debug.Log("hit pos " + hitInfo.point);
+
+
+
                     }
+
+
+
+
+
+
+
+                    //if (isDoubleClick == true)
+                    //{
+                    //    if (OnPickItemDoubleClick != null)
+                    //    {
+                    //        // OnPickItemDoubleClick.Invoke(hitInfo);
+
+                    //    }
+                    //}
                 }
+
+
+
             }
+            //if (OnPickItem2D != null || OnPickItem2DDoubleClick != null)
+            //{
+            //    RaycastHit2D hitInfo2D = Physics2D.Raycast(camRay.origin, camRay.direction);
+            //    if (hitInfo2D == true)
+            //    {
+            //        if (OnPickItem2D != null)
+            //        {
+            //            OnPickItem2D.Invoke(hitInfo2D);
+            //        }
+            //        if (isDoubleClick == true)
+            //        {
+            //            if (OnPickItem2DDoubleClick != null)
+            //            {
+            //                OnPickItem2DDoubleClick.Invoke(hitInfo2D);
+            //            }
+            //        }
+            //    }
+            //}
+
         }
 
         private IEnumerator ZoomToTargetValueCoroutine(float target)

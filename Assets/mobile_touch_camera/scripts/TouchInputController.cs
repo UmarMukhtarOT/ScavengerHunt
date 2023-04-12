@@ -16,7 +16,8 @@ using UnityEngine.EventSystems;
 
 namespace BitBenderGames {
 
-  public class TouchInputController : MonoBehaviour {
+  public class TouchInputController : MonoBehaviour
+    {
 
     [Header("Expert Mode")]
     [SerializeField]
@@ -113,8 +114,8 @@ namespace BitBenderGames {
       get { return isInputOnLockedArea; }
       set { isInputOnLockedArea = value; }
     }
-
-    public void Awake() {
+        
+        public void Awake() {
       lastFingerDownTimeReal = 0;
       lastClickTimeReal = 0;
       lastFinger0DownPos = Vector3.zero;
@@ -387,5 +388,19 @@ namespace BitBenderGames {
       float dragDistance = new Vector2(dragVector.x / Screen.width, dragVector.y / Screen.height).magnitude;
       return dragDistance;
     }
-  }
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
 }

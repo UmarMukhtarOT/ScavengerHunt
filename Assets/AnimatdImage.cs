@@ -32,7 +32,7 @@ public class AnimatdImage : MonoBehaviour
         transform.DOMove(UIManagerScav.instance.SV_IconList[iconNum].childImg.transform.position, 1f).SetEase(DG.Tweening.Ease.InBack).OnComplete(() =>
         {
 
-            SoundsManager.instance.PlayScavSound(SoundsManager.instance.AssetCollect_Scav);
+           //SoundsManager.instance.PlayScavSound(SoundsManager.instance.AssetCollect_Scav);
 
             UIManagerScav.instance.SV_IconList[iconNum].childImg.transform.DOScale(new Vector3(1.25f, 1.25f, 1.25f), 0.15f).OnComplete(() =>
             {
