@@ -91,9 +91,10 @@ public class AreaHolder : MonoBehaviour
         if (PlayerPrefs.GetInt("TutorialPlayed", 0) == 1)
         {
 
-           TutorialEnd();
+            TutorialEnd();
 
         }
+       
 
 
 
@@ -199,6 +200,23 @@ public class AreaHolder : MonoBehaviour
     
     
     }
+
+
+
+
+
+
+
+    public void Tutorialstart()
+    {
+        
+        tutorailmask.SetActive(true);
+        TutorailBG.SetActive(true);
+
+
+
+    }
+
 
 
 

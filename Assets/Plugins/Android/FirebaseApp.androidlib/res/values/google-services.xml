@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">303316584634</string>
+  <string name="google_storage_bucket" translatable="false">scavenger-hunt-239c4.appspot.com</string>
+  <string name="project_id" translatable="false">scavenger-hunt-239c4</string>
+  <string name="google_api_key" translatable="false">AIzaSyAfStfTQ_49CvG__UeIjn13w1v-SSkzAUA</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAfStfTQ_49CvG__UeIjn13w1v-SSkzAUA</string>
+  <string name="google_app_id" translatable="false">1:303316584634:android:e56c7c607240acc382da83</string>
+  <string name="default_web_client_id" translatable="false">303316584634-j3f20bpno42u96l0oe018qlco6aupahb.apps.googleusercontent.com</string>
+</resources>

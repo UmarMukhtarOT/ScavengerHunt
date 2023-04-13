@@ -19,7 +19,9 @@ public class SoundsManager : MonoBehaviour
     public AudioClip ClickScav = null;
     public AudioClip AssetCollect_Scav = null;
     public AudioClip AssetFound_Scav = null;
+    public AudioClip AreaUnlock = null;
     public AudioSource AS = null;
+    public AudioSource BGAS = null;
     private void Awake()
     {
         instance = this;

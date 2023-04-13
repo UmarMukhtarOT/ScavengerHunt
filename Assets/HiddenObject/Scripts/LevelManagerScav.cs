@@ -88,20 +88,23 @@ public class LevelManagerScav : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("TutorialPlayed"))
         {
+
+            
             PlayerPrefs.SetInt("TutorialPlayed", 0);
+           
 
 
         }
 
         if (PlayerPrefs.GetInt("TutorialPlayed", 0) == 0)
         {
-
+            
             UIManagerScav.instance.LowerBarButton.SetActive(false);
             StartCoroutine(StartTutorial());
 
         }
 
-
+       
 
 
 
@@ -109,20 +112,24 @@ public class LevelManagerScav : MonoBehaviour
 
         TouchInput = Cam.GetComponent<TouchInputController>();
         Invoke(nameof(SetupLevel), 1);
+        SoundsManager.instance.PlayBackGroundSound(SoundsManager.instance.BGAS);
 
-
+        if (FbAnalytics.Instance) { FbAnalytics.Instance.LogEvent("level_start_" + GameData.instance.GetLevelNumber()); }
         AdsManagerWrapper.Instance.ShowBanner(AdPosition.Top, AdsManagerWrapper.Instance.adaptiveSize);
     }
 
 
     IEnumerator StartTutorial()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(2);
+        AreaHolderObj.Tutorialstart();
         UIManagerScav.instance.TutorialPanel.SetActive(true);
+        yield return new WaitForSeconds(2);
+
         UIManagerScav.instance.TutInfoGp.SetActive(true);
         yield return new WaitUntil(() => FirstItemPicked);
         UIManagerScav.instance.TutInfoGp.SetActive(false);
-
+        AreaHolderObj.TutorialEnd();
         yield return new WaitForSeconds(2);
 
         UIManagerScav.instance.TutInfoBar.SetActive(true);
@@ -130,10 +137,7 @@ public class LevelManagerScav : MonoBehaviour
         UIManagerScav.instance.TutorialPanel.SetActive(false);
         PlayerPrefs.SetInt("TutorialPlayed", 1);
 
-        AreaHolderObj.TutorialEnd();
-
-
-
+        
 
     }
 
@@ -260,6 +264,7 @@ public class LevelManagerScav : MonoBehaviour
             PlayerPrefs.SetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), AreaHolderObj.AreaUnlockedTill);
 
 
+            SoundsManager.instance.PlayScavSound(SoundsManager.instance.AreaUnlock);
 
 
 
@@ -269,6 +274,14 @@ public class LevelManagerScav : MonoBehaviour
             Debug.Log("You won the game");                      //if yes then we have won the game
                                                                 //UIManagerScav.instance.GameCompleteObj.SetActive(true); //activate GameComplete panel
             PlayerPrefs.DeleteAll();
+            PlayerPrefs.SetInt("TutorialPlayed", 1);
+
+            if (FbAnalytics.Instance) { FbAnalytics.Instance.LogEvent("level_end_" + GameData.instance.GetLevelNumber()); }
+
+            Debug.Log("level_end_" + GameData.instance.GetLevelNumber());
+
+            SoundsManager.instance.PlayScavSound(SoundsManager.instance.levelWinSound);
+
             GameManager.instance.levelCompleteManager.LevelComplete(1);
 
 
@@ -287,7 +300,7 @@ public class LevelManagerScav : MonoBehaviour
     public void OpenNextArea()
     {
 
-        AdsManagerWrapper.Instance.ShowInterstitial();
+
         UIManagerScav.instance.NewAreaPanle.SetActive(false);
         BoxCollider NextBound = AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill];
         Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(NextBound);
@@ -317,19 +330,46 @@ public class LevelManagerScav : MonoBehaviour
         UIManagerScav.instance.Sv_fillText.text = totalHiddenObjectsFound + "/" + maxHiddenObjectToFound;
         UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
 
+
+        //level_1_area_1
+
+
+        string FbEventString = "level_" + GameData.instance.GetLevelNumber() + "_Area" + AreaHolderObj.areaProps.AreaObjNum[AreaHolderObj.AreaUnlockedTill];
+
+        if (FbAnalytics.Instance) { FbAnalytics.Instance.LogEvent(FbEventString); }
+        Debug.Log("FbEventString: " + FbEventString);
+
+        AdsManagerWrapper.Instance.ShowInterstitial();
     }
 
 
-
+    int popupNum = 1;
     public void checkAppericite()
     {
+
+        if (PlayerPrefs.HasKey("popup_"))
+        {
+            PlayerPrefs.SetInt("popup_", 0);
+
+        }
+
+
+
+        PlayerPrefs.SetInt("popup_", 1);
+
+
+
         if (PlayerPrefs.GetInt("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea_AppericiateFirstTime", 0) == 0)
         {
             if (totalHiddenObjectsFound == 10)
             {
 
                 UIManagerScav.instance.Appericiatepanel.SetActive(true);
+                OpenApperPanel();
                 PlayerPrefs.SetInt("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea_AppericiateFirstTime", 1);
+
+                if (FbAnalytics.Instance) { FbAnalytics.Instance.LogEvent("popup_1"); }
+                
             }
 
 
@@ -338,10 +378,14 @@ public class LevelManagerScav : MonoBehaviour
 
         if (totalHiddenObjectsFound % 8 == 0)
         {
-
             UIManagerScav.instance.Appericiatepanel.SetActive(true);
+           
+            OpenApperPanel();
 
         }
+
+
+
 
 
         UIManagerScav.instance.ApperText.text = "Only " + (maxHiddenObjectToFound - totalHiddenObjectsFound) + " are left to be found to unlock next area.";
@@ -349,7 +393,23 @@ public class LevelManagerScav : MonoBehaviour
     }
 
 
+    public void OpenApperPanel()
+    {
+       
 
+
+
+        PlayerPrefs.SetInt("popup_", PlayerPrefs.GetInt("popup_") + 1);
+        string str = "popup_" + PlayerPrefs.GetInt("popup_");
+
+
+        if (FbAnalytics.Instance) { FbAnalytics.Instance.LogEvent(str); }
+        Debug.Log(str);
+        
+
+    
+    
+    }
 
 
 
@@ -472,14 +532,21 @@ public class LevelManagerScav : MonoBehaviour
 
                 UIManagerScav.instance.Sv_fillText.text = 0 + "/" + 0;
 
+                if (PlayerPrefs.GetInt("TutorialPlayed", 0) == 0)
+                {
 
+                    FirstItemPicked = true;
+
+
+
+                }
                 string IconName = CurrentIcone.name;
 
                 HitPos.y += 100;
                 UIManagerScav.instance.infoImg.transform.position = HitPos;
                 UIManagerScav.instance.infoImg.gameObject.SetActive(true);
                 CurrentIcone.updateCollectedText();
-               
+
 
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
                 UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),
@@ -489,14 +556,7 @@ public class LevelManagerScav : MonoBehaviour
 
                 StartCoroutine(GetSnapToPositionToBringChildIntoView(CurrentIcone.GetComponent<RectTransform>(), i));
 
-                if (PlayerPrefs.GetInt("TutorialPlayed", 0) == 0)
-                {
-
-                    FirstItemPicked = true;
-
-
-
-                }
+               
 
 
 
@@ -531,7 +591,7 @@ public class LevelManagerScav : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         UIManagerScav.instance.AnimatedImage[animPoolNum].gameObject.SetActive(true);
         UIManagerScav.instance.AnimatedImage[animPoolNum].GetComponent<AnimatdImage>().AnimateFlyingImage(HitPos, i);
-        
+
 
 
 

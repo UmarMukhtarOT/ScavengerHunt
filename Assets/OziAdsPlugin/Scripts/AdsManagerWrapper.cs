@@ -49,7 +49,14 @@ public class AdsManagerWrapper : MonoBehaviour
             return;
         }
 
-        Instance = this;
+
+        
+
+            //if (FbAnalytics.Instance)
+            //    FbAnalytics.Instance.LogEvent("level_started" + GameKeys.instance.GetLevelNumber());
+            //scavanger app id ca-app-pub-4366776775285738~8271492597
+
+            Instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
 
