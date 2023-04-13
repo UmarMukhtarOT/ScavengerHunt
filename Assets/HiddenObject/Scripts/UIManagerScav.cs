@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using UnityEditor;
 //using static GameManager;
 
 public class UIManagerScav : MonoBehaviour
@@ -44,7 +45,7 @@ public class UIManagerScav : MonoBehaviour
     public GameObject TutInfoBar;
     public GameObject LowerBarButton;
     public GameObject NewAreaPanle;
-
+    public Text ApperText;
 
     private void Awake()
     {
@@ -232,10 +233,23 @@ public class UIManagerScav : MonoBehaviour
     public void CloseAppericiation() 
     {
 
-        LevelManagerScav.instance.Cam.touchController.enabled = true;
+       // LevelManagerScav.instance.Cam.touchController.enabled = true;
         Appericiatepanel.SetActive(false);
         SoundsManager.instance.PlayButtonClipSound(SoundsManager.instance.AS);
+        AdsManagerWrapper.Instance.ShowInterstitial();
     }
+
+
+
+    public void rateUs()
+    {
+
+        Application.OpenURL("https://play.google.com/store/apps/details?id="+ Application.identifier);
+
+    }
+
+
+
 
 
 }

@@ -69632,7 +69632,7 @@ MonoBehaviour:
     AreaPos:
     - {fileID: 1467321213567058037}
     - {fileID: 6135143865536544711}
-    AreaObjNum: 1900000050000000
+    AreaObjNum: 1e00000050000000
     areaColliders:
     - {fileID: 8433565691676797029}
     - {fileID: 2830036834377393047}

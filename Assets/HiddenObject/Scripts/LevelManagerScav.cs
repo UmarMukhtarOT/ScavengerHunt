@@ -46,7 +46,7 @@ public class LevelManagerScav : MonoBehaviour
 
     public DemoController _Controller;
     private bool FirstItemPicked;
-    
+
 
 
 
@@ -100,7 +100,7 @@ public class LevelManagerScav : MonoBehaviour
             StartCoroutine(StartTutorial());
 
         }
-       
+
 
 
 
@@ -109,20 +109,21 @@ public class LevelManagerScav : MonoBehaviour
 
         TouchInput = Cam.GetComponent<TouchInputController>();
         Invoke(nameof(SetupLevel), 1);
-       
+
 
         AdsManagerWrapper.Instance.ShowBanner(AdPosition.Top, AdsManagerWrapper.Instance.adaptiveSize);
     }
 
 
-   IEnumerator StartTutorial()
-   {
+    IEnumerator StartTutorial()
+    {
         yield return new WaitForSeconds(4);
         UIManagerScav.instance.TutorialPanel.SetActive(true);
         UIManagerScav.instance.TutInfoGp.SetActive(true);
         yield return new WaitUntil(() => FirstItemPicked);
-        yield return new WaitForSeconds(2);
         UIManagerScav.instance.TutInfoGp.SetActive(false);
+
+        yield return new WaitForSeconds(2);
 
         UIManagerScav.instance.TutInfoBar.SetActive(true);
         yield return new WaitForSeconds(4);
@@ -134,7 +135,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-   }
+    }
 
 
 
@@ -214,7 +215,7 @@ public class LevelManagerScav : MonoBehaviour
 
     }
 
-   
+
 
 
 
@@ -260,7 +261,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-           
+
 
         }
         else
@@ -322,20 +323,28 @@ public class LevelManagerScav : MonoBehaviour
 
     public void checkAppericite()
     {
-        if (PlayerPrefs.GetInt("Level"+GameData.instance.GetLevelNumber()+"LatestUnlockedArea_AppericiateFirstTime",0)==0)
+        if (PlayerPrefs.GetInt("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea_AppericiateFirstTime", 0) == 0)
         {
-            if (totalHiddenObjectsFound==10)
+            if (totalHiddenObjectsFound == 10)
             {
 
                 UIManagerScav.instance.Appericiatepanel.SetActive(true);
-
+                PlayerPrefs.SetInt("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea_AppericiateFirstTime", 1);
             }
-        
-        
+
+
         }
-      
+        else
+
+        if (totalHiddenObjectsFound % 8 == 0)
+        {
+
+            UIManagerScav.instance.Appericiatepanel.SetActive(true);
+
+        }
 
 
+        UIManagerScav.instance.ApperText.text = "Only " + (maxHiddenObjectToFound - totalHiddenObjectsFound) + " are left to be found to unlock next area.";
 
     }
 
@@ -468,22 +477,22 @@ public class LevelManagerScav : MonoBehaviour
 
                 HitPos.y += 100;
                 UIManagerScav.instance.infoImg.transform.position = HitPos;
-                   UIManagerScav.instance.infoImg.gameObject.SetActive(true);
+                UIManagerScav.instance.infoImg.gameObject.SetActive(true);
                 CurrentIcone.updateCollectedText();
-                checkAppericite();
+               
 
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
                 UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),
-                PlayerPrefs.GetInt((IconName + "Collected")))+"/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
-              
-                
-                
+                PlayerPrefs.GetInt((IconName + "Collected"))) + "/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
+
+
+
                 StartCoroutine(GetSnapToPositionToBringChildIntoView(CurrentIcone.GetComponent<RectTransform>(), i));
 
                 if (PlayerPrefs.GetInt("TutorialPlayed", 0) == 0)
                 {
 
-                    FirstItemPicked=true;
+                    FirstItemPicked = true;
 
 
 
@@ -497,7 +506,7 @@ public class LevelManagerScav : MonoBehaviour
         }
     }
 
-    private int animPoolNum=0;
+    private int animPoolNum = 0;
 
     IEnumerator GetSnapToPositionToBringChildIntoView(RectTransform child, int i)
     {
@@ -522,7 +531,7 @@ public class LevelManagerScav : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         UIManagerScav.instance.AnimatedImage[animPoolNum].gameObject.SetActive(true);
         UIManagerScav.instance.AnimatedImage[animPoolNum].GetComponent<AnimatdImage>().AnimateFlyingImage(HitPos, i);
-
+        
 
 
 
@@ -545,7 +554,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-
+        checkAppericite();
 
     }
 
@@ -568,10 +577,10 @@ public class LevelManagerScav : MonoBehaviour
 
     private void OnDisable()
     {
-       // Cam.GetComponent<TouchInputController>().OnInputClick -= OnInputClick;
+        // Cam.GetComponent<TouchInputController>().OnInputClick -= OnInputClick;
     }
 
-   
+
 
 
     private void OnInputClick(Vector3 clickScreenPosition, bool isDoubleClick, bool isLongTap)
