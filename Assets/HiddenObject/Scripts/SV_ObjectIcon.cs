@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.UI.Extensions.TextPic;
 
 public class SV_ObjectIcon : MonoBehaviour
 {
@@ -24,12 +25,14 @@ public class SV_ObjectIcon : MonoBehaviour
 
     public void setIconProperties(string IconName, Sprite IconSpr)
     {
-        if (!PlayerPrefs.HasKey(IconName + "Collected"))
+       
+        transform.name = IconName;
+
+        if (!PlayerPrefs.HasKey(transform.name + "Collected"))
         {
-            PlayerPrefs.SetInt((IconName + "Collected"), 0);
+            PlayerPrefs.SetInt((transform.name + "Collected"), 0);
         }
 
-        transform.name = IconName;
         childImg.sprite = IconSpr;
         updateCollectedText();
        
@@ -45,17 +48,17 @@ public class SV_ObjectIcon : MonoBehaviour
     {
 
         int collected = PlayerPrefs.GetInt((transform.name + "Collected"), 0);
-
+        Debug.Log((transform.name + "Collected") + collected);
         CollectedObjectsText.text = collected+"";
         TotalObjectsText.text = TotalObjects + "";
-        Invoke("updateSibling",5);
+        Invoke("updateSibling",3);
 
 
        
 
         int val = collected % LevelManagerScav.instance.appreciateEveryTurn;
 
-       // Debug.Log(" val is currently " + val);
+        
 
         if (collected>0)
         {

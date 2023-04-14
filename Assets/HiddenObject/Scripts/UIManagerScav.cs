@@ -189,7 +189,7 @@ public class UIManagerScav : MonoBehaviour
     [SerializeField]
     public ScrollRect scrollRect; //your scroll rect component
     [SerializeField]
-    RectTransform _container; //content transform of the scrollrect
+  public  RectTransform _container; //content transform of the scrollrect
 
 
 

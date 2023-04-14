@@ -8,6 +8,7 @@ using BitBenderGames;
 using MoreMountains.NiceVibrations;
 
 using GoogleMobileAds.Api;
+using static UnityEngine.Networking.UnityWebRequest;
 
 
 public enum GameStatus
@@ -115,7 +116,7 @@ public class LevelManagerScav : MonoBehaviour
         SoundsManager.instance.PlayBackGroundSound(SoundsManager.instance.BGAS);
 
         if (FbAnalytics.Instance) { FbAnalytics.Instance.LogEvent("level_start_" + GameData.instance.GetLevelNumber()); }
-        AdsManagerWrapper.Instance.ShowBanner(AdPosition.Top, AdsManagerWrapper.Instance.adaptiveSize);
+        AdsManagerWrapper.Instance.ShowBanner(AdPosition.Bottom, AdsManagerWrapper.Instance.adaptiveSize);
     }
 
 
@@ -165,7 +166,7 @@ public class LevelManagerScav : MonoBehaviour
 
         UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
         AreaHolderObj.AreaUnlockedTill = PlayerPrefs.GetInt(("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea"), 0);
-
+        UIManagerScav.instance._container.transform.DOLocalMove(new Vector2(1550,0), 0.01f).SetEase(DG.Tweening.Ease.OutBack);
 
         Cam.GetComponent<SetBoundaryFromCollider>().SetBoundary(AreaHolderObj.areaProps.areaColliders[AreaHolderObj.AreaUnlockedTill]);
 
@@ -214,7 +215,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-
+        UIManagerScav.instance._container.localPosition = new Vector3(1150,0,0);
 
 
     }
@@ -568,7 +569,7 @@ public class LevelManagerScav : MonoBehaviour
 
     private int animPoolNum = 0;
 
-    IEnumerator GetSnapToPositionToBringChildIntoView(RectTransform child, int i)
+    IEnumerator GetSnapToPositionToBringChildIntoView(RectTransform child, int CurrentIconeNum)
     {
         RectTransform contentRt = UIManagerScav.instance.scrollRect.content;
 
@@ -590,7 +591,7 @@ public class LevelManagerScav : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
         UIManagerScav.instance.AnimatedImage[animPoolNum].gameObject.SetActive(true);
-        UIManagerScav.instance.AnimatedImage[animPoolNum].GetComponent<AnimatdImage>().AnimateFlyingImage(HitPos, i);
+        UIManagerScav.instance.AnimatedImage[animPoolNum].GetComponent<AnimatdImage>().AnimateFlyingImage(HitPos, CurrentIconeNum);
 
 
 
