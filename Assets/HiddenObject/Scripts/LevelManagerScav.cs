@@ -550,8 +550,8 @@ public class LevelManagerScav : MonoBehaviour
 
 
                 PlayerPrefs.SetInt((IconName + "Collected"), PlayerPrefs.GetInt((IconName + "Collected"), 0) + 1);
-                UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(" count " + PlayerPrefs.GetInt((IconName + "Collected"),
-                PlayerPrefs.GetInt((IconName + "Collected"))) + "/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
+
+                UIManagerScav.instance.infoImg.GetComponent<InfoImage>().SetInfovalues(PlayerPrefs.GetInt((IconName + "Collected"),PlayerPrefs.GetInt((IconName + "Collected"))) + "/" + CurrentIcone.TotalObjects, CurrentIcone.childImg.sprite);
 
 
 

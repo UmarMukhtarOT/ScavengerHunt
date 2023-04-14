@@ -26,8 +26,10 @@ public class InfoImage : MonoBehaviour
 
     public void SetInfovalues(string str,Sprite spr) 
     {
+
+        Debug.Log("info image count is: "+str+ " name "+ spr.name);
         img.sprite = spr;   
-        Txt.text = str;
+        Txt.text = spr.name +"\n"+ str;
     
     
     
