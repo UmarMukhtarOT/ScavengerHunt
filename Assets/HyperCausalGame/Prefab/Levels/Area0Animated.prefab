@@ -10337,7 +10337,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1142776655291400498}
   - component: {fileID: 2855675392319544959}
-  - component: {fileID: 8729893054009165885}
   m_Layer: 0
   m_Name: Cloud (15)
   m_TagString: Untagged
@@ -10412,19 +10411,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8729893054009165885
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382631788040777663}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10.24, y: 5.1199994, z: 0.2}
-  m_Center: {x: 0.0000019073486, y: 0, z: -0.000000059604645}
 --- !u!1 &1385584351501476800
 GameObject:
   m_ObjectHideFlags: 0
@@ -32555,7 +32541,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5054906904663716986}
   - component: {fileID: 6049593346918555368}
-  - component: {fileID: 7599303523091663192}
   m_Layer: 0
   m_Name: Cloud (14)
   m_TagString: Untagged
@@ -32630,19 +32615,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7599303523091663192
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3939403326902585663}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10.24, y: 5.1199994, z: 0.2}
-  m_Center: {x: 0.0000019073486, y: 0, z: -0.000000059604645}
 --- !u!1 &3939854073485798548
 GameObject:
   m_ObjectHideFlags: 0

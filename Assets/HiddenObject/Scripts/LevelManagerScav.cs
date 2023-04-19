@@ -439,11 +439,11 @@ public class LevelManagerScav : MonoBehaviour
         if (gameStatus == GameStatus.PLAYING)
         {
             GameObject go = hitInfo.collider.gameObject;
-
+            //Debug.Log("clicekd on obj 0 : " + go.name);
             hitobj = go.transform;
             if (go.CompareTag("HidddenObject"))
             {
-
+               // Debug.Log("clicekd on obj 1 : "+go.name);
 
                 go.tag = "Untagged";
 
