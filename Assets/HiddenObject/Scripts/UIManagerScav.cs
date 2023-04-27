@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEditor;
+using static UnityEngine.GraphicsBuffer;
 //using static GameManager;
 
 public class UIManagerScav : MonoBehaviour
@@ -223,11 +224,7 @@ public class UIManagerScav : MonoBehaviour
     }
 
 
-    public void HintButton()
-    {
-        //TODO: Using Coroutine is not recommended, try using TweenEngine. Eg:- DOtween, iTween
-        StartCoroutine(LevelManagerScav.instance.HintObject());
-    }
+    
 
 
     public void CloseAppericiation() 
@@ -248,6 +245,11 @@ public class UIManagerScav : MonoBehaviour
 
     }
 
+
+
+  
+
+  
 
 
 

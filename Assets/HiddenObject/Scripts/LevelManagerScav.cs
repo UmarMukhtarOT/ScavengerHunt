@@ -35,7 +35,7 @@ public class LevelManagerScav : MonoBehaviour
     [SerializeField] private AreaHolder objectHolderPrefab;           //ObjectHolderPrefab contains list of all the hiddenObjects available in it
     [HideInInspector] public GameStatus gameStatus = GameStatus.NEXT;
 
-    private List<Transform> activeHiddenObjectList;              //list hidden objects which are marked as hidden from the above list
+    public List<Transform> activeHiddenObjectList;              //list hidden objects which are marked as hidden from the above list
     private float currentTime;
     public int totalHiddenObjectsFound = 0;
     private TimeSpan time;
@@ -420,15 +420,7 @@ public class LevelManagerScav : MonoBehaviour
     public Vector3 HitPos;
 
 
-    public IEnumerator HintObject() //Method called by HintButton of UIManager
-    {
-        int randomValue = UnityEngine.Random.Range(0, activeHiddenObjectList.Count);
-        Vector3 originalScale = activeHiddenObjectList[randomValue].transform.localScale;
-        activeHiddenObjectList[randomValue].transform.localScale = originalScale * 1.25f;
-        yield return new WaitForSeconds(0.25f);
-        activeHiddenObjectList[randomValue].transform.localScale = originalScale;
-    }
-
+  
 
 
     public Transform hitobj;
@@ -655,6 +647,60 @@ public class LevelManagerScav : MonoBehaviour
     {
         MMVibrationManager.Haptic(Type);
     }
+
+
+
+
+
+
+
+    #region PowerUps
+
+    public void HintButton()
+    {
+
+        int randomValue = UnityEngine.Random.Range(0, activeHiddenObjectList.Count);
+        Vector3 originalScale = activeHiddenObjectList[randomValue].transform.localScale;
+
+        activeHiddenObjectList[randomValue].transform.localScale = originalScale * 1.25f;
+       
+
+
+
+
+
+
+        activeHiddenObjectList[randomValue].transform.localScale = originalScale;
+    }
+
+
+
+
+
+
+  
+
+
+    public Vector2 CnvPos(Vector3 worldPosition)
+    {
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPosition);
+        Vector2 anchoredPosition = transform.InverseTransformPoint(screenPoint);
+        return anchoredPosition;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    #endregion
+
+
 
 }
 

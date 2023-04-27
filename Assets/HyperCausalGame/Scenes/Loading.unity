@@ -1362,10 +1362,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AdsmanagerWrapper
       objectReference: {fileID: 0}
-    - target: {fileID: 4914674835707845665, guid: 4fa7598672cb14f8592c10ad49b36b61, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4914674835707845667, guid: 4fa7598672cb14f8592c10ad49b36b61, type: 3}
       propertyPath: m_RootOrder
       value: 3
