@@ -656,13 +656,19 @@ public class LevelManagerScav : MonoBehaviour
 
     #region PowerUps
 
-    public void HintButton()
+    public Transform HintButton()
     {
 
-        int randomValue = UnityEngine.Random.Range(0, activeHiddenObjectList.Count);
-        Vector3 originalScale = activeHiddenObjectList[randomValue].transform.localScale;
+        Transform go= activeHiddenObjectList[UnityEngine.Random.Range(0, activeHiddenObjectList.Count)];
+        Debug.Log("Compas Target: " + go);
+        return go;
 
-        activeHiddenObjectList[randomValue].transform.localScale = originalScale * 1.25f;
+
+
+
+       // Vector3 originalScale = activeHiddenObjectList[randomValue].transform.localScale;
+
+       /// activeHiddenObjectList[randomValue].transform.localScale = originalScale * 1.25f;
        
 
 
@@ -670,7 +676,7 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
-        activeHiddenObjectList[randomValue].transform.localScale = originalScale;
+       // activeHiddenObjectList[randomValue].transform.localScale = originalScale;
     }
 
 
