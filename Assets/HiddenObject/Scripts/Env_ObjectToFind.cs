@@ -34,6 +34,8 @@ public class Env_ObjectToFind : MonoBehaviour
             {
 
                 IsTaken = true;
+                
+
                 LevelManagerScav.instance.totalHiddenObjectsFound++;
                 UIManagerScav.instance.Sv_fillText.text = LevelManagerScav.instance.totalHiddenObjectsFound + "/" + LevelManagerScav.instance.maxHiddenObjectToFound;
 

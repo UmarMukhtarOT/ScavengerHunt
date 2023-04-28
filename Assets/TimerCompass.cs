@@ -4,17 +4,18 @@ using System.Collections;
 
 public class TimerCompass : MonoBehaviour
 {
-    public GameObject targetObject;
     public Image compassImage;
     public float timerDuration = 30.0f;
     public Image timerFillImage;
     public Text timerProgressText;
-
+    
     private RectTransform canvasRectTransform;
     private float timerRemaining;
     private bool timerRunning = false;
-
+    private GameObject targetObject;
     private Color Compcolor;
+
+
 
     void Start()
     {
@@ -70,7 +71,7 @@ public class TimerCompass : MonoBehaviour
     {
         if (targetObject == null)
         {
-            targetObject = LevelManagerScav.instance.HintButton().gameObject;
+            targetObject = LevelManagerScav.instance.ObjForHint().gameObject;
         }
         compassImage.gameObject.SetActive(true);
         compassImage.color = Compcolor;
@@ -100,5 +101,26 @@ public class TimerCompass : MonoBehaviour
 
         compassImage.gameObject.SetActive(false);
     }
+
+
+
+
+
+
+
+
+
+    public void StartMagnifier()
+    {
+        LevelManagerScav.instance.MagnifyHint();
+
+    }
+
+
+
+
+
+
+
 
 }

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 namespace BitBenderGames
 {
@@ -1331,6 +1332,11 @@ namespace BitBenderGames
             //    return false;
             //}
         }
+        public float mouseScrollDelta;
+        public float AutoZoomSpeed=0.1f;
+        public bool DisableWheelZoom;
+
+       
 
         public void LateUpdate()
         {
@@ -1347,8 +1353,27 @@ namespace BitBenderGames
 
             if (keyboardAndMousePlatforms.Contains(Application.platform) && Input.touchCount == 0)
             {
+                if (!DisableWheelZoom)
+                {
+                    mouseScrollDelta = Input.GetAxis("Mouse ScrollWheel") * mouseZoomFactor;
 
-                float mouseScrollDelta = Input.GetAxis("Mouse ScrollWheel") * mouseZoomFactor;
+                }
+                else
+                {
+
+                    if (mouseScrollDelta > camZoomMin)
+                    {
+                        mouseScrollDelta -= Time.deltaTime* AutoZoomSpeed;
+                    }
+                    else
+                    {
+                        mouseScrollDelta = camZoomMin;
+                        DisableWheelZoom = false;
+
+                    }
+                
+                
+                }
                 Vector3 mousePosDelta = mousePosLastFrame - Input.mousePosition;
                 bool isEditorInputRotate = false;
                 bool isEditorInputTilt = false;

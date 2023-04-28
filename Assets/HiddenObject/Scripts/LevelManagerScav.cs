@@ -185,8 +185,11 @@ public class LevelManagerScav : MonoBehaviour
 
         for (int i = 0; i < AreaHolderObj.HiddenObjectList.Count; i++)
         {
+            if (!AreaHolderObj.HiddenObjectList[i].GetComponent<Env_ObjectToFind>().IsTaken)
+            {
+                activeHiddenObjectList.Add(AreaHolderObj.HiddenObjectList[i]);
 
-            activeHiddenObjectList.Add(AreaHolderObj.HiddenObjectList[i]);
+            }
 
         }
 
@@ -195,19 +198,21 @@ public class LevelManagerScav : MonoBehaviour
         Vector3 NextAreaPos = AreaHolderObj.areaProps.AreaPos[AreaHolderObj.AreaUnlockedTill].transform.position;
         NextAreaPos.z = Cam.transform.position.z;
 
-
         Cam.enabled = false;
-        Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
-        {
-            TouchInput.enabled = true;
+        PanCamera(NextAreaPos);
 
-            //  NextBound.GetComponent<Animator>().enabled = true;
-            Cam.enabled = true;
+        //Cam.enabled = false;
+        //Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
+        //{
+        //    TouchInput.enabled = true;
+
+        //    //  NextBound.GetComponent<Animator>().enabled = true;
+        //    Cam.enabled = true;
 
 
-        }
+        //}
 
-        );
+        //);
 
 
         UIManagerScav.instance.PopulateHiddenObjectIcons(activeHiddenObjectList);   //send the activeHiddenObjectList to UIManager
@@ -229,15 +234,15 @@ public class LevelManagerScav : MonoBehaviour
 
         //if (IsTimeLimited)
         //{
-        //    currentTime -= Time.deltaTime;  //as long as gamestatus i in playing, we keep reducing currentTime by Time.deltaTime
+        //    currentTime -= Time.deltaTime;  
 
         //    time = TimeSpan.FromSeconds(currentTime);                       //set the time value
         //    UIManagerScav.instance.TimerText.text = time.ToString("mm':'ss");   //convert time to Time format
         //    if (currentTime <= 0)                                           //if currentTime is less or equal to zero
         //    {
         //        Debug.Log("Time Up");                                       //if yes then we have lost the game
-        //        UIManagerScav.instance.GameCompleteObj.SetActive(true);         //activate GameComplete panel
-        //        gameStatus = GameStatus.NEXT;                               //set gamestatus to Next
+        //       //activate GameComplete panel
+        //                               
         //    }
         //}
     }
@@ -309,18 +314,21 @@ public class LevelManagerScav : MonoBehaviour
         NextAreaPos.z = Cam.transform.position.z;
 
 
-        Cam.enabled = false;
 
-        Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
-        {
-            TouchInput.enabled = true;
+        PanCamera(NextAreaPos);
+        NextBound.GetComponent<Animator>().enabled = true;
+        //Cam.enabled = false;
 
-            NextBound.GetComponent<Animator>().enabled = true;
-            Cam.enabled = true;
+        //Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
+        //{
+        //    TouchInput.enabled = true;
+
+        //    NextBound.GetComponent<Animator>().enabled = true;
+        //    Cam.enabled = true;
 
 
-        }
-        );
+        //}
+        //);
 
         UIManagerScav.instance.Sv_FillBar.fillAmount = Mathf.InverseLerp(0, maxHiddenObjectToFound, totalHiddenObjectsFound);
 
@@ -369,7 +377,7 @@ public class LevelManagerScav : MonoBehaviour
                 OpenApperPanel();
                 PlayerPrefs.SetInt("Level" + GameData.instance.GetLevelNumber() + "LatestUnlockedArea_AppericiateFirstTime", 1);
 
-                if (FbAnalytics.Instance) { FbAnalytics.Instance.LogEvent("popup_1"); }
+                
                 
             }
 
@@ -386,7 +394,7 @@ public class LevelManagerScav : MonoBehaviour
         }
 
 
-
+        if (FbAnalytics.Instance) { FbAnalytics.Instance.LogEvent("popup_"+ popupNum); }
 
 
         UIManagerScav.instance.ApperText.text = "Only " + (maxHiddenObjectToFound - totalHiddenObjectsFound) + " are left to be found to unlock next area.";
@@ -413,20 +421,15 @@ public class LevelManagerScav : MonoBehaviour
     }
 
 
-
-
-
-
     public Vector3 HitPos;
-
-
-  
 
 
     public Transform hitobj;
 
     public void OnPickItemLM(RaycastHit hitInfo)
     {
+
+        AreaHolderObj.MagnifyingCircle.SetActive(false);
 
         if (gameStatus == GameStatus.PLAYING)
         {
@@ -656,42 +659,40 @@ public class LevelManagerScav : MonoBehaviour
 
     #region PowerUps
 
-    public Transform HintButton()
+    public Transform ObjForHint()
     {
 
         Transform go= activeHiddenObjectList[UnityEngine.Random.Range(0, activeHiddenObjectList.Count)];
+        
+        
+        if (go==null||!go.gameObject.activeSelf)
+        {
+
+        }
+
+
         Debug.Log("Compas Target: " + go);
         return go;
 
-
-
-
-       // Vector3 originalScale = activeHiddenObjectList[randomValue].transform.localScale;
-
-       /// activeHiddenObjectList[randomValue].transform.localScale = originalScale * 1.25f;
-       
-
-
-
-
-
-
-       // activeHiddenObjectList[randomValue].transform.localScale = originalScale;
     }
 
 
-
-
-
-
-  
-
-
-    public Vector2 CnvPos(Vector3 worldPosition)
+    public void MagnifyHint() 
     {
-        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPosition);
-        Vector2 anchoredPosition = transform.InverseTransformPoint(screenPoint);
-        return anchoredPosition;
+
+
+        AreaHolderObj.MagnifyingCircle.SetActive(true);
+        Transform HintOb= ObjForHint().transform;
+        AreaHolderObj.MagnifyingCircle.transform.position = HintOb.position;
+        Vector3 NextAreaPos = HintOb.position;
+        NextAreaPos.z = -20;// Cam.transform.position.z;
+       // Cam.mouseScrollDelta = 5;
+
+        Cam.DisableWheelZoom = true;
+
+        PanCamera(NextAreaPos);
+
+
     }
 
 
@@ -699,6 +700,25 @@ public class LevelManagerScav : MonoBehaviour
 
 
 
+    private void PanCamera(Vector3 NextAreaPos)
+    {
+       // Cam.enabled = false;
+
+        Cam.Cam.transform.DOMove(NextAreaPos, 3).OnComplete(() =>
+        {
+            TouchInput.enabled = true;
+
+            
+            Cam.enabled = true;
+
+
+        }
+        );
+
+
+
+
+    }
 
 
 

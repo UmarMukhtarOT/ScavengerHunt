@@ -56,6 +56,7 @@ public class AreaHolder : MonoBehaviour
     [SerializeField] public bool EditorSpawn;
 
     public GameObject Plane;
+    public GameObject MagnifyingCircle;
     public GameObject TutorailBG;
     public GameObject tutorailmask;
     public List<Sprite> Sprites1;

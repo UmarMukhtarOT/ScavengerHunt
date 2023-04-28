@@ -48,7 +48,7 @@ public class SV_ObjectIcon : MonoBehaviour
     {
 
         int collected = PlayerPrefs.GetInt((transform.name + "Collected"), 0);
-        Debug.Log((transform.name + "Collected") + collected);
+       // Debug.Log((transform.name + "Collected") + collected);
         CollectedObjectsText.text = collected+"";
         TotalObjectsText.text = TotalObjects + "";
         Invoke("updateSibling",3);
